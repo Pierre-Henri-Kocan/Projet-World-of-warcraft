@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PlayerRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -41,6 +43,34 @@ class Player
      * @ORM\Column(type="boolean")
      */
     private $isActif;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Item::class, mappedBy="player")
+     */
+    private $items;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Event::class, mappedBy="player")
+     */
+    private $events;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=role::class, inversedBy="players")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $role;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Raid::class, mappedBy="player")
+     */
+    private $raids;
+
+    public function __construct()
+    {
+        $this->items = new ArrayCollection();
+        $this->events = new ArrayCollection();
+        $this->raids = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -103,6 +133,99 @@ class Player
     public function setIsActif(bool $isActif): self
     {
         $this->isActif = $isActif;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Item>
+     */
+    public function getItems(): Collection
+    {
+        return $this->items;
+    }
+
+    public function addItem(Item $item): self
+    {
+        if (!$this->items->contains($item)) {
+            $this->items[] = $item;
+            $item->addPlayer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeItem(Item $item): self
+    {
+        if ($this->items->removeElement($item)) {
+            $item->removePlayer($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Event>
+     */
+    public function getEvents(): Collection
+    {
+        return $this->events;
+    }
+
+    public function addEvent(Event $event): self
+    {
+        if (!$this->events->contains($event)) {
+            $this->events[] = $event;
+            $event->addPlayer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvent(Event $event): self
+    {
+        if ($this->events->removeElement($event)) {
+            $event->removePlayer($this);
+        }
+
+        return $this;
+    }
+
+    public function getRole(): ?role
+    {
+        return $this->role;
+    }
+
+    public function setRole(?role $role): self
+    {
+        $this->role = $role;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Raid>
+     */
+    public function getRaids(): Collection
+    {
+        return $this->raids;
+    }
+
+    public function addRaid(Raid $raid): self
+    {
+        if (!$this->raids->contains($raid)) {
+            $this->raids[] = $raid;
+            $raid->addPlayer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRaid(Raid $raid): self
+    {
+        if ($this->raids->removeElement($raid)) {
+            $raid->removePlayer($this);
+        }
 
         return $this;
     }
