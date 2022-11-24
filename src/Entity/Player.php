@@ -55,7 +55,7 @@ class Player
     private $events;
 
     /**
-     * @ORM\ManyToOne(targetEntity=role::class, inversedBy="players")
+     * @ORM\ManyToOne(targetEntity=Role::class, inversedBy="players")
      * @ORM\JoinColumn(nullable=false)
      */
     private $role;
