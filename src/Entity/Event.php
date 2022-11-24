@@ -30,17 +30,17 @@ class Event
     private $log;
 
     /**
-     * @ORM\ManyToMany(targetEntity=raid::class, inversedBy="events")
+     * @ORM\ManyToMany(targetEntity=Raid::class, inversedBy="events")
      */
     private $raid;
 
     /**
-     * @ORM\ManyToMany(targetEntity=player::class, inversedBy="events")
+     * @ORM\ManyToMany(targetEntity=Player::class, inversedBy="events")
      */
     private $player;
 
     /**
-     * @ORM\ManyToMany(targetEntity=item::class, inversedBy="events")
+     * @ORM\ManyToMany(targetEntity=Item::class, inversedBy="events")
      */
     private $item;
 

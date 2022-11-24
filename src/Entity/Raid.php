@@ -30,12 +30,12 @@ class Raid
     private $events;
 
     /**
-     * @ORM\OneToMany(targetEntity=item::class, mappedBy="raid")
+     * @ORM\OneToMany(targetEntity=Item::class, mappedBy="raid")
      */
     private $item;
 
     /**
-     * @ORM\ManyToMany(targetEntity=player::class, inversedBy="raids")
+     * @ORM\ManyToMany(targetEntity=Player::class, inversedBy="raids")
      */
     private $player;
 
