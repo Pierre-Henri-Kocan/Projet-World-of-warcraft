@@ -35,12 +35,12 @@ class Item
     private $type;
 
     /**
-     * @ORM\ManyToMany(targetEntity=role::class, inversedBy="items")
+     * @ORM\ManyToMany(targetEntity=Role::class, inversedBy="items")
      */
     private $role;
 
     /**
-     * @ORM\ManyToMany(targetEntity=player::class, inversedBy="items")
+     * @ORM\ManyToMany(targetEntity=Player::class, inversedBy="items")
      */
     private $player;
 
