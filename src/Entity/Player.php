@@ -45,6 +45,7 @@ class Player
     private $isActif;
 
     /**
+<<<<<<< HEAD
      * @ORM\ManyToMany(targetEntity=Item::class, mappedBy="player")
      */
     private $items;
@@ -71,6 +72,11 @@ class Player
         $this->events = new ArrayCollection();
         $this->raids = new ArrayCollection();
     }
+=======
+     * @ORM\Column(type="string", length=64)
+     */
+    private $slug;
+>>>>>>> entities
 
     public function getId(): ?int
     {
@@ -137,6 +143,7 @@ class Player
         return $this;
     }
 
+<<<<<<< HEAD
     /**
      * @return Collection<int, Item>
      */
@@ -226,6 +233,16 @@ class Player
         if ($this->raids->removeElement($raid)) {
             $raid->removePlayer($this);
         }
+=======
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+>>>>>>> entities
 
         return $this;
     }

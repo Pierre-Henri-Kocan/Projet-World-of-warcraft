@@ -103,6 +103,7 @@ class Item
         return $this;
     }
 
+<<<<<<< HEAD
     /**
      * @return Collection<int, role>
      */
@@ -186,6 +187,16 @@ class Item
     public function setRaid(?Raid $raid): self
     {
         $this->raid = $raid;
+=======
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+>>>>>>> entities
 
         return $this;
     }

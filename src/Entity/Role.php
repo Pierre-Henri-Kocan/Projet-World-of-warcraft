@@ -25,6 +25,7 @@ class Role
     private $name;
 
     /**
+<<<<<<< HEAD
      * @ORM\ManyToMany(targetEntity=Item::class, mappedBy="role")
      */
     private $items;
@@ -39,6 +40,11 @@ class Role
         $this->items = new ArrayCollection();
         $this->players = new ArrayCollection();
     }
+=======
+     * @ORM\Column(type="string", length=64)
+     */
+    private $slug;
+>>>>>>> entities
 
     public function getId(): ?int
     {
@@ -57,6 +63,7 @@ class Role
         return $this;
     }
 
+<<<<<<< HEAD
     /**
      * @return Collection<int, Item>
      */
@@ -110,6 +117,16 @@ class Role
                 $player->setRole(null);
             }
         }
+=======
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+>>>>>>> entities
 
         return $this;
     }
