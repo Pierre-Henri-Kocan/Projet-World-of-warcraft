@@ -60,6 +60,11 @@ class Item
      */
     private $raid;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $detail;
+
     public function __construct()
     {
         $this->role = new ArrayCollection();
@@ -203,6 +208,18 @@ class Item
     public function setRaid(?Raid $raid): self
     {
         $this->raid = $raid;
+
+        return $this;
+    }
+
+    public function getDetail(): ?string
+    {
+        return $this->detail;
+    }
+
+    public function setDetail(string $detail): self
+    {
+        $this->detail = $detail;
 
         return $this;
     }
