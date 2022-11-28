@@ -25,17 +25,22 @@ class Raid
     private $name;
 
     /**
+     * @ORM\Column(type="string", length=64)
+     */
+    private $slug;
+
+    /**
      * @ORM\ManyToMany(targetEntity=Event::class, mappedBy="raid")
      */
     private $events;
 
     /**
-     * @ORM\OneToMany(targetEntity=item::class, mappedBy="raid")
+     * @ORM\OneToMany(targetEntity=Item::class, mappedBy="raid")
      */
     private $item;
 
     /**
-     * @ORM\ManyToMany(targetEntity=player::class, inversedBy="raids")
+     * @ORM\ManyToMany(targetEntity=Player::class, inversedBy="raids")
      */
     private $player;
 
@@ -59,6 +64,18 @@ class Raid
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

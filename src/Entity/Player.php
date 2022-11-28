@@ -45,6 +45,11 @@ class Player
     private $isActif;
 
     /**
+     * @ORM\Column(type="string", length=64)
+     */
+    private $slug;
+
+    /**
      * @ORM\ManyToMany(targetEntity=Item::class, mappedBy="player")
      */
     private $items;
@@ -55,7 +60,7 @@ class Player
     private $events;
 
     /**
-     * @ORM\ManyToOne(targetEntity=role::class, inversedBy="players")
+     * @ORM\ManyToOne(targetEntity=Role::class, inversedBy="players")
      * @ORM\JoinColumn(nullable=false)
      */
     private $role;
@@ -133,6 +138,18 @@ class Player
     public function setIsActif(bool $isActif): self
     {
         $this->isActif = $isActif;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }
