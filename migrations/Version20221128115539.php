@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20221124084449 extends AbstractMigration
+final class Version20221128115539 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -24,13 +24,13 @@ final class Version20221124084449 extends AbstractMigration
         $this->addSql('CREATE TABLE event_raid (event_id INT NOT NULL, raid_id INT NOT NULL, INDEX IDX_484C2F1871F7E88B (event_id), INDEX IDX_484C2F189C55ABC9 (raid_id), PRIMARY KEY(event_id, raid_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE event_player (event_id INT NOT NULL, player_id INT NOT NULL, is_bench TINYINT(1) NOT NULL, INDEX IDX_AA800D3771F7E88B (event_id), INDEX IDX_AA800D3799E6F5DF (player_id), PRIMARY KEY(event_id, player_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE event_item (event_id INT NOT NULL, item_id INT NOT NULL, INDEX IDX_D069B571F7E88B (event_id), INDEX IDX_D069B5126F525E (item_id), PRIMARY KEY(event_id, item_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE item (id INT AUTO_INCREMENT NOT NULL, raid_id INT NOT NULL, name VARCHAR(64) NOT NULL, location VARCHAR(64) NOT NULL, type VARCHAR(10) NOT NULL, INDEX IDX_1F1B251E9C55ABC9 (raid_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE item (id INT AUTO_INCREMENT NOT NULL, raid_id INT NOT NULL, name VARCHAR(64) NOT NULL, location VARCHAR(64) NOT NULL, type VARCHAR(10) NOT NULL, slug VARCHAR(64) NOT NULL, INDEX IDX_1F1B251E9C55ABC9 (raid_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE item_role (item_id INT NOT NULL, role_id INT NOT NULL, INDEX IDX_9F59CE91126F525E (item_id), INDEX IDX_9F59CE91D60322AC (role_id), PRIMARY KEY(item_id, role_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE item_player (item_id INT NOT NULL, player_id INT NOT NULL, INDEX IDX_1EE00FAA126F525E (item_id), INDEX IDX_1EE00FAA99E6F5DF (player_id), PRIMARY KEY(item_id, player_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE player (id INT AUTO_INCREMENT NOT NULL, role_id INT NOT NULL, name VARCHAR(64) NOT NULL, class VARCHAR(30) NOT NULL, score DOUBLE PRECISION NOT NULL, rank VARCHAR(30) NOT NULL, is_actif TINYINT(1) NOT NULL, INDEX IDX_98197A65D60322AC (role_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE raid (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(64) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE player (id INT AUTO_INCREMENT NOT NULL, role_id INT NOT NULL, name VARCHAR(64) NOT NULL, class VARCHAR(30) NOT NULL, score DOUBLE PRECISION NOT NULL, rank VARCHAR(30) NOT NULL, is_actif TINYINT(1) NOT NULL, slug VARCHAR(64) NOT NULL, INDEX IDX_98197A65D60322AC (role_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE raid (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(64) NOT NULL, slug VARCHAR(64) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE raid_player (raid_id INT NOT NULL, player_id INT NOT NULL, INDEX IDX_ABCBEEB69C55ABC9 (raid_id), INDEX IDX_ABCBEEB699E6F5DF (player_id), PRIMARY KEY(raid_id, player_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE role (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(64) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE role (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(64) NOT NULL, slug VARCHAR(64) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('ALTER TABLE event_raid ADD CONSTRAINT FK_484C2F1871F7E88B FOREIGN KEY (event_id) REFERENCES event (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE event_raid ADD CONSTRAINT FK_484C2F189C55ABC9 FOREIGN KEY (raid_id) REFERENCES raid (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE event_player ADD CONSTRAINT FK_AA800D3771F7E88B FOREIGN KEY (event_id) REFERENCES event (id) ON DELETE CASCADE');
