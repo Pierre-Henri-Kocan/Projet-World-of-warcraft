@@ -25,11 +25,6 @@ class Item
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=64)
-     */
-    private $location;
-
-    /**
      * @ORM\Column(type="string", length=10)
      */
     private $type;
@@ -91,18 +86,6 @@ class Item
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getLocation(): ?string
-    {
-        return $this->location;
-    }
-
-    public function setLocation(string $location): self
-    {
-        $this->location = $location;
 
         return $this;
     }
