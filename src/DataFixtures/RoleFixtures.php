@@ -2,12 +2,12 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Raid;
+use App\Entity\Role;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
-class RaidFixtures extends Fixture
+class RoleFixtures extends Fixture
 {
     private $slugger;
 
@@ -18,29 +18,27 @@ class RaidFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        $raids = [
+        $roles = [
             [
-                "name" => "Hors raid",
+                "name" => "CAC",
             ],
 
             [
-                "name" => "L'oeil de l'éternité",
+                "name" => "Caster",
             ],
 
             [
-                "name" => "Le sanctum Obsidien",
+                "name" => "Healer",
             ],
 
             [
-                "name" => "Naxxramas",
+                "name" => "Tank",
             ],
-
         ];
-
         $raidsObjArray = [];
-        foreach ($raids as $currentRaid) {
+        foreach ($roles as $currentRaid) {
             
-            $raidObj = new Raid();
+            $raidObj = new Role();
             $raidObj->setName($currentRaid['name']);
             $raidObj->setSlug($this->slugger->slug(mb_strtolower($currentRaid['name'])));
 
