@@ -42,7 +42,7 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
                 "name" => "Anneau d'invincibilité - Ring 1",
                 "location" => "Ring 1",
                 "type" => "Bis",
-                "role" => "",
+                "role" => "test",
                 "raid" => "",
                 "detail" => "",
             ],
