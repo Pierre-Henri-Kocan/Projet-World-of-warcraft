@@ -20,7 +20,7 @@ class RaidFixtures extends Fixture
     {
         $raids = [
             [
-                "name" => "Naxxramas",
+                "name" => "Hors raid",
             ],
 
             [
@@ -28,28 +28,13 @@ class RaidFixtures extends Fixture
             ],
 
             [
-                "name" => "Ingénierie",
-            ],
-
-            [
-                "name" => "Dalaran",
-            ],
-
-            [
                 "name" => "Le sanctum Obsidien",
             ],
 
             [
-                "name" => "Azjol-Nérub",
+                "name" => "Naxxramas",
             ],
 
-            [
-                "name" => "Quête",
-            ],
-
-            [
-                "name" => "Joaillerie",
-            ],
         ];
 
         $raidsObjArray = [];
