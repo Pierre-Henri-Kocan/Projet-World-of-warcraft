@@ -25,7 +25,7 @@ class Item
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=10)
+     * @ORM\Column(type="string", length=10, columnDefinition="enum('Bis','Contested')")
      */
     private $type;
 

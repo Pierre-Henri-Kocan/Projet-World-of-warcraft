@@ -25,7 +25,7 @@ class Player
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=30)
+     * @ORM\Column(type="string", length=30, columnDefinition="enum('Chaman', 'Chasseur', 'Chevalier de la mort', 'Démoniste', 'Druide', 'Guerrier', 'Mage', 'Paladin', 'Prêtre', 'Voleur')")
      */
     private $class;
 
@@ -35,7 +35,7 @@ class Player
     private $score;
 
     /**
-     * @ORM\Column(type="string", length=30)
+     * @ORM\Column(type="string", length=30, columnDefinition="enum('Demi', 'Galopin', 'Sérieux')")
      */
     private $rank;
 
