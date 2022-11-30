@@ -3,8 +3,6 @@
 namespace App\DataFixtures;
 
 use App\Entity\Item;
-use App\Entity\Raid;
-use App\Entity\Role;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -12,11 +10,16 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 class ItemFixtures extends Fixture implements DependentFixtureInterface 
 {
+    
     public function getDependencies()
    {
       return [
-         RaidFixtures::class
+          RoleFixtures::class,
+          RaidFixtures::class,
+          PlayerFixtures::class,
+          LocationFixtures::class,
       ];
+
    }
 
     private $slugger;
@@ -28,6 +31,7 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager): void
     {
+
         $items = [
             [
                 "name" => "Ambition infinie",
@@ -313,8 +317,8 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
                 "location" => "Trinket 1",
                 "type" => "Bis",
                 "role" => "CAC",
-                "raid" => "A définir",
-                "detail" => "A définir",
+                "raid" => "Hors raid",
+                "detail" => "https://www.wowhead.com/wotlk/fr/item=44253/carte-de-sombrelune-grandeur",
             ],
 
             [
@@ -322,8 +326,8 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
                 "location" => "Trinket 1",
                 "type" => "Bis",
                 "role" => "Healer",
-                "raid" => "A définir",
-                "detail" => "A définir",
+                "raid" => "Hors raid",
+                "detail" => "https://www.wowhead.com/wotlk/fr/item=44255/carte-de-sombrelune-grandeur",
             ],
 
             [
@@ -457,8 +461,8 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
                 "location" => "Neck",
                 "type" => "Contested",
                 "role" => "Tank",
-                "raid" => "A définir",
-                "detail" => "A définir",
+                "raid" => "Naxxramas",
+                "detail" => "https://www.wowhead.com/wotlk/fr/item=44577/cl%C3%A9-h%C3%A9ro%C3%AFque-de-liris-de-focalisation",
             ],
 
             [
@@ -466,7 +470,7 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
                 "location" => "Trinket 2",
                 "type" => "Bis",
                 "role" => "Healer",
-                "raid" => "A définir",
+                "raid" => "Hors raid",
                 "detail" => "https://www.wowhead.com/wotlk/fr/item=37835/cloche-dafromaj",
             ],
 
@@ -1204,7 +1208,7 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
                 "location" => "Trinket 2",
                 "type" => "Bis",
                 "role" => "Healer",
-                "raid" => "A définir",
+                "raid" => "Hors raid",
                 "detail" => "https://www.wowhead.com/wotlk/fr/item=37111/protecteur-d%C3%A2me#english-comments",
             ],
 
@@ -1302,7 +1306,7 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
                 "name" => "Torche du saint feu - Caster",
                 "location" => "Main Hand",
                 "type" => "Contested",
-                "role" => "Contested",
+                "role" => "Caster",
                 "raid" => "Naxxramas",
                 "detail" => "https://www.wowhead.com/wotlk/fr/item=40395/torche-du-saint-feu",
             ],
@@ -1311,7 +1315,7 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
                 "name" => "Torche du saint feu - Healer",
                 "location" => "Main Hand",
                 "type" => "Contested",
-                "role" => "Contested",
+                "role" => "Healer",
                 "raid" => "Naxxramas",
                 "detail" => "https://www.wowhead.com/wotlk/fr/item=40395/torche-du-saint-feu",
             ],
@@ -1320,7 +1324,7 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
                 "name" => "Torsade de la calamité",
                 "location" => "Main Hand",
                 "type" => "Bis",
-                "role" => "Bis",
+                "role" => "CAC",
                 "raid" => "Naxxramas",
                 "detail" => "https://www.wowhead.com/wotlk/fr/item=40383/torsade-de-la-calamit%C3%A9",
             ],
@@ -1329,7 +1333,7 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
                 "name" => "Totem de croissance forestière",
                 "location" => "Relic-Wand-Ranged",
                 "type" => "Bis",
-                "role" => "Bis",
+                "role" => "Healer",
                 "raid" => "Hors raid",
                 "detail" => "https://www.wowhead.com/wotlk/fr/item=40709/totem-de-croissance-foresti%C3%A8re",
             ],
@@ -1338,7 +1342,7 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
                 "name" => "Totem de maléfice",
                 "location" => "Relic-Wand-Ranged",
                 "type" => "Bis",
-                "role" => "Bis",
+                "role" => "Caster",
                 "raid" => "Naxxramas",
                 "detail" => "https://www.wowhead.com/wotlk/fr/item=40267/totem-de-mal%C3%A9fice",
             ],
@@ -1347,7 +1351,7 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
                 "name" => "Traître à l'humanité - Main Hand",
                 "location" => "Main Hand",
                 "type" => "Contested",
-                "role" => "Contested",
+                "role" => "CAC",
                 "raid" => "Naxxramas",
                 "detail" => "https://www.wowhead.com/wotlk/fr/item=40384/tra%C3%AEtre-%C3%A0-lhumanit%C3%A9",
             ],
@@ -1356,7 +1360,7 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
                 "name" => "Traître à l'humanité - Offhand",
                 "location" => "Offhand",
                 "type" => "Contested",
-                "role" => "Contested",
+                "role" => "CAC",
                 "raid" => "Naxxramas",
                 "detail" => "https://www.wowhead.com/wotlk/fr/item=40384/tra%C3%AEtre-%C3%A0-lhumanit%C3%A9",
             ],
@@ -1365,7 +1369,7 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
                 "name" => "Urne des souvenirs perdus",
                 "location" => "Offhand",
                 "type" => "Bis",
-                "role" => "Bis",
+                "role" => "Healer",
                 "raid" => "Naxxramas",
                 "detail" => "https://www.wowhead.com/wotlk/fr/item=40350/urne-des-souvenirs-perdus",
             ],
@@ -1374,7 +1378,7 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
                 "name" => "Ventaille du trépassé",
                 "location" => "Head",
                 "type" => "Bis",
-                "role" => "Bis",
+                "role" => "Healer",
                 "raid" => "Naxxramas",
                 "detail" => "https://www.wowhead.com/wotlk/fr/item=40298/ventaille-du-tr%C3%A9pass%C3%A9",
             ],
@@ -1383,7 +1387,7 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
                 "name" => "Voix de la raison - Caster",
                 "location" => "Offhand",
                 "type" => "Bis",
-                "role" => "Bis",
+                "role" => "Caster",
                 "raid" => "Naxxramas",
                 "detail" => "https://www.wowhead.com/wotlk/fr/item=40401/voix-de-la-raison",
             ],
@@ -1392,7 +1396,7 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
                 "name" => "Voix de la raison - Healer",
                 "location" => "Offhand",
                 "type" => "Contested",
-                "role" => "Contested",
+                "role" => "Healer",
                 "raid" => "Naxxramas",
                 "detail" => "https://www.wowhead.com/wotlk/fr/item=40401/voix-de-la-raison",
             ],
@@ -1405,23 +1409,25 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
             $itemObj = new Item();
 
             $itemObj->setName($currentItem['name']);
-            $itemObj->setLocation($currentItem['location']);
             $itemObj->setType($currentItem['type']);
             $itemObj->setSlug($this->slugger->slug(mb_strtolower($currentItem['name'])));
             $itemObj->setDetail($currentItem['detail']);
+            
+            $manager->persist($itemObj);
 
             $raidObj = $this->getReference($currentItem["raid"]);
             $itemObj->setRaid($raidObj);
-
+            
+            $locationObj = $this->getReference($currentItem["location"]);
+            $itemObj->addLocation($locationObj);
+            
             $roleObj = $this->getReference($currentItem["role"]);
-            $itemObj->addRole($roleObj);
-
-            $manager->persist($itemObj);
+            $itemObj->getRole($roleObj);
 
             //* reference to link fixtures files
             $this->addReference($currentItem['name'], $itemObj);
- 
         }
+                
 
         $manager->flush();
     }

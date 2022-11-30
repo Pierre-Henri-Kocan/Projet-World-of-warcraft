@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Player;
+use App\Entity\Role;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\String\Slugger\SluggerInterface;
@@ -23,7 +24,7 @@ class PlayerFixtures extends Fixture
 
             [
                 "name" => "Arianhrod",
-                "class" => "Drood",
+                "class" => "Druide",
                 "score" => "0",
                 "role" => "CAC",
                 "rank" => "Sérieux",
@@ -34,7 +35,7 @@ class PlayerFixtures extends Fixture
                 "name" => "Atanea",
                 "class" => "Prêtre",
                 "score" => "0",
-                "role" => "Heal",
+                "role" => "Healer",
                 "rank" => "Demi",
                 "is_actif" => "1",
             ],
@@ -70,7 +71,7 @@ class PlayerFixtures extends Fixture
                 "name" => "Camchoupette",
                 "class" => "Paladin",
                 "score" => "0",
-                "role" => "Heal",
+                "role" => "Healer",
                 "rank" => "Galopin",
                 "is_actif" => "1",
             ],
@@ -79,7 +80,7 @@ class PlayerFixtures extends Fixture
                 "name" => "Cegar",
                 "class" => "Paladin",
                 "score" => "0",
-                "role" => "Heal",
+                "role" => "Healer",
                 "rank" => "Sérieux",
                 "is_actif" => "1",
             ],
@@ -113,7 +114,7 @@ class PlayerFixtures extends Fixture
             
             [
                 "name" => "Demoralyse",
-                "class" => "Démonsite",
+                "class" => "Démoniste",
                 "score" => "0",
                 "role" => "Caster",
                 "rank" => "Sérieux",
@@ -185,7 +186,7 @@ class PlayerFixtures extends Fixture
             
             [
                 "name" => "Gulliver",
-                "class" => "Démonsite",
+                "class" => "Démoniste",
                 "score" => "0",
                 "role" => "Caster",
                 "rank" => "Galopin",
@@ -196,7 +197,7 @@ class PlayerFixtures extends Fixture
                 "name" => "Gwen",
                 "class" => "Druide",
                 "score" => "0",
-                "role" => "Heal",
+                "role" => "Healer",
                 "rank" => "Sérieux",
                 "is_actif" => "1",
             ],
@@ -239,7 +240,7 @@ class PlayerFixtures extends Fixture
             
             [
                 "name" => "Kwaky",
-                "class" => "Démonsite",
+                "class" => "Démoniste",
                 "score" => "0",
                 "role" => "Caster",
                 "rank" => "Sérieux",
@@ -268,7 +269,7 @@ class PlayerFixtures extends Fixture
                 "name" => "Lucamar",
                 "class" => "Druide",
                 "score" => "0",
-                "role" => "Heal",
+                "role" => "Healer",
                 "rank" => "Galopin",
                 "is_actif" => "1",
             ],
@@ -302,7 +303,7 @@ class PlayerFixtures extends Fixture
             
             [
                 "name" => "Necrogirl",
-                "class" => "Démonsite",
+                "class" => "Démoniste",
                 "score" => "0",
                 "role" => "Caster",
                 "rank" => "Sérieux",
@@ -313,7 +314,7 @@ class PlayerFixtures extends Fixture
                 "name" => "Portish",
                 "class" => "Prêtre",
                 "score" => "0",
-                "role" => "Heal",
+                "role" => "Healer",
                 "rank" => "Sérieux",
                 "is_actif" => "1",
             ],
@@ -331,7 +332,7 @@ class PlayerFixtures extends Fixture
                 "name" => "Rim",
                 "class" => "Paladin",
                 "score" => "0",
-                "role" => "Heal",
+                "role" => "Healer",
                 "rank" => "Sérieux",
                 "is_actif" => "1",
             ],
@@ -340,7 +341,7 @@ class PlayerFixtures extends Fixture
                 "name" => "Schaga",
                 "class" => "Chaman",
                 "score" => "0",
-                "role" => "Heal",
+                "role" => "Healer",
                 "rank" => "Sérieux",
                 "is_actif" => "1",
             ],
@@ -428,7 +429,7 @@ class PlayerFixtures extends Fixture
             
             [
                 "name" => "Vultris",
-                "class" => "Démonsite",
+                "class" => "Démoniste",
                 "score" => "0",
                 "role" => "Caster",
                 "rank" => "Sérieux",
@@ -455,19 +456,21 @@ class PlayerFixtures extends Fixture
             
         ];
 
-        $raidsObjArray = [];
+        $playersObjArray = [];
         foreach ($player as $currentPlayer) {
             
             $playerObj = new Player();
 
             $playerObj->setName($currentPlayer['name']);
-            $playerObj->setName($currentPlayer['class']);
-            $playerObj->setName($currentPlayer['score']);
-            $playerObj->setName($currentPlayer['role']);
-            $playerObj->setName($currentPlayer['rank']);
-            $playerObj->setName($currentPlayer['is_actif']);
+            $playerObj->setClass($currentPlayer['class']);
+            $playerObj->setScore($currentPlayer['score']);
+            $playerObj->setRank($currentPlayer['rank']);
+            $playerObj->setIsActif($currentPlayer['is_actif']);
 
             $playerObj->setSlug($this->slugger->slug(mb_strtolower($currentPlayer['name'])));
+
+            $roleObj = $this->getReference($currentPlayer["role"]);
+            $playerObj->setRole($roleObj);
 
             $manager->persist($playerObj);
 
@@ -475,6 +478,7 @@ class PlayerFixtures extends Fixture
             $this->addReference($currentPlayer['name'], $playerObj);
  
         }
+
 
         $manager->flush();
     }
