@@ -35,17 +35,17 @@ class RoleFixtures extends Fixture
                 "name" => "Tank",
             ],
         ];
-        $raidsObjArray = [];
-        foreach ($roles as $currentRaid) {
+        $rolesObjArray = [];
+        foreach ($roles as $currentRole) {
             
-            $raidObj = new Role();
-            $raidObj->setName($currentRaid['name']);
-            $raidObj->setSlug($this->slugger->slug(mb_strtolower($currentRaid['name'])));
+            $roleObj = new Role();
+            $roleObj->setName($currentRole['name']);
+            $roleObj->setSlug($this->slugger->slug(mb_strtolower($currentRole['name'])));
 
-            $manager->persist($raidObj);
+            $manager->persist($roleObj);
 
             //* reference to link fixtures files
-            $this->addReference($currentRaid['name'], $raidObj);
+            $this->addReference($currentRole['name'], $roleObj);
  
         }
 

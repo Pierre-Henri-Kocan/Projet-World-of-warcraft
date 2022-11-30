@@ -3,8 +3,6 @@
 namespace App\DataFixtures;
 
 use App\Entity\Item;
-use App\Entity\Raid;
-use App\Entity\Role;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -12,11 +10,16 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 class ItemFixtures extends Fixture implements DependentFixtureInterface 
 {
+    
     public function getDependencies()
    {
       return [
-         RaidFixtures::class
+          RoleFixtures::class,
+          RaidFixtures::class,
+          PlayerFixtures::class,
+          LocationFixtures::class,
       ];
+
    }
 
     private $slugger;
@@ -28,6 +31,7 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager): void
     {
+
         $items = [
             [
                 "name" => "Ambition infinie",
@@ -313,8 +317,8 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
                 "location" => "Trinket 1",
                 "type" => "Bis",
                 "role" => "CAC",
-                "raid" => "A définir",
-                "detail" => "A définir",
+                "raid" => "Hors raid",
+                "detail" => "https://www.wowhead.com/wotlk/fr/item=44253/carte-de-sombrelune-grandeur",
             ],
 
             [
@@ -322,8 +326,8 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
                 "location" => "Trinket 1",
                 "type" => "Bis",
                 "role" => "Healer",
-                "raid" => "A définir",
-                "detail" => "A définir",
+                "raid" => "Hors raid",
+                "detail" => "https://www.wowhead.com/wotlk/fr/item=44255/carte-de-sombrelune-grandeur",
             ],
 
             [
@@ -457,8 +461,8 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
                 "location" => "Neck",
                 "type" => "Contested",
                 "role" => "Tank",
-                "raid" => "A définir",
-                "detail" => "A définir",
+                "raid" => "Naxxramas",
+                "detail" => "https://www.wowhead.com/wotlk/fr/item=44577/cl%C3%A9-h%C3%A9ro%C3%AFque-de-liris-de-focalisation",
             ],
 
             [
@@ -466,7 +470,7 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
                 "location" => "Trinket 2",
                 "type" => "Bis",
                 "role" => "Healer",
-                "raid" => "A définir",
+                "raid" => "Hors raid",
                 "detail" => "https://www.wowhead.com/wotlk/fr/item=37835/cloche-dafromaj",
             ],
 
@@ -1204,7 +1208,7 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
                 "location" => "Trinket 2",
                 "type" => "Bis",
                 "role" => "Healer",
-                "raid" => "A définir",
+                "raid" => "Hors raid",
                 "detail" => "https://www.wowhead.com/wotlk/fr/item=37111/protecteur-d%C3%A2me#english-comments",
             ],
 
@@ -1405,23 +1409,26 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
             $itemObj = new Item();
 
             $itemObj->setName($currentItem['name']);
-            $itemObj->setLocation($currentItem['location']);
+            // $itemObj->setLocation($currentItem['location']);
             $itemObj->setType($currentItem['type']);
             $itemObj->setSlug($this->slugger->slug(mb_strtolower($currentItem['name'])));
             $itemObj->setDetail($currentItem['detail']);
+            
+            $manager->persist($itemObj);
 
             $raidObj = $this->getReference($currentItem["raid"]);
             $itemObj->setRaid($raidObj);
-
+            
+            $locationObj = $this->getReference($currentItem["location"]);
+            $itemObj->addLocation($locationObj);
+            
             $roleObj = $this->getReference($currentItem["role"]);
-            $itemObj->addRole($roleObj);
-
-            $manager->persist($itemObj);
+            $itemObj->getRole($roleObj);
 
             //* reference to link fixtures files
             $this->addReference($currentItem['name'], $itemObj);
- 
         }
+                
 
         $manager->flush();
     }
