@@ -25,7 +25,7 @@ class Item
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=10, columnDefinition="enum('Bis', 'Contested')")
+     * @ORM\Column(type="string", length=10)
      */
     private $type;
 
@@ -61,7 +61,7 @@ class Item
     private $detail;
 
     /**
-     * @ORM\OneToMany(targetEntity=Location::class, mappedBy="item")
+     * @ORM\ManyToMany(targetEntity=Location::class, mappedBy="item")
      */
     private $locations;
 
@@ -225,7 +225,7 @@ class Item
     {
         if (!$this->locations->contains($location)) {
             $this->locations[] = $location;
-            $location->setItem($this);
+            $location->addItem($this);
         }
 
         return $this;
@@ -234,12 +234,10 @@ class Item
     public function removeLocation(Location $location): self
     {
         if ($this->locations->removeElement($location)) {
-            // set the owning side to null (unless already changed)
-            if ($location->getItem() === $this) {
-                $location->setItem(null);
-            }
+            $location->removeItem($this);
         }
 
         return $this;
     }
+
 }
