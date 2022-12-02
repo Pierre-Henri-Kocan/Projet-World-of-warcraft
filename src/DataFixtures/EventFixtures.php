@@ -5,10 +5,19 @@ namespace App\DataFixtures;
 use App\Entity\Event;
 use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class EventFixtures extends Fixture
+class EventFixtures extends Fixture implements DependentFixtureInterface 
 {
+    
+    public function getDependencies()
+   {
+      return [
+          ItemFixtures::class,
+      ];
+
+   }
  
     public function load(ObjectManager $manager): void
     {
@@ -17,9 +26,10 @@ class EventFixtures extends Fixture
             [
                 "date" => "2022-11-30 20:45:00",
                 "log" => "https://classic.warcraftlogs.com/reports/GtrmZdLaC7Pykh2c/#boss=-2&difficulty=0&wipes=2&view=rankings",
-                "raid" => "plusieurs",
-                "player" => "plusieurs",
-                "item" => "plusieurs",
+                "raid" => "Naxxramas",
+                "player" => "Arianhrod",
+                "item" => "Ambition infinie",
+                "is_bench" => true,
             ],
 
         ];
@@ -44,8 +54,6 @@ class EventFixtures extends Fixture
 
             $manager->persist($eventObj);
 
-            //* reference to link fixtures files
-            $this->addReference($currentEvent['name'], $eventObj);
         }
 
         $manager->flush();
