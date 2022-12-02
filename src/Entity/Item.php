@@ -25,11 +25,6 @@ class Item
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=64)
-     */
-    private $location;
-
-    /**
      * @ORM\Column(type="string", length=10)
      */
     private $type;
@@ -60,11 +55,22 @@ class Item
      */
     private $raid;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $detail;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Location::class, mappedBy="item")
+     */
+    private $locations;
+
     public function __construct()
     {
         $this->role = new ArrayCollection();
         $this->player = new ArrayCollection();
         $this->events = new ArrayCollection();
+        $this->locations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -80,18 +86,6 @@ class Item
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getLocation(): ?string
-    {
-        return $this->location;
-    }
-
-    public function setLocation(string $location): self
-    {
-        $this->location = $location;
 
         return $this;
     }
@@ -206,4 +200,44 @@ class Item
 
         return $this;
     }
+
+    public function getDetail(): ?string
+    {
+        return $this->detail;
+    }
+
+    public function setDetail(string $detail): self
+    {
+        $this->detail = $detail;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Location>
+     */
+    public function getLocations(): Collection
+    {
+        return $this->locations;
+    }
+
+    public function addLocation(Location $location): self
+    {
+        if (!$this->locations->contains($location)) {
+            $this->locations[] = $location;
+            $location->addItem($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLocation(Location $location): self
+    {
+        if ($this->locations->removeElement($location)) {
+            $location->removeItem($this);
+        }
+
+        return $this;
+    }
+
 }

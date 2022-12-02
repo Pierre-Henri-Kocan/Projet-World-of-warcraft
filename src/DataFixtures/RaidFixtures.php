@@ -20,44 +20,21 @@ class RaidFixtures extends Fixture
     {
         $raids = [
             [
-                "name" => "Naxxramas",
-                "slug" => "naxxramas", 
+                "name" => "Hors raid",
             ],
 
             [
                 "name" => "L'oeil de l'éternité",
-                "slug" => "l-oeil-de-l-eternite", 
-            ],
-
-            [
-                "name" => "Ingénierie",
-                "slug" => "ingenierie", 
-            ],
-
-            [
-                "name" => "Dalaran",
-                "slug" => "dalaran", 
             ],
 
             [
                 "name" => "Le sanctum Obsidien",
-                "slug" => "le-sanctum-obsidien", 
             ],
 
             [
-                "name" => "Azjol-Nérub",
-                "slug" => "azjol-nerub", 
+                "name" => "Naxxramas",
             ],
 
-            [
-                "name" => "Quête",
-                "slug" => "quete", 
-            ],
-
-            [
-                "name" => "Joaillerie",
-                "slug" => "joaillerie", 
-            ],
         ];
 
         $raidsObjArray = [];
