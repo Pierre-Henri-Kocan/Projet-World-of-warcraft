@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Event;
+use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -27,7 +28,7 @@ class EventFixtures extends Fixture
             
             $eventObj = new Event();
 
-            $eventObj->setDate($currentEvent['date']);
+            $eventObj->setDate(new DateTime($currentEvent["date"]));
             $eventObj->setLog($currentEvent['log']);
            
 
