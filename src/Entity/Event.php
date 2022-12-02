@@ -56,9 +56,13 @@ class Event
         return $this->id;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    public function getDate(): ?string
     {
+        if(!is_null($this->date)) {
+           return $this->date->format('Y-m-d H:i:s'); 
+        }
         return $this->date;
+        
     }
 
     public function setDate(\DateTimeInterface $date): self
