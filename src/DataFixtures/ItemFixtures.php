@@ -1422,7 +1422,7 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
             $itemObj->addLocation($locationObj);
             
             $roleObj = $this->getReference($currentItem["role"]);
-            $itemObj->getRole($roleObj);
+            $itemObj->addRole($roleObj);
 
             //* reference to link fixtures files
             $this->addReference($currentItem['name'], $itemObj);
