@@ -20,7 +20,7 @@ class PlayerFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
 
-        $player = [
+        $players = [
 
             [
                 "name" => "Arianhrod",
@@ -457,7 +457,7 @@ class PlayerFixtures extends Fixture
         ];
 
         $playersObjArray = [];
-        foreach ($player as $currentPlayer) {
+        foreach ($players as $currentPlayer) {
             
             $playerObj = new Player();
 
