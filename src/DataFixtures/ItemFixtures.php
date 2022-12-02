@@ -111,12 +111,10 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
             $locationObj = new Location();
 
             $locationObj->setName($currentLocation['name']);
-
             $locationObj->setSlug($this->slugger->slug(mb_strtolower($currentLocation['name'])));
             
-            // //* to be able to link categories to posts
-            // $locationObjArray[md5($currentLocation['name'])] = $locationObj;
-
+            //* to be able to link categories to posts
+            $locationObjArray[md5($currentLocation['name'])] = $locationObj;
             $manager->persist($locationObj);
         }
         $items = [
@@ -1506,14 +1504,14 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
             $raidObj = $this->getReference($currentItem["raid"]);
             $itemObj->setRaid($raidObj);
             
-            $locationObj = $this->getReference($currentItem["location"]);
-            $itemObj->addLocation($locationObj);
+            // $locationObj = $this->getReference($currentItem["location"]);
+            // $itemObj->addLocation($locationObj);
             
-            // foreach ($currentItem["location"] as $currentLocationName) {
+            foreach ($currentItem["location"] as $currentLocationName) {
 
-            //     $currentLocationObj = $locationObjArray[md5($currentLocationName)];
-            //     $itemObj->addLocation($currentLocationObj);
-            // }
+                $currentLocationObj = $locationObjArray[md5($currentLocationName)];
+                $itemObj->addLocation($currentLocationObj);
+            }
 
             $roleObj = $this->getReference($currentItem["role"]);
             $itemObj->addRole($roleObj);
