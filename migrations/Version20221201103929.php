@@ -20,7 +20,7 @@ final class Version20221201103929 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE TABLE location (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(64) NOT NULL, slug VARCHAR(64) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE location (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(64) NOT NULL, slug VARCHAR(64) NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE location_item (location_id INT NOT NULL, item_id INT NOT NULL, INDEX IDX_9F1F905E64D218E (location_id), INDEX IDX_9F1F905E126F525E (item_id), PRIMARY KEY(location_id, item_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('ALTER TABLE location_item ADD CONSTRAINT FK_9F1F905E64D218E FOREIGN KEY (location_id) REFERENCES location (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE location_item ADD CONSTRAINT FK_9F1F905E126F525E FOREIGN KEY (item_id) REFERENCES item (id) ON DELETE CASCADE');
