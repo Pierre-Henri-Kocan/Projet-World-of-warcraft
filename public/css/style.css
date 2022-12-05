@@ -1,0 +1,24 @@
+.logo-nav {
+    width: 5rem;
+    height: auto;
+    margin-right: 2rem;
+}
+
+.navbar {
+    background-color: rgb(30, 131, 190);
+    background-position:bottom;
+    width: 100%;
+    height: 5rem;
+}
+
+.nav-item {
+    font-size: 1.2rem;
+}
+
+#navbarNav .nav-link {
+    color: white;
+}
+
+html body{
+    background-color:rgb(123, 206, 162);
+}
