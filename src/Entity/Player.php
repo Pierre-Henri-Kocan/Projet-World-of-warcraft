@@ -21,31 +21,37 @@ class Player
 
     /**
      * @ORM\Column(type="string", length=64)
+     * @Assert\NotBlank(message="Merci de remplir ce champs")
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=30, columnDefinition="enum('Chaman', 'Chasseur', 'Chevalier de la mort', 'Démoniste', 'Druide', 'Guerrier', 'Mage', 'Paladin', 'Prêtre', 'Voleur')")
+     * @Assert\NotBlank(message="Merci de remplir ce champs")
      */
     private $class;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank(message="Merci de remplir ce champs")
      */
     private $score;
 
     /**
      * @ORM\Column(type="string", length=30, columnDefinition="enum('Demi', 'Galopin', 'Sérieux')")
+     * @Assert\NotBlank(message="Merci de remplir ce champs")
      */
     private $rank;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Assert\NotBlank(message="Merci de remplir ce champs")
      */
     private $isActif;
 
     /**
      * @ORM\Column(type="string", length=64)
+     * @Assert\NotBlank(message="Merci de remplir ce champs")
      */
     private $slug;
 
@@ -62,6 +68,7 @@ class Player
     /**
      * @ORM\ManyToOne(targetEntity=Role::class, inversedBy="players")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank(message="Merci de remplir ce champs")
      */
     private $role;
 
