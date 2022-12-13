@@ -21,6 +21,7 @@ class Event
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\NotBlank(message="Merci de remplir ce champs")
      */
     private $date;
 
@@ -31,16 +32,19 @@ class Event
 
     /**
      * @ORM\ManyToMany(targetEntity=Raid::class, inversedBy="events")
+     * @Assert\NotBlank(message="Merci de remplir ce champs")
      */
     private $raid;
 
     /**
      * @ORM\ManyToMany(targetEntity=Player::class, inversedBy="events")
+     * @Assert\NotBlank(message="Merci de remplir ce champs")
      */
     private $player;
 
     /**
      * @ORM\ManyToMany(targetEntity=Item::class, inversedBy="events")
+     * @Assert\NotBlank(message="Merci de remplir ce champs")
      */
     private $item;
 
