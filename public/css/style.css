@@ -1,102 +1,137 @@
+/* ---------------------- NavBar + Footer ---------------------- */
+
 html, body {
     margin:0;
     padding:0;
     height:100%;
  }
 
- body {
+body {
     position: relative;
- }
-
-.logo-nav {
-    width: 5rem;
-    height: auto;
-    margin-right: 2rem;
+    background-image: url(../images/og-image.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .navbar {
-    background-color: rgb(30, 131, 190);
+    background-color: rgba(30, 131, 190, 0.418);
     background-position:bottom;
     width: 100%;
-    height: 5rem;
+    height: 10rem;
+}
+    
+.logo-nav {
+    width: 8rem;
+    /* width à partir de de 768px 13 rem */
+    height: auto;
+    margin: 0 2rem;
 }
 
-.nav-item {
-    font-size: 1.2rem;
-}
-
-#navbarNav .nav-link {
+.navbar-expand-lg .navbar-nav .nav-link {
     color: white;
+    font-size: 1.3rem;
+    margin: 2rem;
 }
 
 footer {
    position: absolute;
    bottom: 0;
    width: 100%;
-   height: 80px;
-   background-color: rgb(30, 131, 190);
+   height: 2.5rem;
+   background-color: rgb(30, 131, 190, 0.418);
    padding: 0rem;
    text-align: center;
-}
-
-.footer-text {
-    margin: 0.5rem 0;
-    color: rgb(255, 255, 255);
 }
 
 .footer-list {
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
     padding: 0;
-    margin-right: 3rem;
-    margin-bottom: 0;
+    margin: 0.5rem;
 }
 
 .footer-list-text {
-    text-decoration: none;
     color: rgb(255, 255, 255);
 }
 
-.footer-list :hover {
-    color: rgb(255, 0, 0);
+/* ---------------------- calendrier ---------------------- */
+#calendar {
+    width: 45rem;
+    margin: auto;
 }
 
-/* roster-template */
+
+/* ---------------------- container principaux ---------------------- */
 .container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    padding: 2rem;
-}
-
-.right-container {
-    width: 31rem;
+    margin: 4rem auto;
 }
 
 .left-container {
     width: 31rem;
 }
 
+.right-container {
+    width: 31rem;
+}
+
+
+/* ---------------------- textes ---------------------- */
+h1 {
+    color: white;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+a:hover, .navbar-expand-lg .navbar-nav .nav-link:hover {
+    color: rgb(211, 43, 226);
+}
+
+
+/* ---------------------- boutons ---------------------- */
+.button-top {
+    text-align: end;
+    margin-right: 2rem;
+    margin-top: 4rem;
+}
+
+
+/* ---------------------- tables ---------------------- */
 table {
     padding: 2rem;
     color: white;
     margin: auto;
+    text-align: center;
 }
 
 table th  {
-    background-color: #617ba1;
-    text-align: center;
+    background-color: #617aa165;
     font-weight: bold;
+    color: white;
 }
 
 table tbody tr:nth-child(even) {
-    background-color: #88C9FB;
+    background-color: #88c9fb6b;
 }
 
 table tbody tr:nth-child(odd) {
-    background-color: #1B2F4E;
+    background-color: #1b2f4e5e;
 }
 
 table tbody td {
     padding: 0 1rem;
+    color: white;
+}
+
+/* ---------------------- MEDIA-QUERIES ---------------------- */
+@media (min-width: 352px) {
+    .logo-nav {
+        width: 13rem;
+    }
 }

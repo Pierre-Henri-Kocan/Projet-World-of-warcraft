@@ -4,8 +4,10 @@
 
 {% block body %}
 
+<div class="button-top">        
+    <a href="{{ path('app_event_create') }}"class="button-top-add" title="Ajouter"><i class="bi bi-plus-circle"></i> Ajouter un évènement</a>
+</div>
 <div class="container">
-        
     <table>
         <thead>
             <tr>
@@ -14,19 +16,18 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>évènement_1</td>
-                <td>date_1</td>
-            </tr>
-            <tr>
-                <td>évènement_2</td>
-                <td>date_2</td>
-            </tr>
-            <tr>
-                <td>évènement_3</td>
-                <td>date_3</td>
-
-            </tr>
+            {% for event in events %}
+                <tr>
+                    <td>
+                        <a href="{{ path('app_event_read', {'id': event.id}) }}">
+                        {% for raid in event.raid %}
+                           > {{ raid.name }}
+                        {% endfor %}
+                        </a>
+                    </td>
+                    <td>{{ event.date }}</td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 </div>

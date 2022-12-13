@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}- Evènement{% endblock %}
+
+{% block body %}
+<div class="container">
+
+    <h1>{{ event.date }}</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Raids</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for raid in event.raid %}
+            <tr>
+                <td> {{ raid.name }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Joueurs</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for player in event.player %}
+            <tr>
+                <td> {{ player.name }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Raid</th>
+                <th>Joueur</th>
+                <th>Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                {% for item in event.item %}
+                <td> {{ item.name }}</td>
+                {% endfor %}
+                {% for item in event.item %}
+                {# dans mon event, j'ai un item appartenant à un raid, je veux le nom de ce raid #}
+                <td> {{ item.raid.name }}</td>
+                {% endfor %}
+                {% for item in event.item %}
+                {# dans mon event, j'ai un item attribué à un player, je veux le nom de ce player #}
+                {# <td> {{ item.player.name }}</td> #}
+                <td> </td>
+                {% endfor %}
+                {% for item in event.item %}
+                <td> {{ item.type }}</td>
+                {% endfor %}
+            </tr>
+        </tbody>
+    </table>
+    <div class="botom-button d-flex flex-wrap justify-content-evenly">
+        <a class="botom-button-update" href="{{ path('app_event_update', {'id': event.id}) }}">Modifier</a>
+        <a class="botom-button-back" href="{{ path('app_event_list') }}">Retour</a>
+        {{ include('event/_delete_form.html.twig') }}
+    </div>
+
+</div>
+{% endblock %}
