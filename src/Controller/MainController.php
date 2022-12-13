@@ -11,12 +11,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 
-/**
- * @Route("/main", name="app_main")
- */
 class MainController extends AbstractController
 {
-
+    /**
+     * @Route("/main", name="app_main")
+     */
     public function index(EventRepository $eventRepository, ItemRepository $itemRepository, RaidRepository $raidRepository, PlayerRepository $playerRepository): Response
     {
         $eventList = $eventRepository->findAll();
