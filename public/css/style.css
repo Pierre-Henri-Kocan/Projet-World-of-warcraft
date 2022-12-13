@@ -66,6 +66,7 @@ footer {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    padding: 2rem;
 }
 
 .right-container {
@@ -76,26 +77,26 @@ footer {
     width: 31rem;
 }
 
-.roster-table {
+table {
     padding: 2rem;
     color: white;
     margin: auto;
 }
 
-.roster-table th {
+table th  {
     background-color: #617ba1;
     text-align: center;
     font-weight: bold;
 }
 
-.roster-table tbody tr:nth-child(even) {
+table tbody tr:nth-child(even) {
     background-color: #88C9FB;
 }
 
-.roster-table tbody tr:nth-child(odd) {
+table tbody tr:nth-child(odd) {
     background-color: #1B2F4E;
 }
 
-.roster-table tbody td {
+table tbody td {
     padding: 0 1rem;
 }
