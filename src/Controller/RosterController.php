@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Player;
+use App\Form\PlayerType;
 use App\Repository\PlayerRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Raid;
+use App\Form\RaidType;
 use App\Repository\RaidRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
