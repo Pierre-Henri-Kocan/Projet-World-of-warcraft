@@ -4,6 +4,10 @@ html, body {
     height:100%;
  }
 
+ body {
+    position: relative;
+ }
+
 .logo-nav {
     width: 5rem;
     height: auto;
@@ -25,7 +29,7 @@ html, body {
     color: white;
 }
 
-.footer {
+footer {
    position: absolute;
    bottom: 0;
    width: 100%;
@@ -55,4 +59,44 @@ html, body {
 
 .footer-list :hover {
     color: rgb(255, 0, 0);
+}
+
+/* roster-template */
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 2rem;
+}
+
+.right-container {
+    width: 31rem;
+}
+
+.left-container {
+    width: 31rem;
+}
+
+table {
+    padding: 2rem;
+    color: white;
+    margin: auto;
+}
+
+table th  {
+    background-color: #617ba1;
+    text-align: center;
+    font-weight: bold;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #88C9FB;
+}
+
+table tbody tr:nth-child(odd) {
+    background-color: #1B2F4E;
+}
+
+table tbody td {
+    padding: 0 1rem;
 }

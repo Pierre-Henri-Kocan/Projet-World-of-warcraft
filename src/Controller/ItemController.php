@@ -13,7 +13,7 @@ class ItemController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('item/index.html.twig', [
+        return $this->render('item/list.html.twig', [
             'controller_name' => 'ItemController',
         ]);
     }

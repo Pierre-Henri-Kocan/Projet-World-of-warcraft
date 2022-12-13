@@ -13,7 +13,7 @@ class RosterController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('roster/index.html.twig', [
+        return $this->render('roster/list.html.twig', [
             'controller_name' => 'RosterController',
         ]);
     }
