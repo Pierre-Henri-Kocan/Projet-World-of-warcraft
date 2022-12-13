@@ -13,7 +13,7 @@ class RaidController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('raid/index.html.twig', [
+        return $this->render('raid/list.html.twig', [
             'controller_name' => 'RaidController',
         ]);
     }
