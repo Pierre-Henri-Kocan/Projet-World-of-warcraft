@@ -21,21 +21,25 @@ class Raid
 
     /**
      * @ORM\Column(type="string", length=64)
+     * @Assert\NotBlank(message="Merci de remplir ce champs")
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=64)
+     * @Assert\NotBlank(message="Merci de remplir ce champs")
      */
     private $slug;
 
     /**
      * @ORM\ManyToMany(targetEntity=Event::class, mappedBy="raid")
+     * @Assert\NotBlank(message="Merci de remplir ce champs")
      */
     private $events;
 
     /**
      * @ORM\OneToMany(targetEntity=Item::class, mappedBy="raid")
+     * @Assert\NotBlank(message="Merci de remplir ce champs")
      */
     private $item;
 
