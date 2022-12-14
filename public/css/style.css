@@ -64,6 +64,12 @@ footer {
 
 
 /* ---------------------- container principaux ---------------------- */
+.title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .container {
     display: flex;
     flex-wrap: wrap;
@@ -72,16 +78,16 @@ footer {
 }
 
 .left-container {
-    width: 31rem;
+    width: 42rem;
 }
 
 .right-container {
-    width: 31rem;
+    width: 25rem;
 }
 
 
 /* ---------------------- textes ---------------------- */
-h1 {
+h1, h2 {
     color: white;
 }
 
@@ -95,13 +101,18 @@ a:hover, .navbar-expand-lg .navbar-nav .nav-link:hover {
 }
 
 
-/* ---------------------- boutons ---------------------- */
+/* ---------------------- buttons ---------------------- */
 .button-top {
-    text-align: end;
+    display: flex;
+    justify-content: space-evenly;
     margin-right: 2rem;
     margin-top: 4rem;
 }
 
+/*  search button  */
+body > div.button-top > form > button {
+    color: white;
+}
 
 /* ---------------------- tables ---------------------- */
 table {
@@ -129,6 +140,14 @@ table tbody td {
     padding: 0 1rem;
     color: white;
 }
+
+/* ---------------------- accrodions ---------------------- */
+
+.accordion-item, .accordion-button, .accordion-button:not(.collapsed), .list-group-item {
+    background-color: rgba(0, 0, 0, 0.308);
+    color:white;
+}
+
 
 /* ---------------------- page item ---------------------- */
 

@@ -52,10 +52,11 @@ class RosterController extends AbstractController
     /**
      * @Route ("/{id<\d+>}", name="read", methods={"GET"})
      */
-    public function read(Player $player): Response
+    public function read(Player $player, PlayerRepository $playerRepository): Response
     {
         return $this->render('roster/read.html.twig', [
-            'event' => $player,
+            'player' => $player,
+            'rosters' => $playerRepository->findAll(),
         ]);
     }
 
