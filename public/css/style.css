@@ -23,7 +23,6 @@ body {
     
 .logo-nav {
     width: 8rem;
-    /* width à partir de de 768px 13 rem */
     height: auto;
     margin: 0 2rem;
 }
@@ -68,6 +67,7 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 1rem;
 }
 
 .container {
@@ -89,6 +89,7 @@ footer {
 /* ---------------------- textes ---------------------- */
 h1, h2 {
     color: white;
+    text-align: center;
 }
 
 a {
@@ -114,6 +115,19 @@ body > div.button-top > form > button {
     color: white;
 }
 
+.botom-button-update, .botom-button-back, .button-delete {
+    background-color: rgba(30, 131, 190, 0.418);
+    color: white;
+    border: #1b2f4ead solid 1px;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+}
+
+.button-delete:hover {
+    color: red;
+
+}
+
 /* ---------------------- tables ---------------------- */
 table {
     padding: 2rem;
@@ -122,7 +136,7 @@ table {
     text-align: center;
 }
 
-table th  {
+.container table > thead > tr > th  {
     background-color: #6179a180;
     font-weight: bold;
     color: white;
@@ -185,8 +199,45 @@ table tbody td {
     color: rgba(255, 255, 255, 0.7);
 }
 
+/* ---------------------- form ---------------------- */
+form {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    color: white;
+ }
+ 
+ form #event {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: rgba(0, 0, 0, 0.308);
+    justify-content: space-between;
+    align-items: center;
+ }
+
+ form #event div {
+    margin: 1rem;
+ }
+
+ form #event div label {
+    margin-right: 1rem;
+ }
+ 
+ label.required {
+    display: flex;
+    background-color:  #88c9fbab;
+    margin: 1rem;
+    justify-content: center;
+ }
+
+ #event_item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+ }
+
 /* ---------------------- MEDIA-QUERIES ---------------------- */
-@media screen and (max-width: 400px) {
+@media screen and (min-width: 384px) {
     .logo-nav {
         width: 13rem;
     }       

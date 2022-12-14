@@ -63,4 +63,9 @@
         </ul>
     </div>
 </div>
+<div class="botom-button d-flex flex-wrap justify-content-evenly">
+    <a class="botom-button-update" href="{{ path('app_roster_update', {'id': player.id}) }}">Modifier</a>
+    <a class="botom-button-back" href="{{ path('app_roster_list') }}">Retour</a>
+    {# {{ include('event/_delete_form.html.twig') }} #}
+</div>
 {% endblock %}
