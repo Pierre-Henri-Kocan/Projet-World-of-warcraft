@@ -130,9 +130,61 @@ table tbody td {
     color: white;
 }
 
+/* ---------------------- page item ---------------------- */
+
+.title-item{
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    margin: 2rem 0;
+    border: 4px solid rgba(255, 255, 255, 0.7);
+    border-radius: 20px;
+    margin: 5rem 20%;
+    font-size: 3rem;
+}
+
+.wowhead {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10rem;
+}
+
+.wowhead-link {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+}
+
+.wowhead-logo {
+    width: 30rem;
+    opacity: 70%;
+}
+
+.wowhead-title {
+    text-align: center;
+    font-size: 3rem;
+    margin: 7rem 0 0 0;
+    color: rgba(255, 255, 255, 0.7);
+}
+
 /* ---------------------- MEDIA-QUERIES ---------------------- */
-@media (min-width: 384px) {
+@media screen and (max-width: 400px) {
     .logo-nav {
         width: 13rem;
+    }       
+}
+
+@media screen and (max-width: 800px) {
+    .wowhead-link {
+        flex-direction: column-reverse;
+    }
+    .title-item{
+        font-size: 1.5rem;
+    }
+    .wowhead-logo {
+        width: 15rem;
+    }
+    .wowhead-title {
+        text-align: center;
+        font-size: 1.5rem;
     }
 }
