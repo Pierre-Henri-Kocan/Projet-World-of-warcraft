@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}- Evènement{% endblock %}
+
+{% block body %}
+
+<div class="title">
+    <h1>
+        {{ event.date }}</br>
+        {% for raid in event.raid %}
+        {{ raid.name }}</br>
+        {% endfor %}
+    </h1>
+</div>
+<div class="container">
+ 
+    <div class="left-container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Type</th>
+                    <th>Raid</th>
+                    <th>Joueur</th>
+                </tr>
+            </thead>
+            <tbody>
+                {# Pour l'évènement en cours, je veux chaque item récupéré, son type, son raid d'appartenance, le joueur qui l'a récupéré #}
+                {% for item in event.item %}
+                <tr>
+                    <td> {{ item.name }}</td>
+                    <td> {{ item.type }}</td>
+                    <td> {{ item.raid.name }}</td>
+                    {% for current_player in item.player %}
+                    <td> {{ current_player.name }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="right-container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Joueurs</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for player in event.player %}
+                <tr>
+                    <td> {{ player.name }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="botom-button d-flex flex-wrap justify-content-evenly">
+    <a class="botom-button-update" href="{{ path('app_event_update', {'id': event.id}) }}">Modifier</a>
+    <a class="botom-button-back" href="{{ path('app_event_list') }}">Retour</a>
+    {{ include('event/_delete_form.html.twig') }}
+</div>
+{% endblock %}
