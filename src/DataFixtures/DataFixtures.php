@@ -287,25 +287,13 @@ class DataFixtures extends Fixture
                 ],
 
                 [
-                    "name" => "Bague de magie canalisée - Caster",
+                    "name" => "Bague de magie canalisée",
                     "location" => [
                         "Ring 1",
                     ],
                     "type" => "Bis",
                     "role" => [
                         "Caster",
-                    ],
-                    "raid" => "Hors raid",
-                    "detail" => "https://www.wowhead.com/wotlk/fr/item=40719/bague-de-magie-canalis%C3%A9e",
-                ],
-
-                [
-                    "name" => "Bague de magie canalisée - Healer",
-                    "location" => [
-                        "Ring 1",
-                    ],
-                    "type" => "Bis",
-                    "role" => [
                         "Healer",
                     ],
                     "raid" => "Hors raid",
@@ -547,25 +535,13 @@ class DataFixtures extends Fixture
                 ],
 
                 [
-                    "name" => "Cape du pennon - Caster",
+                    "name" => "Cape du pennon",
                     "location" => [
                         "Back",
                     ],
                     "type" => "Contested",
                     "role" => [
                         "Caster",
-                    ],
-                    "raid" => "Le sanctum Obsidien",
-                    "detail" => "https://www.wowhead.com/wotlk/fr/item=44005/cape-du-pennon",
-                ],
-
-                [
-                    "name" => "Cape du pennon - Healer",
-                    "location" => [
-                        "Back",
-                    ],
-                    "type" => "Contested",
-                    "role" => [
                         "Healer",
                     ],
                     "raid" => "Le sanctum Obsidien",
@@ -599,29 +575,17 @@ class DataFixtures extends Fixture
                 ],
 
                 [
-                    "name" => "Carte de Sombrelune : Grandeur - CAC",
+                    "name" => "Carte de Sombrelune : Grandeur",
                     "location" => [
                         "Trinket 1",
                     ],
                     "type" => "Bis",
                     "role" => [
                         "CAC",
-                    ],
-                    "raid" => "Hors raid",
-                    "detail" => "https://www.wowhead.com/wotlk/fr/item=44253/carte-de-sombrelune-grandeur",
-                ],
-
-                [
-                    "name" => "Carte de Sombrelune : Grandeur - Healer",
-                    "location" => [
-                        "Trinket 1",
-                    ],
-                    "type" => "Bis",
-                    "role" => [
                         "Healer",
                     ],
                     "raid" => "Hors raid",
-                    "detail" => "https://www.wowhead.com/wotlk/fr/item=44255/carte-de-sombrelune-grandeur",
+                    "detail" => "https://www.wowhead.com/wotlk/fr/item=44253/carte-de-sombrelune-grandeur",
                 ],
 
                 [
@@ -677,25 +641,13 @@ class DataFixtures extends Fixture
                 ],
 
                 [
-                    "name" => "Ceinturon de récupération - Caster",
+                    "name" => "Ceinturon de récupération",
                     "location" => [
                         "Waist",
                     ],
                     "type" => "Bis",
                     "role" => [
                         "Caster",
-                    ],
-                    "raid" => "Naxxramas",
-                    "detail" => "https://www.wowhead.com/wotlk/fr/item=40327/ceinturon-de-r%C3%A9cup%C3%A9ration",
-                ],
-
-                [
-                    "name" => "Ceinturon de récupération - Healer",
-                    "location" => [
-                        "Waist",
-                    ],
-                    "type" => "Bis",
-                    "role" => [
                         "Healer",
                     ],
                     "raid" => "Naxxramas",
@@ -886,25 +838,13 @@ class DataFixtures extends Fixture
                 ],
 
                 [
-                    "name" => "Crispins sans souillure - Caster",
+                    "name" => "Crispins sans souillure",
                     "location" => [
                         "Wrists",
                     ],
                     "type" => "Contested",
                     "role" => [
                         "Caster",
-                    ],
-                    "raid" => "Le sanctum Obsidien",
-                    "detail" => "https://www.wowhead.com/wotlk/fr/item=44008/crispins-sans-souillure",
-                ],
-
-                [
-                    "name" => "Crispins sans souillure - Healer",
-                    "location" => [
-                        "Wrists",
-                    ],
-                    "type" => "Contested",
-                    "role" => [
                         "Healer",
                     ],
                     "raid" => "Le sanctum Obsidien",
@@ -1397,25 +1337,13 @@ class DataFixtures extends Fixture
                 ],
 
                 [
-                    "name" => "La Marée décisive - Caster",
+                    "name" => "La Marée décisive",
                     "location" => [
                         "Main Hand",
                     ],
                     "type" => "Contested",
                     "role" => [
                         "Caster",
-                    ],
-                    "raid" => "Naxxramas",
-                    "detail" => "https://www.wowhead.com/wotlk/fr/item=40396/la-mar%C3%A9e-d%C3%A9cisive",
-                ],
-
-                [
-                    "name" => "La Marée décisive - Healer",
-                    "location" => [
-                        "Main Hand",
-                    ],
-                    "type" => "Contested",
-                    "role" => [
                         "Healer",
                     ],
                     "raid" => "Naxxramas",
@@ -1423,25 +1351,13 @@ class DataFixtures extends Fixture
                 ],
 
                 [
-                    "name" => "Laisse de magie insouciante - Caster",
+                    "name" => "Laisse de magie insouciante",
                     "location" => [
                         "Waist",
                     ],
                     "type" => "Contested",
                     "role" => [
                         "Caster",
-                    ],
-                    "raid" => "L'oeil de l'éternité",
-                    "detail" => "https://www.wowhead.com/wotlk/fr/item=40561/laisse-de-magie-insouciante",
-                ],
-
-                [
-                    "name" => "Laisse de magie insouciante - Healer",
-                    "location" => [
-                        "Waist",
-                    ],
-                    "type" => "Contested",
-                    "role" => [
                         "Healer",
                     ],
                     "raid" => "L'oeil de l'éternité",
@@ -1449,26 +1365,13 @@ class DataFixtures extends Fixture
                 ],
 
                 [
-                    "name" => "Le dernier sourire - CAC",
+                    "name" => "Le dernier sourire",
                     "location" => [
                         "Main Hand",
                     ],
                     "type" => "Contested",
                     "role" => [
                         "CAC",
-                    ],
-                    "raid" => "Naxxramas",
-                    "detail" => "https://www.wowhead.com/wotlk/fr/item=40402/le-dernier-sourire",
-                ],
-
-                [
-                    "name" => "Le dernier sourire - Tank",
-                    "location" => [
-                        "Main Hand",
-                        "Offhand",
-                    ],
-                    "type" => "Contested",
-                    "role" => [
                         "Tank",
                     ],
                     "raid" => "Naxxramas",
@@ -1490,25 +1393,13 @@ class DataFixtures extends Fixture
                 ],
 
                 [
-                    "name" => "Les habits flottants du Sanctum - Caster",
+                    "name" => "Les habits flottants du Sanctum",
                     "location" => [
                         "Chest",
                     ],
                     "type" => "Bis",
                     "role" => [
                         "Caster",
-                    ],
-                    "raid" => "Le sanctum Obsidien",
-                    "detail" => "https://www.wowhead.com/wotlk/fr/item=44002/les-habits-flottants-du-sanctum",
-                ],
-
-                [
-                    "name" => "Les habits flottants du Sanctum - Healer",
-                    "location" => [
-                        "Chest",
-                    ],
-                    "type" => "Bis",
-                    "role" => [
                         "Healer",
                     ],
                     "raid" => "Le sanctum Obsidien",
@@ -1724,25 +1615,13 @@ class DataFixtures extends Fixture
                 ],
 
                 [
-                    "name" => "Piétineurs arcaniques - Caster",
+                    "name" => "Piétineurs arcaniques",
                     "location" => [
                         "Feet",
                     ],
                     "type" => "Contested",
                     "role" => [
                         "Caster",
-                    ],
-                    "raid" => "L'oeil de l'éternité",
-                    "detail" => "https://www.wowhead.com/wotlk/fr/item=40558/pi%C3%A9tineurs-arcaniques",
-                ],
-
-                [
-                    "name" => "Piétineurs arcaniques - Healer",
-                    "location" => [
-                        "Feet",
-                    ],
-                    "type" => "Contested",
-                    "role" => [
                         "Healer",
                     ],
                     "raid" => "L'oeil de l'éternité",
@@ -1815,25 +1694,13 @@ class DataFixtures extends Fixture
                 ],
 
                 [
-                    "name" => "Rejeton de la matriarche - Caster",
+                    "name" => "Rejeton de la matriarche",
                     "location" => [
                         "Offhand",
                     ],
                     "type" => "Bis",
                     "role" => [
                         "Caster",
-                    ],
-                    "raid" => "Naxxramas",
-                    "detail" => "https://www.wowhead.com/wotlk/fr/item=39719/mantelet-des-sauterelles",
-                ],
-
-                [
-                    "name" => "Rejeton de la matriarche - Healer",
-                    "location" => [
-                        "Offhand",
-                    ],
-                    "type" => "Contested",
-                    "role" => [
                         "Healer",
                     ],
                     "raid" => "Naxxramas",
@@ -1841,21 +1708,7 @@ class DataFixtures extends Fixture
                 ],
 
                 [
-                    "name" => "Représentation de l'Âme des dragons - Healer",
-                    "location" => [
-                        "Trinket 1",
-                        "Trinket 2",
-                    ],
-                    "type" => "Contested",
-                    "role" => [
-                        "Healer",
-                    ],
-                    "raid" => "Le sanctum Obsidien",
-                    "detail" => "https://www.wowhead.com/wotlk/fr/item=40432/repr%C3%A9sentation-de-l%C3%A2me-des-dragons",
-                ],
-
-                [
-                    "name" => "Représentation de l'Âme des dragons - Caster",
+                    "name" => "Représentation de l'Âme des dragons",
                     "location" => [
                         "Trinket 1",
                         "Trinket 2",
@@ -1863,6 +1716,7 @@ class DataFixtures extends Fixture
                     "type" => "Contested",
                     "role" => [
                         "Caster",
+                        "Healer",
                     ],
                     "raid" => "Le sanctum Obsidien",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40432/repr%C3%A9sentation-de-l%C3%A2me-des-dragons",
@@ -1957,32 +1811,23 @@ class DataFixtures extends Fixture
                     ],
                     "type" => "Contested",
                     "role" => [
+                        "CAC",
+                        "Caster",
+                        "Healer",
                         "Tank",
                     ],
                     "raid" => "Naxxramas",
-                    "detail" => "https://www.wowhead.com/wotlk/fr/item=39717/solerets-inexorables",
+                    "detail" => "https://www.wowhead.com/wotlk/fr/guide/raids/tier-7-raid-sets",
                 ],   
 
                 [
-                    "name" => "Torche du saint feu - Caster",
+                    "name" => "Torche du saint feu",
                     "location" => [
                         "Main Hand",
                     ],
                     "type" => "Contested",
                     "role" => [
                         "Caster",
-                    ],
-                    "raid" => "Naxxramas",
-                    "detail" => "https://www.wowhead.com/wotlk/fr/item=40395/torche-du-saint-feu",
-                ],
-
-                [
-                    "name" => "Torche du saint feu - Healer",
-                    "location" => [
-                        "Main Hand",
-                    ],
-                    "type" => "Contested",
-                    "role" => [
                         "Healer",
                     ],
                     "raid" => "Naxxramas",
@@ -2069,25 +1914,13 @@ class DataFixtures extends Fixture
                 ],
 
                 [
-                    "name" => "Voix de la raison - Caster",
-                    "location" => [
-                        "Offhand",
-                    ],
-                    "type" => "Bis",
-                    "role" => [
-                        "Caster",
-                    ],
-                    "raid" => "Naxxramas",
-                    "detail" => "https://www.wowhead.com/wotlk/fr/item=40401/voix-de-la-raison",
-                ],
-
-                [
-                    "name" => "Voix de la raison - Healer",
+                    "name" => "Voix de la raison",
                     "location" => [
                         "Offhand",
                     ],
                     "type" => "Contested",
                     "role" => [
+                        "Caster",
                         "Healer",
                     ],
                     "raid" => "Naxxramas",
@@ -2141,10 +1974,11 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => [
-                        "Ambition infinie",
-                        "Vide",
-                    ],
+                    "item" => "Ambition infinie",
+                    // "item" => [
+                    //     "Ambition infinie",
+                    //     "Vide",
+                    // ],
                     // item doit pouvoir avoir pluseiurs datas ET doit contenir raid car le raid n'est pas propre au player mais à l'item
                     "raid" => "Naxxramas",
                     // le player participe aux events pas aux raids, la table event_player existe
@@ -2157,517 +1991,518 @@ class DataFixtures extends Fixture
                     "role" => "Healer",
                     "rank" => "Demi",
                     "is_actif" => "1",
-                    "item" => [
-                        "Bottes des énergies soignantes",
-                    ],
+                    "item" => "Bottes des énergies soignantes",
+                    // "item" => [
+                    //     "Bottes des énergies soignantes",
+                    // ],
                     "raid" => "L'oeil de l'éternité",
                 ],
                 
-                // [
-                //     "name" => "Belzedar",
-                //     "class" => "Prêtre",
-                //     "score" => "0",
-                //     "role" => "Caster",
-                //     "rank" => "Sérieux",
-                //     "is_actif" => "1",
-                //     "item" => "Vide",
-                //     "raid" => "Hors raid",
-                // ],
+                [
+                    "name" => "Belzedar",
+                    "class" => "Prêtre",
+                    "score" => "0",
+                    "role" => "Caster",
+                    "rank" => "Sérieux",
+                    "is_actif" => "1",
+                    "item" => "Vide",
+                    "raid" => "Hors raid",
+                ],
                 
-                // [
-                //     "name" => "Bourla",
-                //     "class" => "Paladin",
-                //     "score" => "0",
-                //     "role" => "CAC",
-                //     "rank" => "Sérieux",
-                //     "is_actif" => "1",
-                //     "item" => "Vide",
-                //     "raid" => "Hors raid",
-                // ],
+                [
+                    "name" => "Bourla",
+                    "class" => "Paladin",
+                    "score" => "0",
+                    "role" => "CAC",
+                    "rank" => "Sérieux",
+                    "is_actif" => "1",
+                    "item" => "Vide",
+                    "raid" => "Hors raid",
+                ],
                 
-                // [
-                //     "name" => "Burgrogue",
-                //     "class" => "Voleur",
-                //     "score" => "0",
-                //     "role" => "CAC",
-                //     "rank" => "Demi",
-                //     "is_actif" => "1",
-                //     "item" => "Vide",
-                //     "raid" => "Hors raid",
-                // ],
+                [
+                    "name" => "Burgrogue",
+                    "class" => "Voleur",
+                    "score" => "0",
+                    "role" => "CAC",
+                    "rank" => "Demi",
+                    "is_actif" => "1",
+                    "item" => "Vide",
+                    "raid" => "Hors raid",
+                ],
                 
-                // [
-                //     "name" => "Camchoupette",
-                //     "class" => "Paladin",
-                //     "score" => "0",
-                //     "role" => "Healer",
-                //     "rank" => "Galopin",
-                //     "is_actif" => "1",
-                //     "item" => "Vide",
-                //     "raid" => "Hors raid",
-                // ],
+                [
+                    "name" => "Camchoupette",
+                    "class" => "Paladin",
+                    "score" => "0",
+                    "role" => "Healer",
+                    "rank" => "Galopin",
+                    "is_actif" => "1",
+                    "item" => "Vide",
+                    "raid" => "Hors raid",
+                ],
                 
-                // [
-                //     "name" => "Cegar",
-                //     "class" => "Paladin",
-                //     "score" => "0",
-                //     "role" => "Healer",
-                //     "rank" => "Sérieux",
-                //     "is_actif" => "1",
-                //     "item" => "Vide",
-                //     "raid" => "Hors raid",
-                // ],
+                [
+                    "name" => "Cegar",
+                    "class" => "Paladin",
+                    "score" => "0",
+                    "role" => "Healer",
+                    "rank" => "Sérieux",
+                    "is_actif" => "1",
+                    "item" => "Vide",
+                    "raid" => "Hors raid",
+                ],
                 
-                // [
-                //     "name" => "Cheren",
-                //     "class" => "Chasseur",
-                //     "score" => "0",
-                //     "role" => "CAC",
-                //     "rank" => "Galopin",
-                //     "is_actif" => "1",
-                //     "item" => "Vide",
-                //     "raid" => "Hors raid",
-                // ],
+                [
+                    "name" => "Cheren",
+                    "class" => "Chasseur",
+                    "score" => "0",
+                    "role" => "CAC",
+                    "rank" => "Galopin",
+                    "is_actif" => "1",
+                    "item" => "Vide",
+                    "raid" => "Hors raid",
+                ],
                 
-                // [
-                //     "name" => "Chipmage",
-                //     "class" => "Mage",
-                //     "score" => "0",
-                //     "role" => "Caster",
-                //     "rank" => "Demi",
-                //     "is_actif" => "1",
-                //     "item" => "Vide",
-                //     "raid" => "Hors raid",
-                // ],
+                [
+                    "name" => "Chipmage",
+                    "class" => "Mage",
+                    "score" => "0",
+                    "role" => "Caster",
+                    "rank" => "Demi",
+                    "is_actif" => "1",
+                    "item" => "Vide",
+                    "raid" => "Hors raid",
+                ],
                 
-                // [
-                //     "name" => "Chpok",
-                //     "class" => "Mage",
-                //     "score" => "0",
-                //     "role" => "Caster",
-                //     "rank" => "Galopin",
-                //     "is_actif" => "1",
-                //     "item" => "Vide",
-                //     "raid" => "Hors raid",
-                // ],
+                [
+                    "name" => "Chpok",
+                    "class" => "Mage",
+                    "score" => "0",
+                    "role" => "Caster",
+                    "rank" => "Galopin",
+                    "is_actif" => "1",
+                    "item" => "Vide",
+                    "raid" => "Hors raid",
+                ],
                 
-                // [
-                //     "name" => "Demoralyse",
-                //     "class" => "Démoniste",
-                //     "score" => "0",
-                //     "role" => "Caster",
-                //     "rank" => "Sérieux",
-                //     "is_actif" => "1",
-                //     "item" => "Vide",
-                //     "raid" => "Hors raid",
-                // ],
+                [
+                    "name" => "Demoralyse",
+                    "class" => "Démoniste",
+                    "score" => "0",
+                    "role" => "Caster",
+                    "rank" => "Sérieux",
+                    "is_actif" => "1",
+                    "item" => "Vide",
+                    "raid" => "Hors raid",
+                ],
                 
-                // [
-                //     "name" => "Ekte",
-                //     "class" => "Paladin",
-                //     "score" => "0",
-                //     "role" => "CAC",
-                //     "rank" => "Sérieux",
-                //     "is_actif" => "1",
-                //     "item" => "Vide",
-                //     "raid" => "Hors raid",
-                // ],
+                [
+                    "name" => "Ekte",
+                    "class" => "Paladin",
+                    "score" => "0",
+                    "role" => "CAC",
+                    "rank" => "Sérieux",
+                    "is_actif" => "1",
+                    "item" => "Vide",
+                    "raid" => "Hors raid",
+                ],
                 
-                // [
-                //     "name" => "Elvi",
-                //     "class" => "Chevalier de la mort",
-                //     "score" => "0",
-                //     "role" => "CAC",
-                //     "rank" => "Sérieux",
-                //     "is_actif" => "1",
-                //     "item" => "Vide",
-                //     "raid" => "Hors raid",
-                // ],
+                [
+                    "name" => "Elvi",
+                    "class" => "Chevalier de la mort",
+                    "score" => "0",
+                    "role" => "CAC",
+                    "rank" => "Sérieux",
+                    "is_actif" => "1",
+                    "item" => "Vide",
+                    "raid" => "Hors raid",
+                ],
                 
-                // [
-                //     "name" => "Euphorus",
-                //     "class" => "Voleur",
-                //     "score" => "0",
-                //     "role" => "CAC",
-                //     "rank" => "Galopin",
-                //     "is_actif" => "1",
-                //     "item" => "Vide",
-                //     "raid" => "Hors raid",
-                // ],
+                [
+                    "name" => "Euphorus",
+                    "class" => "Voleur",
+                    "score" => "0",
+                    "role" => "CAC",
+                    "rank" => "Galopin",
+                    "is_actif" => "1",
+                    "item" => "Vide",
+                    "raid" => "Hors raid",
+                ],
                 
-                // [
-                //     "name" => "Farah",
-                //     "class" => "Chevalier de la mort",
-                //     "score" => "0",
-                //     "role" => "Tank",
-                //     "rank" => "Sérieux",
-                //     "is_actif" => "1",
-                //     "item" => "Vide",
-                //     "raid" => "Hors raid",
-                // ],
+                [
+                    "name" => "Farah",
+                    "class" => "Chevalier de la mort",
+                    "score" => "0",
+                    "role" => "Tank",
+                    "rank" => "Sérieux",
+                    "is_actif" => "1",
+                    "item" => "Vide",
+                    "raid" => "Hors raid",
+                ],
                 
-                // [
-                //     "name" => "Floriel",
-                //     "class" => "Druide",
-                //     "score" => "0",
-                //     "role" => "CAC",
-                //     "rank" => "Galopin",
-                //     "is_actif" => "1",
-                //     "item" => "Vide",
-                //     "raid" => "Hors raid",
-                // ],
+                [
+                    "name" => "Floriel",
+                    "class" => "Druide",
+                    "score" => "0",
+                    "role" => "CAC",
+                    "rank" => "Galopin",
+                    "is_actif" => "1",
+                    "item" => "Vide",
+                    "raid" => "Hors raid",
+                ],
                 
-                // [
-                //     "name" => "Gazzole",
-                //     "class" => "Voleur",
-                //     "score" => "0",
-                //     "role" => "CAC",
-                //     "rank" => "Galopin",
-                //     "is_actif" => "1",
-                //     "item" => "Vide",
-                //     "raid" => "Hors raid",
-                // ],
+                [
+                    "name" => "Gazzole",
+                    "class" => "Voleur",
+                    "score" => "0",
+                    "role" => "CAC",
+                    "rank" => "Galopin",
+                    "is_actif" => "1",
+                    "item" => "Vide",
+                    "raid" => "Hors raid",
+                ],
                 
-                // [
-                //     "name" => "Grymn",
-                //     "class" => "Guerrier",
-                //     "score" => "0",
-                //     "role" => "CAC",
-                //     "rank" => "Galopin",
-                //     "is_actif" => "1",
-                //     "item" => "Vide",
-                //     "raid" => "Hors raid",
-                // ],
+                [
+                    "name" => "Grymn",
+                    "class" => "Guerrier",
+                    "score" => "0",
+                    "role" => "CAC",
+                    "rank" => "Galopin",
+                    "is_actif" => "1",
+                    "item" => "Vide",
+                    "raid" => "Hors raid",
+                ],
                 
-                // [
-                //     "name" => "Gulliver",
-                //     "class" => "Démoniste",
-                //     "score" => "0",
-                //     "role" => "Caster",
-                //     "rank" => "Galopin",
-                //     "is_actif" => "1",
-                //     "item" => "Vide",
-                //     "raid" => "Hors raid",
-                // ],
+                [
+                    "name" => "Gulliver",
+                    "class" => "Démoniste",
+                    "score" => "0",
+                    "role" => "Caster",
+                    "rank" => "Galopin",
+                    "is_actif" => "1",
+                    "item" => "Vide",
+                    "raid" => "Hors raid",
+                ],
                 
-                // [
-                //     "name" => "Gwen",
-                //     "class" => "Druide",
-                //     "score" => "0",
-                //     "role" => "Healer",
-                //     "rank" => "Sérieux",
-                //     "is_actif" => "1",
-                //     "item" => "Vide",
-                //     "raid" => "Hors raid",
-                // ],
+                [
+                    "name" => "Gwen",
+                    "class" => "Druide",
+                    "score" => "0",
+                    "role" => "Healer",
+                    "rank" => "Sérieux",
+                    "is_actif" => "1",
+                    "item" => "Vide",
+                    "raid" => "Hors raid",
+                ],
                 
-                // [
-                //     "name" => "Icekarr",
-                //     "class" => "Chaman",
-                //     "score" => "0",
-                //     "role" => "Caster",
-                //     "rank" => "Sérieux",
-                //     "is_actif" => "1",
-                //     "item" => "Vide",
-                //     "raid" => "Hors raid",
-                // ],
+                [
+                    "name" => "Icekarr",
+                    "class" => "Chaman",
+                    "score" => "0",
+                    "role" => "Caster",
+                    "rank" => "Sérieux",
+                    "is_actif" => "1",
+                    "item" => "Vide",
+                    "raid" => "Hors raid",
+                ],
                 
-                // [
-                //     "name" => "Judgentix",
-                //     "class" => "Paladin",
-                //     "score" => "0",
-                //     "role" => "CAC",
-                //     "rank" => "Sérieux",
-                //     "is_actif" => "1",
-                //     "item" => "Vide",
-                //     "raid" => "Hors raid",
-                // ],
+                [
+                    "name" => "Judgentix",
+                    "class" => "Paladin",
+                    "score" => "0",
+                    "role" => "CAC",
+                    "rank" => "Sérieux",
+                    "is_actif" => "1",
+                    "item" => "Vide",
+                    "raid" => "Hors raid",
+                ],
                 
-                // [
-                //     "name" => "Kamari",
-                //     "class" => "Chasseur",
-                //     "score" => "0",
-                //     "role" => "CAC",
-                //     "rank" => "Sérieux",
-                //     "is_actif" => "1",
-                //     "item" => "Vide",
-                //     "raid" => "Hors raid",
-                // ],
+                [
+                    "name" => "Kamari",
+                    "class" => "Chasseur",
+                    "score" => "0",
+                    "role" => "CAC",
+                    "rank" => "Sérieux",
+                    "is_actif" => "1",
+                    "item" => "Vide",
+                    "raid" => "Hors raid",
+                ],
                 
-                // [
-                //     "name" => "Keny",
-                //     "class" => "Chevalier de la mort",
-                //     "score" => "0",
-                //     "role" => "CAC",
-                //     "rank" => "Sérieux",
-                //     "is_actif" => "1",
-                //     "item" => "Vide",
-                //     "raid" => "Hors raid",
-                // ],
+                [
+                    "name" => "Keny",
+                    "class" => "Chevalier de la mort",
+                    "score" => "0",
+                    "role" => "CAC",
+                    "rank" => "Sérieux",
+                    "is_actif" => "1",
+                    "item" => "Vide",
+                    "raid" => "Hors raid",
+                ],
                 
-                // [
-                //     "name" => "Kwaky",
-                //     "class" => "Démoniste",
-                //     "score" => "0",
-                //     "role" => "Caster",
-                //     "rank" => "Sérieux",
-                //     "is_actif" => "1",
-                //     "item" => "Vide",
-                //     "raid" => "Hors raid",
-                // ],
+                [
+                    "name" => "Kwaky",
+                    "class" => "Démoniste",
+                    "score" => "0",
+                    "role" => "Caster",
+                    "rank" => "Sérieux",
+                    "is_actif" => "1",
+                    "item" => "Vide",
+                    "raid" => "Hors raid",
+                ],
                 
-                // [
-                //     "name" => "Lady",
-                //     "class" => "Mage",
-                //     "score" => "0",
-                //     "role" => "Caster",
-                //     "rank" => "Sérieux",
-                //     "is_actif" => "1",
-                //     "item" => "Vide",
-                //     "raid" => "Hors raid",
-                // ],
+                [
+                    "name" => "Lady",
+                    "class" => "Mage",
+                    "score" => "0",
+                    "role" => "Caster",
+                    "rank" => "Sérieux",
+                    "is_actif" => "1",
+                    "item" => "Vide",
+                    "raid" => "Hors raid",
+                ],
                             
-                // [
-                //     "name" => "Limdul",
-                //     "class" => "Prêtre",
-                //     "score" => "0",
-                //     "role" => "Caster",
-                //     "rank" => "Demi",
-                //     "is_actif" => "1",
-                //     "item" => "Vide",
-                //     "raid" => "Hors raid",
-                // ],
+                [
+                    "name" => "Limdul",
+                    "class" => "Prêtre",
+                    "score" => "0",
+                    "role" => "Caster",
+                    "rank" => "Demi",
+                    "is_actif" => "1",
+                    "item" => "Vide",
+                    "raid" => "Hors raid",
+                ],
                 
-                // [
-                //     "name" => "Lucamar",
-                //     "class" => "Druide",
-                //     "score" => "0",
-                //     "role" => "Healer",
-                //     "rank" => "Galopin",
-                //     "is_actif" => "1",
-                //     "item" => "Vide",
-                //     "raid" => "Hors raid",
-                // ],
+                [
+                    "name" => "Lucamar",
+                    "class" => "Druide",
+                    "score" => "0",
+                    "role" => "Healer",
+                    "rank" => "Galopin",
+                    "is_actif" => "1",
+                    "item" => "Vide",
+                    "raid" => "Hors raid",
+                ],
                             
-                // [
-                //     "name" => "Maxxam",
-                //     "class" => "Mage",
-                //     "score" => "0",
-                //     "role" => "Caster",
-                //     "rank" => "Galopin",
-                //     "is_actif" => "1",
-                //     "item" => "Vide",
-                //     "raid" => "Hors raid",
-                // ],
+                [
+                    "name" => "Maxxam",
+                    "class" => "Mage",
+                    "score" => "0",
+                    "role" => "Caster",
+                    "rank" => "Galopin",
+                    "is_actif" => "1",
+                    "item" => "Vide",
+                    "raid" => "Hors raid",
+                ],
                 
-                // [
-                //     "name" => "Mealyn",
-                //     "class" => "Mage",
-                //     "score" => "0",
-                //     "role" => "Caster",
-                //     "rank" => "Sérieux",
-                //     "is_actif" => "1",
-                //     "item" => "Vide",
-                //     "raid" => "Hors raid",
-                // ],
+                [
+                    "name" => "Mealyn",
+                    "class" => "Mage",
+                    "score" => "0",
+                    "role" => "Caster",
+                    "rank" => "Sérieux",
+                    "is_actif" => "1",
+                    "item" => "Vide",
+                    "raid" => "Hors raid",
+                ],
                             
-                // [
-                //     "name" => "Mjol",
-                //     "class" => "Mage",
-                //     "score" => "0",
-                //     "role" => "Caster",
-                //     "rank" => "Sérieux",
-                //     "is_actif" => "1",
-                //     "item" => "Vide",
-                //     "raid" => "Hors raid",
-                // ],
+                [
+                    "name" => "Mjol",
+                    "class" => "Mage",
+                    "score" => "0",
+                    "role" => "Caster",
+                    "rank" => "Sérieux",
+                    "is_actif" => "1",
+                    "item" => "Vide",
+                    "raid" => "Hors raid",
+                ],
                 
-                // [
-                //     "name" => "Necrogirl",
-                //     "class" => "Démoniste",
-                //     "score" => "0",
-                //     "role" => "Caster",
-                //     "rank" => "Sérieux",
-                //     "is_actif" => "1",
-                //     "item" => "Vide",
-                //     "raid" => "Hors raid",
-                // ],
+                [
+                    "name" => "Necrogirl",
+                    "class" => "Démoniste",
+                    "score" => "0",
+                    "role" => "Caster",
+                    "rank" => "Sérieux",
+                    "is_actif" => "1",
+                    "item" => "Vide",
+                    "raid" => "Hors raid",
+                ],
                             
-                // [
-                //     "name" => "Portish",
-                //     "class" => "Prêtre",
-                //     "score" => "0",
-                //     "role" => "Healer",
-                //     "rank" => "Sérieux",
-                //     "is_actif" => "1",
-                //     "item" => "Vide",
-                //     "raid" => "Hors raid",
-                // ],
+                [
+                    "name" => "Portish",
+                    "class" => "Prêtre",
+                    "score" => "0",
+                    "role" => "Healer",
+                    "rank" => "Sérieux",
+                    "is_actif" => "1",
+                    "item" => "Vide",
+                    "raid" => "Hors raid",
+                ],
                 
-                // [
-                //     "name" => "Pyro",
-                //     "class" => "Guerrier",
-                //     "score" => "0",
-                //     "role" => "CAC",
-                //     "rank" => "Sérieux",
-                //     "is_actif" => "1",
-                //     "item" => "Vide",
-                //     "raid" => "Hors raid",
-                // ],
+                [
+                    "name" => "Pyro",
+                    "class" => "Guerrier",
+                    "score" => "0",
+                    "role" => "CAC",
+                    "rank" => "Sérieux",
+                    "is_actif" => "1",
+                    "item" => "Vide",
+                    "raid" => "Hors raid",
+                ],
                             
-                // [
-                //     "name" => "Rim",
-                //     "class" => "Paladin",
-                //     "score" => "0",
-                //     "role" => "Healer",
-                //     "rank" => "Sérieux",
-                //     "is_actif" => "1",
-                //     "item" => "Vide",
-                //     "raid" => "Hors raid",
-                // ],
+                [
+                    "name" => "Rim",
+                    "class" => "Paladin",
+                    "score" => "0",
+                    "role" => "Healer",
+                    "rank" => "Sérieux",
+                    "is_actif" => "1",
+                    "item" => "Vide",
+                    "raid" => "Hors raid",
+                ],
                 
-                // [
-                //     "name" => "Schaga",
-                //     "class" => "Chaman",
-                //     "score" => "0",
-                //     "role" => "Healer",
-                //     "rank" => "Sérieux",
-                //     "is_actif" => "1",
-                //     "item" => "Vide",
-                //     "raid" => "Hors raid",
-                // ],
+                [
+                    "name" => "Schaga",
+                    "class" => "Chaman",
+                    "score" => "0",
+                    "role" => "Healer",
+                    "rank" => "Sérieux",
+                    "is_actif" => "1",
+                    "item" => "Vide",
+                    "raid" => "Hors raid",
+                ],
                             
-                // [
-                //     "name" => "Selena",
-                //     "class" => "Druide",
-                //     "score" => "0",
-                //     "role" => "Caster",
-                //     "rank" => "Demi",
-                //     "is_actif" => "1",
-                //     "item" => "Vide",
-                //     "raid" => "Hors raid",
-                // ],
+                [
+                    "name" => "Selena",
+                    "class" => "Druide",
+                    "score" => "0",
+                    "role" => "Caster",
+                    "rank" => "Demi",
+                    "is_actif" => "1",
+                    "item" => "Vide",
+                    "raid" => "Hors raid",
+                ],
                 
-                // [
-                //     "name" => "Sha",
-                //     "class" => "Chevalier de la mort",
-                //     "score" => "0",
-                //     "role" => "CAC",
-                //     "rank" => "Sérieux",
-                //     "is_actif" => "1",
-                //     "item" => "Vide",
-                //     "raid" => "Hors raid",
-                // ],
+                [
+                    "name" => "Sha",
+                    "class" => "Chevalier de la mort",
+                    "score" => "0",
+                    "role" => "CAC",
+                    "rank" => "Sérieux",
+                    "is_actif" => "1",
+                    "item" => "Vide",
+                    "raid" => "Hors raid",
+                ],
                             
-                // [
-                //     "name" => "Skenz",
-                //     "class" => "Chaman",
-                //     "score" => "0",
-                //     "role" => "Caster",
-                //     "rank" => "Sérieux",
-                //     "is_actif" => "1",
-                //     "item" => "Vide",
-                //     "raid" => "Hors raid",
-                // ],
+                [
+                    "name" => "Skenz",
+                    "class" => "Chaman",
+                    "score" => "0",
+                    "role" => "Caster",
+                    "rank" => "Sérieux",
+                    "is_actif" => "1",
+                    "item" => "Vide",
+                    "raid" => "Hors raid",
+                ],
                 
-                // [
-                //     "name" => "Sunks",
-                //     "class" => "Voleur",
-                //     "score" => "0",
-                //     "role" => "CAC",
-                //     "rank" => "Sérieux",
-                //     "is_actif" => "1",
-                //     "item" => "Vide",
-                //     "raid" => "Hors raid",
-                // ],
+                [
+                    "name" => "Sunks",
+                    "class" => "Voleur",
+                    "score" => "0",
+                    "role" => "CAC",
+                    "rank" => "Sérieux",
+                    "is_actif" => "1",
+                    "item" => "Vide",
+                    "raid" => "Hors raid",
+                ],
                             
-                // [
-                //     "name" => "Tanriel",
-                //     "class" => "Chasseur",
-                //     "score" => "0",
-                //     "role" => "CAC",
-                //     "rank" => "Galopin",
-                //     "is_actif" => "1",
-                //     "item" => "Vide",
-                //     "raid" => "Hors raid",
-                // ],
+                [
+                    "name" => "Tanriel",
+                    "class" => "Chasseur",
+                    "score" => "0",
+                    "role" => "CAC",
+                    "rank" => "Galopin",
+                    "is_actif" => "1",
+                    "item" => "Vide",
+                    "raid" => "Hors raid",
+                ],
                 
-                // [
-                //     "name" => "Tindu",
-                //     "class" => "Guerrier",
-                //     "score" => "0",
-                //     "role" => "CAC",
-                //     "rank" => "Demi",
-                //     "is_actif" => "1",
-                //     "item" => "Vide",
-                //     "raid" => "Hors raid",
-                // ],
+                [
+                    "name" => "Tindu",
+                    "class" => "Guerrier",
+                    "score" => "0",
+                    "role" => "CAC",
+                    "rank" => "Demi",
+                    "is_actif" => "1",
+                    "item" => "Vide",
+                    "raid" => "Hors raid",
+                ],
                             
-                // [
-                //     "name" => "Ulmo",
-                //     "class" => "Voleur",
-                //     "score" => "0",
-                //     "role" => "CAC",
-                //     "rank" => "Sérieux",
-                //     "is_actif" => "1",
-                //     "item" => "Vide",
-                //     "raid" => "Hors raid",
-                // ],
+                [
+                    "name" => "Ulmo",
+                    "class" => "Voleur",
+                    "score" => "0",
+                    "role" => "CAC",
+                    "rank" => "Sérieux",
+                    "is_actif" => "1",
+                    "item" => "Vide",
+                    "raid" => "Hors raid",
+                ],
                 
-                // [
-                //     "name" => "Untardo",
-                //     "class" => "Chasseur",
-                //     "score" => "0",
-                //     "role" => "CAC",
-                //     "rank" => "Demi",
-                //     "is_actif" => "1",
-                //     "item" => "Vide",
-                //     "raid" => "Hors raid",
-                // ],
+                [
+                    "name" => "Untardo",
+                    "class" => "Chasseur",
+                    "score" => "0",
+                    "role" => "CAC",
+                    "rank" => "Demi",
+                    "is_actif" => "1",
+                    "item" => "Vide",
+                    "raid" => "Hors raid",
+                ],
                             
-                // [
-                //     "name" => "Vali",
-                //     "class" => "Paladin",
-                //     "score" => "0",
-                //     "role" => "Tank",
-                //     "rank" => "Sérieux",
-                //     "is_actif" => "1",
-                //     "item" => "Vide",
-                //     "raid" => "Hors raid",
-                // ],
+                [
+                    "name" => "Vali",
+                    "class" => "Paladin",
+                    "score" => "0",
+                    "role" => "Tank",
+                    "rank" => "Sérieux",
+                    "is_actif" => "1",
+                    "item" => "Vide",
+                    "raid" => "Hors raid",
+                ],
                 
-                // [
-                //     "name" => "Vultris",
-                //     "class" => "Démoniste",
-                //     "score" => "0",
-                //     "role" => "Caster",
-                //     "rank" => "Sérieux",
-                //     "is_actif" => "1",
-                //     "item" => "Vide",
-                //     "raid" => "Hors raid",
-                // ],
+                [
+                    "name" => "Vultris",
+                    "class" => "Démoniste",
+                    "score" => "0",
+                    "role" => "Caster",
+                    "rank" => "Sérieux",
+                    "is_actif" => "1",
+                    "item" => "Vide",
+                    "raid" => "Hors raid",
+                ],
                             
-                // [
-                //     "name" => "Xamena",
-                //     "class" => "Mage",
-                //     "score" => "0",
-                //     "role" => "Caster",
-                //     "rank" => "Demi",
-                //     "is_actif" => "1",
-                //     "item" => "Vide",
-                //     "raid" => "Hors raid",
-                // ],
+                [
+                    "name" => "Xamena",
+                    "class" => "Mage",
+                    "score" => "0",
+                    "role" => "Caster",
+                    "rank" => "Demi",
+                    "is_actif" => "1",
+                    "item" => "Vide",
+                    "raid" => "Hors raid",
+                ],
                 
-                // [
-                //     "name" => "Youyou",
-                //     "class" => "Druide",
-                //     "score" => "0",
-                //     "role" => "Caster",
-                //     "rank" => "Sérieux",
-                //     "is_actif" => "1",
-                //     "item" => "Vide",
-                //     "raid" => "Hors raid",
-                // ],
+                [
+                    "name" => "Youyou",
+                    "class" => "Druide",
+                    "score" => "0",
+                    "role" => "Caster",
+                    "rank" => "Sérieux",
+                    "is_actif" => "1",
+                    "item" => "Vide",
+                    "raid" => "Hors raid",
+                ],
                 
             ];
 
@@ -2687,13 +2522,12 @@ class DataFixtures extends Fixture
                 $roleObj = $this->getReference($currentPlayer["role"]);
                 $playerObj->setRole($roleObj);
 
-                // $itemObj = $this->getReference($currentPlayer["item"]);
-                // $playerObj->addItem($itemObj);
-                foreach ($currentPlayer["item"] as $currentItemName) {
-
-                    $currentItemObj = $itemsObjArray[md5($currentItemName)];
-                    $playerObj->addItem($currentItemObj);
-                }
+                $itemObj = $this->getReference($currentPlayer["item"]);
+                $playerObj->addItem($itemObj);               
+                // foreach ($currentPlayer["item"] as $currentItemName) {
+                //     $currentItemObj = $itemsObjArray[md5($currentItemName)];
+                //     $playerObj->addItem($currentItemObj);
+                // }
 
                 $raidObj = $this->getReference($currentPlayer["raid"]);
                 $playerObj->addRaid($raidObj);
