@@ -1,0 +1,129 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}- Liste des joueurs{% endblock %}
+
+{% block body %}
+
+<div class="button-top">
+    <form class="d-flex search-bar" role="search">
+        <input class="form-control me-2" type="search" placeholder="Nom du joueur" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+    <a href="{{ path('app_event_create') }}" class="button-top-add" title="Ajouter"><i class="bi bi-plus-circle"></i>
+        Ajouter un joueur</a>
+</div>
+<div class="container">
+    <div class="left-container">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="1">Joueur</th>
+                    <th colspan="1">Rôle</th>
+                    <th colspan="1">Classe</th>
+                    <th colspan="1">Grade</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for roster in rosters %}
+                <tr>
+                    <td>
+                        <a href="{{ path('app_roster_read', {'id': roster.id}) }}">
+                            {{ roster.name }}
+                        </a>
+                    </td>
+                    <td>{{ roster.role.name }}</td>
+                    <td>{{ roster.class }}</td>
+                    <td>{{ roster.rank }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="right-container">
+        <div class="accordion" id="accordionPanelsStayOpenExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                        aria-controls="panelsStayOpen-collapseOne">
+                        Top 5 des présences
+                    </button>
+                </h2>
+                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
+                    aria-labelledby="panelsStayOpen-headingOne">
+                    <div class="accordion-body">
+                        <ul>
+                            <li>Joueur 1 + nbr présences</li>
+                            <li>Joueur 2 + nbr présences</li>
+                            <li>Joueur 3 + nbr présences</li>
+                            <li>Joueur 4 + nbr présences</li>
+                            <li>Joueur 5 + nbr présences</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
+                        aria-controls="panelsStayOpen-collapseTwo">
+                        Top 5 des benchs
+                    </button>
+                </h2>
+                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse"
+                    aria-labelledby="panelsStayOpen-headingTwo">
+                    <div class="accordion-body">
+                        <ul>
+                            <li>Joueur 1 + nbr benchs</li>
+                            <li>Joueur 2 + nbr benchs</li>
+                            <li>Joueur 3 + nbr benchs</li>
+                            <li>Joueur 4 + nbr benchs</li>
+                            <li>Joueur 5 + nbr benchs</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
+                        aria-controls="panelsStayOpen-collapseThree">
+                        Joueurs par grade﻿
+                    </button>
+                </h2>
+                <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse"
+                    aria-labelledby="panelsStayOpen-headingThree">
+                    <div class="accordion-body">
+                        <ul>
+                            <li>X joueurs Sérieux</li>
+                            <li>X joueurs Demi</li>
+                            <li>X joueurs Galopin</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
+                        aria-controls="panelsStayOpen-collapseThree">
+                        Joueurs par rôle
+                    </button>
+                </h2>
+                <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse"
+                    aria-labelledby="panelsStayOpen-headingThree">
+                    <div class="accordion-body">
+                        <ul>
+                            <li>X joueurs CAC</li>
+                            <li>X joueurs Caster</li>
+                            <li>X joueurs Healer</li>
+                            <li>X joueurs Tank</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
