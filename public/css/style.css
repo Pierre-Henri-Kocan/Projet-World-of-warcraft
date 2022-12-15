@@ -1,21 +1,58 @@
-/* ---------------------- NavBar + Footer ---------------------- */
+/* ---------------------- HTML + BODY + HEADER + MAIN + FOOTER ---------------------- */
 
 html, body {
-    margin:0;
-    padding:0;
-    height:100%;
+    box-sizing: border-box;
+    height: 100%;
+    padding: 0;
+    margin: 0;
  }
 
 body {
-    position: relative;
     background-image: url(../images/og-image.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
-    min-height: 100%;
-    margin: 0;
-    padding: 0;
+    flex-grow: 1;
 }
+
+.wrapper {
+    box-sizing: border-box;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+header, footer {
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+main {
+    margin: 1rem;
+}
+
+footer {
+    width: 100%;
+    /* height: 2.5rem; */
+    background-color: rgb(30, 131, 190, 0.418);
+    text-align: center;
+}
+
+.footer-list {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0.5rem;
+}
+
+.footer-list-text {
+    color: rgb(255, 255, 255);
+}
+
+
+/* ---------------------- navbar ---------------------- */
 
 .navbar {
     background-color: rgba(30, 131, 190, 0.418);
@@ -37,27 +74,7 @@ body {
     margin: 2rem;
 }
 
-footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 2.5rem;
-    background-color: rgb(30, 131, 190, 0.418);
-    padding: 0rem;
-    text-align: center;
-}
 
-.footer-list {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    padding: 0;
-    margin: 0.5rem;
-}
-
-.footer-list-text {
-    color: rgb(255, 255, 255);
-}
 
 /* ---------------------- calendrier ---------------------- */
 #calendar {
