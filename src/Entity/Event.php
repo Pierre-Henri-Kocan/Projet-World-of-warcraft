@@ -21,8 +21,8 @@ class Event
     private $id;
 
     /**
-     * @ORM\Column(type="datetime")
-     * @Assert\NotBlank(message="Merci de remplir ce champs")
+     * @ORM\Column(type="datetime_immutable", nullable=true)
+     * @Assert\NotNull
      */
     private $date;
 
@@ -61,16 +61,13 @@ class Event
         return $this->id;
     }
 
-    public function getDate(): ?string
+    public function getDate(): ?\DateTimeImmutable
     {
-        if(!is_null($this->date)) {
-           return $this->date->format('Y-m-d H:i:s'); 
-        }
         return $this->date;
         
     }
 
-    public function setDate(\DateTimeInterface $date): self
+    public function setDate(?\DateTimeImmutable $date): self
     {
         $this->date = $date;
 

@@ -18,12 +18,12 @@ class EventType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('date', DateTimeType::class,
-            [ 'label' => 'Date d\'évènement',
-            'widget' => 'single_text',
-            'input' => 'datetime',
-            'html5' => true,
-            ])
+            ->add('date', DateTimeType::class, [
+                'label' => 'Date d\'événement',
+                'widget' => 'single_text',
+                'input' => 'datetime_immutable',
+                'html5' => true,
+                ])
             ->add('log', TextType::class, [
                 'label' => 'URL log',
                 ])
