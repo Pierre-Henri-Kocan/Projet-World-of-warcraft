@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\LocationRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -23,14 +25,19 @@ class Location
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=64)
+     * @ORM\Column(type="string", length=64, nullable=true)
      */
     private $slug;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Item::class, inversedBy="locations")
+     * @ORM\ManyToMany(targetEntity=Item::class, inversedBy="locations")
      */
     private $item;
+
+    public function __construct()
+    {
+        $this->item = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -61,14 +68,26 @@ class Location
         return $this;
     }
 
-    public function getItem(): ?Item
+    /**
+     * @return Collection<int, Item>
+     */
+    public function getItem(): Collection
     {
         return $this->item;
     }
 
-    public function setItem(?Item $item): self
+    public function addItem(Item $item): self
     {
-        $this->item = $item;
+        if (!$this->item->contains($item)) {
+            $this->item[] = $item;
+        }
+
+        return $this;
+    }
+
+    public function removeItem(Item $item): self
+    {
+        $this->item->removeElement($item);
 
         return $this;
     }

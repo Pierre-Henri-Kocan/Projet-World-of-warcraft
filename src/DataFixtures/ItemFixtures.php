@@ -3,8 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Item;
-use App\Entity\Raid;
-use App\Entity\Role;
+use App\Entity\Location;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -12,11 +11,14 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 class ItemFixtures extends Fixture implements DependentFixtureInterface 
 {
+    
     public function getDependencies()
    {
       return [
-         RaidFixtures::class
+          RoleFixtures::class,
+          RaidFixtures::class,
       ];
+
    }
 
     private $slugger;
@@ -28,10 +30,99 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager): void
     {
+
+        $locationObjArray = [
+
+            [
+                "name" => "Back",
+            ],
+
+            [
+                "name" => "Chest",
+            ],
+
+            [
+                "name" => "Feet",
+            ],
+
+            [
+                "name" => "Hands",
+            ],
+
+            [
+                "name" => "Head",
+            ],
+
+            [
+                "name" => "Legs",
+            ],
+
+            [
+                "name" => "Main Hand",
+            ],
+
+            [
+                "name" => "Neck",
+            ],
+
+            [
+                "name" => "Offhand",
+            ],
+
+            [
+                "name" => "Relic-Wand-Ranged",
+            ],
+
+            [
+                "name" => "Ring 1",
+            ],
+
+            [
+                "name" => "Ring 2",
+            ],
+
+            [
+                "name" => "Shoulders",
+            ],
+
+            [
+                "name" => "Trinket 1",
+            ],
+
+            [
+                "name" => "Trinket 2",
+            ],
+
+            [
+                "name" => "Trinket 3",
+            ],
+
+            [
+                "name" => "Waist",
+            ],
+
+            [
+                "name" => "Wrists",
+            ],
+        ];
+
+        // $locationObjArray = [];
+        foreach ($locationObjArray as $currentLocation) {
+            $locationObj = new Location();
+
+            $locationObj->setName($currentLocation['name']);
+            $locationObj->setSlug($this->slugger->slug(mb_strtolower($currentLocation['name'])));
+            
+            //* to be able to link categories to posts
+            $locationObjArray[md5($currentLocation['name'])] = $locationObj;
+            $manager->persist($locationObj);
+        }
         $items = [
             [
                 "name" => "Ambition infinie",
-                "location" => "Neck",
+                "location" => [
+                    "Neck",
+                ],
                 "type" => "Contested",
                 "role" => "Tank",
                 "raid" => "Naxxramas",
@@ -39,17 +130,11 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
             ],
 
             [
-                "name" => "Anneau d'invincibilité - Ring 1",
-                "location" => "Ring 1",
-                "type" => "Bis",
-                "role" => "CAC",
-                "raid" => "Hors raid",
-                "detail" => "https://www.wowhead.com/wotlk/fr/item=40717/anneau-dinvincibilit%C3%A9",
-            ],
-
-            [
-                "name" => "Anneau d'invincibilité - Ring 2",
-                "location" => "Ring 2",
+                "name" => "Anneau d'invincibilité",
+                "location" => [
+                    "Ring 1",
+                    "Ring 2",
+                ],
                 "type" => "Bis",
                 "role" => "CAC",
                 "raid" => "Hors raid",
@@ -58,7 +143,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
  
             [
                 "name" => "Anneau de beauté décomposée",
-                "location" => "Ring 2",
+                "location" => [
+                    "Ring 2",
+                ],
                 "type" => "Contested",
                 "role" => "Healer",
                 "raid" => "Naxxramas",
@@ -67,7 +154,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Anneau de la main lourde",
-                "location" => "Ring 1",
+                "location" => [
+                    "Ring 1",
+                ],
                 "type" => "Contested",
                 "role" => "CAC",
                 "raid" => "Naxxramas",
@@ -76,7 +165,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Anneau du capteur tellurique",
-                "location" => "Ring 2",
+                "location" => [
+                    "Ring 2",
+                ],
                 "type" => "Contested",
                 "role" => "CAC",
                 "raid" => "L'oeil de l'éternité",
@@ -85,7 +176,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Averse de grêle",
-                "location" => "Offhand",
+                "location" => [
+                    "Offhand",
+                ],
                 "type" => "Bis",
                 "role" => "CAC",
                 "raid" => "L'oeil de l'éternité",
@@ -94,7 +187,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Bague de magie canalisée - Caster",
-                "location" => "Ring 1",
+                "location" => [
+                    "Ring 1",
+                ],
                 "type" => "Bis",
                 "role" => "Caster",
                 "raid" => "Hors raid",
@@ -103,7 +198,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Bague de magie canalisée - Healer",
-                "location" => "Ring 1",
+                "location" => [
+                    "Ring 1",
+                ],
                 "type" => "Bis",
                 "role" => "Healer",
                 "raid" => "Hors raid",
@@ -112,7 +209,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Bague usée par le sable",
-                "location" => "Ring 1",
+                "location" => [
+                    "Ring 1",
+                ],
                 "type" => "Contested",
                 "role" => "Tank",
                 "raid" => "Naxxramas",
@@ -121,7 +220,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Baguette de l'archiliche",
-                "location" => "Relic-Wand-Ranged",
+                "location" => [
+                    "Relic-Wand-Ranged",
+                ],
                 "type" => "Bis",
                 "role" => "Caster",
                 "raid" => "Naxxramas",
@@ -130,7 +231,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Baguette des nérubiens ornée",
-                "location" => "Relic-Wand-Ranged",
+                "location" => [
+                    "Relic-Wand-Ranged",
+                ],
                 "type" => "Contested",
                 "role" => "Caster",
                 "raid" => "Naxxramas",
@@ -139,7 +242,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Beauté ravie",
-                "location" => "Ring 2",
+                "location" => [
+                    "Ring 2",
+                ],
                 "type" => "Bis",
                 "role" => "Healer",
                 "raid" => "Naxxramas",
@@ -148,7 +253,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Bottes de persuasion",
-                "location" => "Feet",
+                "location" => [
+                    "Feet",
+                ],
                 "type" => "Bis",
                 "role" => "Healer",
                 "raid" => "Naxxramas",
@@ -157,7 +264,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Bottes des énergies soignantes",
-                "location" => "Feet",
+                "location" => [
+                    "Feet",
+                ],
                 "type" => "Bis",
                 "role" => "Healer",
                 "raid" => "L'oeil de l'éternité",
@@ -166,7 +275,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Bottes des idéaux impétueux",
-                "location" => "Feet",
+                "location" => [
+                    "Feet",
+                ],
                 "type" => "Bis",
                 "role" => "Caster",
                 "raid" => "Naxxramas",
@@ -175,7 +286,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Bottes du vol renouvelé",
-                "location" => "Feet",
+                "location" => [
+                    "Feet",
+                ],
                 "type" => "Bis",
                 "role" => "CAC",
                 "raid" => "L'oeil de l'éternité",
@@ -184,7 +297,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Bottillons de la vile duperie",
-                "location" => "Feet",
+                "location" => [
+                    "Feet",
+                ],
                 "type" => "Bis",
                 "role" => "CAC",
                 "raid" => "Naxxramas",
@@ -193,7 +308,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Brassards de complicité",
-                "location" => "Wrists",
+                "location" => [
+                    "Wrists",
+                ],
                 "type" => "Bis",
                 "role" => "Healer",
                 "raid" => "Naxxramas",
@@ -202,7 +319,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Brassards de l'attaque implacable",
-                "location" => "Wrists",
+                "location" => [
+                    "Wrists",
+                ],
                 "type" => "Contested",
                 "role" => "CAC",
                 "raid" => "Naxxramas",
@@ -211,7 +330,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Brassards du chevalier impie",
-                "location" => "Wrists",
+                "location" => [
+                    "Wrists",
+                ],
                 "type" => "Bis",
                 "role" => "Tank",
                 "raid" => "Naxxramas",
@@ -220,7 +341,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Brodequins de l'aube",
-                "location" => "Feet",
+                "location" => [
+                    "Feet",
+                ],
                 "type" => "Bis",
                 "role" => "CAC",
                 "raid" => "Naxxramas",
@@ -229,7 +352,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Cachet de la conscience gelée",
-                "location" => "Relic-Wand-Ranged",
+                "location" => [
+                    "Relic-Wand-Ranged",
+                ],
                 "type" => "Bis",
                 "role" => "Tank",
                 "raid" => "Hors raid",
@@ -238,7 +363,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Cachet de lutte du gladiateur fatal",
-                "location" => "Relic-Wand-Ranged",
+                "location" => [
+                    "Relic-Wand-Ranged",
+                ],
                 "type" => "Bis",
                 "role" => "CAC",
                 "raid" => "Hors raid",
@@ -247,7 +374,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Cachet de vigilance",
-                "location" => "Relic-Wand-Ranged",
+                "location" => [
+                    "Relic-Wand-Ranged",
+                ],
                 "type" => "Bis",
                 "role" => "CAC",
                 "raid" => "Naxxramas",
@@ -256,7 +385,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Cadran solaire de l'exilé",
-                "location" => "Trinket 2",
+                "location" => [
+                    "Trinket 2",
+                ],
                 "type" => "Bis",
                 "role" => "Caster",
                 "raid" => "Hors raid",
@@ -265,7 +396,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Cape des plumes de kea",
-                "location" => "Back",
+                "location" => [
+                    "Back",
+                ],
                 "type" => "Bis",
                 "role" => "Healer",
                 "raid" => "Hors raid",
@@ -274,7 +407,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Cape du pennon - Caster",
-                "location" => "Back",
+                "location" => [
+                    "Back",
+                ],
                 "type" => "Contested",
                 "role" => "Caster",
                 "raid" => "Le sanctum Obsidien",
@@ -283,7 +418,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Cape du pennon - Healer",
-                "location" => "Back",
+                "location" => [
+                    "Back",
+                ],
                 "type" => "Contested",
                 "role" => "Healer",
                 "raid" => "Le sanctum Obsidien",
@@ -292,7 +429,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Cape du sorcier déméritant",
-                "location" => "Back",
+                "location" => [
+                    "Back",
+                ],
                 "type" => "Bis",
                 "role" => "Caster",
                 "raid" => "Naxxramas",
@@ -301,7 +440,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Cape maillée en platine",
-                "location" => "Back",
+                "location" => [
+                    "Back",
+                ],
                 "type" => "Contested",
                 "role" => "Tank",
                 "raid" => "Hors raid",
@@ -310,25 +451,31 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Carte de Sombrelune : Grandeur - CAC",
-                "location" => "Trinket 1",
+                "location" => [
+                    "Trinket 1",
+                ],
                 "type" => "Bis",
                 "role" => "CAC",
-                "raid" => "A définir",
-                "detail" => "A définir",
+                "raid" => "Hors raid",
+                "detail" => "https://www.wowhead.com/wotlk/fr/item=44253/carte-de-sombrelune-grandeur",
             ],
 
             [
                 "name" => "Carte de Sombrelune : Grandeur - Healer",
-                "location" => "Trinket 1",
+                "location" => [
+                    "Trinket 1",
+                ],
                 "type" => "Bis",
                 "role" => "Healer",
-                "raid" => "A définir",
-                "detail" => "A définir",
+                "raid" => "Hors raid",
+                "detail" => "https://www.wowhead.com/wotlk/fr/item=44255/carte-de-sombrelune-grandeur",
             ],
 
             [
                 "name" => "Ceinture de traque-peau",
-                "location" => "Waist",
+                "location" => [
+                    "Waist",
+                ],
                 "type" => "Contested",
                 "role" => "CAC",
                 "raid" => "Naxxramas",
@@ -337,7 +484,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Ceinture rivetée dépravée",
-                "location" => "Waist",
+                "location" => [
+                    "Waist",
+                ],
                 "type" => "Bis",
                 "role" => "CAC",
                 "raid" => "Naxxramas",
@@ -346,7 +495,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Ceinturon ablatif en chitine",
-                "location" => "Waist",
+                "location" => [
+                    "Waist",
+                ],
                 "type" => "Contested",
                 "role" => "Tank",
                 "raid" => "Naxxramas",
@@ -355,7 +506,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Ceinturon de chevalerie",
-                "location" => "Waist",
+                "location" => [
+                    "Waist",
+                ],
                 "type" => "Contested",
                 "role" => "CAC",
                 "raid" => "Naxxramas",
@@ -364,7 +517,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Ceinturon de récupération - Caster",
-                "location" => "Waist",
+                "location" => [
+                    "Waist",
+                ],
                 "type" => "Bis",
                 "role" => "Caster",
                 "raid" => "Naxxramas",
@@ -373,7 +528,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Ceinturon de récupération - Healer",
-                "location" => "Waist",
+                "location" => [
+                    "Waist",
+                ],
                 "type" => "Bis",
                 "role" => "Healer",
                 "raid" => "Naxxramas",
@@ -382,7 +539,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Cercle de mort",
-                "location" => "Ring 2",
+                "location" => [
+                    "Ring 2",
+                ],
                 "type" => "Bis",
                 "role" => "CAC",
                 "raid" => "Naxxramas",
@@ -391,7 +550,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Chaîne d'adoration",
-                "location" => "Neck",
+                "location" => [
+                    "Neck",
+                ],
                 "type" => "Bis",
                 "role" => "Healer",
                 "raid" => "Naxxramas",
@@ -400,7 +561,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Chapel de réconciliation",
-                "location" => "Head",
+                "location" => [
+                    "Head",
+                ],
                 "type" => "Bis",
                 "role" => "Healer",
                 "raid" => "Le sanctum Obsidien",
@@ -409,7 +572,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Chaperon de rationalité",
-                "location" => "Head",
+                "location" => [
+                    "Head",
+                ],
                 "type" => "Bis",
                 "role" => "Caster",
                 "raid" => "L'oeil de l'éternité",
@@ -418,7 +583,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Chevalière de la forteresse imprenable",
-                "location" => "Ring 2",
+                "location" => [
+                    "Ring 2",
+                ],
                 "type" => "Contested",
                 "role" => "Tank",
                 "raid" => "Hors raid",
@@ -426,8 +593,11 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
             ],
 
             [
-                "name" => "Chevalière de la souffrance manifeste - Ring 1",
-                "location" => "Ring 1",
+                "name" => "Chevalière de la souffrance manifeste",
+                "location" => [
+                    "Ring 1",
+                    "Ring 2",
+                ],
                 "type" => "Contested",
                 "role" => "Healer",
                 "raid" => "Naxxramas",
@@ -435,17 +605,10 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
             ],
 
             [
-                "name" => "Chevalière de la souffrance manifeste - Ring 2",
-                "location" => "Ring 2",
-                "type" => "Contested",
-                "role" => "Caster",
-                "raid" => "Naxxramas",
-                "detail" => "https://www.wowhead.com/wotlk/fr/item=40399/chevali%C3%A8re-de-la-souffrance-manifeste",
-            ],
-
-            [
                 "name" => "Chevalière du malveillant",
-                "location" => "Ring 1",
+                "location" => [
+                    "Ring 1",
+                ],
                 "type" => "Bis",
                 "role" => "Caster",
                 "raid" => "Naxxramas",
@@ -454,25 +617,31 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Clé de l'iris de focalisation",
-                "location" => "Neck",
+                "location" => [
+                    "Neck",
+                ],
                 "type" => "Contested",
                 "role" => "Tank",
-                "raid" => "A définir",
-                "detail" => "A définir",
+                "raid" => "Naxxramas",
+                "detail" => "https://www.wowhead.com/wotlk/fr/item=44577/cl%C3%A9-h%C3%A9ro%C3%AFque-de-liris-de-focalisation",
             ],
 
             [
                 "name" => "Cloche d'Af'Romaj",
-                "location" => "Trinket 2",
+                "location" => [
+                    "Trinket 2",
+                ],
                 "type" => "Bis",
                 "role" => "Healer",
-                "raid" => "A définir",
+                "raid" => "Hors raid",
                 "detail" => "https://www.wowhead.com/wotlk/fr/item=37835/cloche-dafromaj",
             ],
 
             [
                 "name" => "Code du défenseur",
-                "location" => "Trinket 1",
+                "location" => [
+                    "Trinket 1",
+                ],
                 "type" => "Bis",
                 "role" => "Tank",
                 "raid" => "Naxxramas",
@@ -481,7 +650,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Collier de puissance du Repos du ver",
-                "location" => "Neck",
+                "location" => [
+                    "Neck",
+                ],
                 "type" => "Contested",
                 "role" => "Caster",
                 "raid" => "L'oeil de l'éternité",
@@ -490,7 +661,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Cordelette de polarité",
-                "location" => "Waist",
+                "location" => [
+                    "Waist",
+                ],
                 "type" => "Bis",
                 "role" => "Caster",
                 "raid" => "Naxxramas",
@@ -499,7 +672,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Corselet des prouesses indéniables",
-                "location" => "Chest",
+                "location" => [
+                    "Chest",
+                ],
                 "type" => "Bis",
                 "role" => "CAC",
                 "raid" => "Le sanctum Obsidien",
@@ -508,7 +683,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Corselet du solitaire",
-                "location" => "Chest",
+                "location" => [
+                    "Chest",
+                ],
                 "type" => "Contested",
                 "role" => "CAC",
                 "raid" => "L'oeil de l'éternité",
@@ -517,7 +694,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Crispins sans souillure - Caster",
-                "location" => "Wrists",
+                "location" => [
+                    "Wrists",
+                ],
                 "type" => "Contested",
                 "role" => "Caster",
                 "raid" => "Le sanctum Obsidien",
@@ -526,7 +705,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Crispins sans souillure - Healer",
-                "location" => "Wrists",
+                "location" => [
+                    "Wrists",
+                ],
                 "type" => "Contested",
                 "role" => "Healer",
                 "raid" => "Le sanctum Obsidien",
@@ -535,7 +716,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Cuirasse de l'orage draconique",
-                "location" => "Chest",
+                "location" => [
+                    "Chest",
+                ],
                 "type" => "Bis",
                 "role" => "Tank",
                 "raid" => "Le sanctum Obsidien",
@@ -544,7 +727,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Cuissards de souveraineté",
-                "location" => "Legs",
+                "location" => [
+                    "Legs",
+                ],
                 "type" => "Contested",
                 "role" => "Tank",
                 "raid" => "L'oeil de l'éternité",
@@ -553,7 +738,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Drapé de l'ennemi mortel",
-                "location" => "Back",
+                "location" => [
+                    "Back",
+                ],
                 "type" => "Contested",
                 "role" => "CAC",
                 "raid" => "Naxxramas",
@@ -561,17 +748,11 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
             ],
 
             [
-                "name" => "Effroi coléreux - Main Hand",
-                "location" => "Main Hand",
-                "type" => "Bis",
-                "role" => "CAC",
-                "raid" => "Naxxramas",
-                "detail" => "https://www.wowhead.com/wotlk/fr/item=40189/effroi-col%C3%A9reux",
-            ],
-
-            [
-                "name" => "Effroi coléreux - Offhand",
-                "location" => "Offhand",
+                "name" => "Effroi coléreux",
+                "location" => [
+                    "Main Hand",
+                    "Offhand",
+                ],
                 "type" => "Bis",
                 "role" => "CAC",
                 "raid" => "Naxxramas",
@@ -580,7 +761,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Emissaire de mortalité",
-                "location" => "Relic-Wand-Ranged",
+                "location" => [
+                    "Relic-Wand-Ranged",
+                ],
                 "type" => "Contested",
                 "role" => "CAC",
                 "raid" => "Naxxramas",
@@ -589,7 +772,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Espauliers de mort non naturelle",
-                "location" => "Shoulders",
+                "location" => [
+                    "Shoulders",
+                ],
                 "type" => "Bis",
                 "role" => "Tank",
                 "raid" => "Naxxramas",
@@ -598,7 +783,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Essence de tulle",
-                "location" => "Trinket 1",
+                "location" => [
+                    "Trinket 1",
+                ],
                 "type" => "Bis",
                 "role" => "Tank",
                 "raid" => "Hors raid",
@@ -606,17 +793,11 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
             ],
 
             [
-                "name" => "Etreinte de l'araignée - Trinket 1",
-                "location" => "Trinket 1",
-                "type" => "Bis",
-                "role" => "Caster",
-                "raid" => "Naxxramas",
-                "detail" => "https://www.wowhead.com/wotlk/fr/item=39229/etreinte-de-laraign%C3%A9e",
-            ],
-
-            [
-                "name" => "Etreinte de l'araignée - Trinket 2",
-                "location" => "Trinket 2",
+                "name" => "Etreinte de l'araignée",
+                "location" => [
+                    "Trinket 1",
+                    "Trinket 2",
+                ],
                 "type" => "Bis",
                 "role" => "Caster",
                 "raid" => "Naxxramas",
@@ -625,7 +806,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Faveur de la reine dragon",
-                "location" => "Neck",
+                "location" => [
+                    "Neck",
+                ],
                 "type" => "Contested",
                 "role" => "CAC",
                 "raid" => "L'oeil de l'éternité",
@@ -634,7 +817,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Figurine de crabe monarchique",
-                "location" => "Trinket 2",
+                "location" => [
+                    "Trinket 2",
+                ],
                 "type" => "Bis",
                 "role" => "Tank",
                 "raid" => "Hors raid",
@@ -643,7 +828,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Figurine de lièvre de rubis",
-                "location" => "Trinket 1",
+                "location" => [
+                    "Trinket 1",
+                ],
                 "type" => "Bis",
                 "role" => "Tank",
                 "raid" => "Hors raid",
@@ -652,7 +839,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Fin du voyage",
-                "location" => "Main Hand",
+                "location" => [
+                    "Main Hand",
+                ],
                 "type" => "Contested",
                 "role" => "CAC",
                 "raid" => "Naxxramas",
@@ -660,17 +849,11 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
             ],
 
             [
-                "name" => "Fureur des cinq vols - Trinket 2",
-                "location" => "Trinket 2",
-                "type" => "Contested",
-                "role" => "CAC",
-                "raid" => "Le sanctum Obsidien",
-                "detail" => "https://www.wowhead.com/wotlk/fr/item=40431/fureur-des-cinq-vols",
-            ],
-
-            [
-                "name" => "Fureur des cinq vols - Trinket 3",
-                "location" => "Trinket 3",
+                "name" => "Fureur des cinq vols",
+                "location" => [
+                    "Trinket 2",
+                    "Trinket 3",
+                ],
                 "type" => "Contested",
                 "role" => "CAC",
                 "raid" => "Le sanctum Obsidien",
@@ -679,7 +862,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Fusil de combat blindé",
-                "location" => "Relic-Wand-Ranged",
+                "location" => [
+                    "Relic-Wand-Ranged",
+                ],
                 "type" => "Bis",
                 "role" => "Tank",
                 "raid" => "Hors raid",
@@ -688,7 +873,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Gantelets de Zeliek",
-                "location" => "Hands",
+                "location" => [
+                    "Hands",
+                ],
                 "type" => "Bis",
                 "role" => "CAC",
                 "raid" => "Naxxramas",
@@ -697,7 +884,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Gants du spectacle d'hiver",
-                "location" => "Hands",
+                "location" => [
+                    "Hands",
+                ],
                 "type" => "Bis",
                 "role" => "Healer",
                 "raid" => "L'oeil de l'éternité",
@@ -706,7 +895,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Garde-jambes de l'ossuaire",
-                "location" => "Legs",
+                "location" => [
+                    "Legs",
+                ],
                 "type" => "Bis",
                 "role" => "Healer",
                 "raid" => "Naxxramas",
@@ -715,7 +906,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Garde-mains adroits givrés",
-                "location" => "Hands",
+                "location" => [
+                    "Hands",
+                ],
                 "type" => "Contested",
                 "role" => "CAC",
                 "raid" => "L'oeil de l'éternité",
@@ -724,7 +917,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Garde-porte",
-                "location" => "Ring 1",
+                "location" => [
+                    "Ring 1",
+                ],
                 "type" => "Bis",
                 "role" => "Tank",
                 "raid" => "Naxxramas",
@@ -733,7 +928,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Grand anneau de collision",
-                "location" => "Ring 2",
+                "location" => [
+                    "Ring 2",
+                ],
                 "type" => "Bis",
                 "role" => "CAC",
                 "raid" => "Le sanctum Obsidien",
@@ -742,7 +939,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Grand heaume en obsidienne",
-                "location" => "Head",
+                "location" => [
+                    "Head",
+                ],
                 "type" => "Contested",
                 "role" => "CAC",
                 "raid" => "Le sanctum Obsidien",
@@ -751,7 +950,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Grèves d'expiation",
-                "location" => "Feet",
+                "location" => [
+                    "Feet",
+                ],
                 "type" => "Bis",
                 "role" => "Healer",
                 "raid" => "Naxxramas",
@@ -760,7 +961,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Habits putrides de Heigan",
-                "location" => "Chest",
+                "location" => [
+                    "Chest",
+                ],
                 "type" => "Bis",
                 "role" => "Caster",
                 "raid" => "Naxxramas",
@@ -769,7 +972,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Halo pâlissant",
-                "location" => "Relic-Wand-Ranged",
+                "location" => [
+                    "Relic-Wand-Ranged",
+                ],
                 "type" => "Contested",
                 "role" => "Healer",
                 "raid" => "Naxxramas",
@@ -778,7 +983,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Heaume de l'aspect bleu",
-                "location" => "Head",
+                "location" => [
+                    "Head",
+                ],
                 "type" => "Bis",
                 "role" => "CAC",
                 "raid" => "L'oeil de l'éternité",
@@ -787,7 +994,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Idole d'adoration",
-                "location" => "Relic-Wand-Ranged",
+                "location" => [
+                    "Relic-Wand-Ranged",
+                ],
                 "type" => "Bis",
                 "role" => "CAC",
                 "raid" => "Naxxramas",
@@ -796,7 +1005,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Idole d'éveil",
-                "location" => "Relic-Wand-Ranged",
+                "location" => [
+                    "Relic-Wand-Ranged",
+                ],
                 "type" => "Bis",
                 "role" => "Healer",
                 "raid" => "Naxxramas",
@@ -805,7 +1016,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Idole de l'étoile filante",
-                "location" => "Relic-Wand-Ranged",
+                "location" => [
+                    "Relic-Wand-Ranged",
+                ],
                 "type" => "Bis",
                 "role" => "Caster",
                 "raid" => "Naxxramas",
@@ -814,7 +1027,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Impitoyable",
-                "location" => "Ring 1",
+                "location" => [
+                    "Ring 1",
+                ],
                 "type" => "Contested",
                 "role" => "CAC",
                 "raid" => "Naxxramas",
@@ -823,7 +1038,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Jambards du dragon vaincu",
-                "location" => "Legs",
+                "location" => [
+                    "Legs",
+                ],
                 "type" => "Bis",
                 "role" => "Caster",
                 "raid" => "Naxxramas",
@@ -832,7 +1049,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Jambières d'abomination rivetées",
-                "location" => "Legs",
+                "location" => [
+                    "Legs",
+                ],
                 "type" => "Bis",
                 "role" => "CAC",
                 "raid" => "Naxxramas",
@@ -841,7 +1060,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Jambières d'arrogance mortelle",
-                "location" => "Legs",
+                "location" => [
+                    "Legs",
+                ],
                 "type" => "Contested",
                 "role" => "Healer",
                 "raid" => "Naxxramas",
@@ -850,7 +1071,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Jambières de fuite ratée",
-                "location" => "Legs",
+                "location" => [
+                    "Legs",
+                ],
                 "type" => "Bis",
                 "role" => "CAC",
                 "raid" => "Naxxramas",
@@ -859,7 +1082,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Jambières des honorés",
-                "location" => "Legs",
+                "location" => [
+                    "Legs",
+                ],
                 "type" => "Contested",
                 "role" => "CAC",
                 "raid" => "Le sanctum Obsidien",
@@ -868,7 +1093,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Jambières du lanceur de sorts dévergondé",
-                "location" => "Legs",
+                "location" => [
+                    "Legs",
+                ],
                 "type" => "Contested",
                 "role" => "Caster",
                 "raid" => "L'oeil de l'éternité",
@@ -876,17 +1103,11 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
             ],
 
             [
-                "name" => "Joyau perdu - Ring 1",
-                "location" => "Ring 1",
-                "type" => "Bis",
-                "role" => "Caster",
-                "raid" => "Naxxramas",
-                "detail" => "https://www.wowhead.com/wotlk/fr/item=40080/joyau-perdu",
-            ],
-
-            [
-                "name" => "Joyau perdu - Ring 2",
-                "location" => "Ring 2",
+                "name" => "Joyau perdu",
+                "location" => [
+                    "Ring 1",
+                    "Ring 2",
+                ],
                 "type" => "Bis",
                 "role" => "Caster",
                 "raid" => "Naxxramas",
@@ -895,7 +1116,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "L'œuf d'essence mortelle",
-                "location" => "Trinket 1",
+                "location" => [
+                    "Trinket 1",
+                ],
                 "type" => "Bis",
                 "role" => "Healer",
                 "raid" => "Hors raid",
@@ -904,7 +1127,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "La Marée décisive - Caster",
-                "location" => "Main Hand",
+                "location" => [
+                    "Main Hand",
+                ],
                 "type" => "Contested",
                 "role" => "Caster",
                 "raid" => "Naxxramas",
@@ -913,7 +1138,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "La Marée décisive - Healer",
-                "location" => "Main Hand",
+                "location" => [
+                    "Main Hand",
+                ],
                 "type" => "Contested",
                 "role" => "Healer",
                 "raid" => "Naxxramas",
@@ -922,7 +1149,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Laisse de magie insouciante - Caster",
-                "location" => "Waist",
+                "location" => [
+                    "Waist",
+                ],
                 "type" => "Contested",
                 "role" => "Caster",
                 "raid" => "L'oeil de l'éternité",
@@ -931,7 +1160,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Laisse de magie insouciante - Healer",
-                "location" => "Waist",
+                "location" => [
+                    "Waist",
+                ],
                 "type" => "Contested",
                 "role" => "Healer",
                 "raid" => "L'oeil de l'éternité",
@@ -939,8 +1170,10 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
             ],
 
             [
-                "name" => "Le dernier sourire - Main Hand - CAC",
-                "location" => "Main Hand",
+                "name" => "Le dernier sourire - CAC",
+                "location" => [
+                    "Main Hand",
+                ],
                 "type" => "Contested",
                 "role" => "CAC",
                 "raid" => "Naxxramas",
@@ -948,8 +1181,11 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
             ],
 
             [
-                "name" => "Le dernier sourire - Main Hand - Tank",
-                "location" => "Main Hand",
+                "name" => "Le dernier sourire - Tank",
+                "location" => [
+                    "Main Hand",
+                    "Offhand",
+                ],
                 "type" => "Contested",
                 "role" => "Tank",
                 "raid" => "Naxxramas",
@@ -957,26 +1193,11 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
             ],
 
             [
-                "name" => "Le dernier sourire - Offhand",
-                "location" => "Offhand",
-                "type" => "Contested",
-                "role" => "Tank",
-                "raid" => "Naxxramas",
-                "detail" => "https://www.wowhead.com/wotlk/fr/item=40402/le-dernier-sourire",
-            ],
-
-            [
-                "name" => "Le glas sinistre - Trinket 2",
-                "location" => "Trinket 2",
-                "type" => "Contested",
-                "role" => "CAC",
-                "raid" => "Naxxramas",
-                "detail" => "https://www.wowhead.com/wotlk/fr/item=40256/le-glas-sinistre",
-            ],
-
-            [
-                "name" => "Le glas sinistre - Trinket 3",
-                "location" => "Trinket 3",
+                "name" => "Le glas sinistre",
+                "location" => [
+                    "Trinket 2",
+                    "Trinket 3",
+                ],
                 "type" => "Contested",
                 "role" => "CAC",
                 "raid" => "Naxxramas",
@@ -985,7 +1206,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Les habits flottants du Sanctum - Caster",
-                "location" => "Chest",
+                "location" => [
+                    "Chest",
+                ],
                 "type" => "Bis",
                 "role" => "Caster",
                 "raid" => "Le sanctum Obsidien",
@@ -994,7 +1217,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Les habits flottants du Sanctum - Healer",
-                "location" => "Chest",
+                "location" => [
+                    "Chest",
+                ],
                 "type" => "Bis",
                 "role" => "Healer",
                 "raid" => "Le sanctum Obsidien",
@@ -1003,7 +1228,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Libram d'obstruction",
-                "location" => "Relic-Wand-Ranged",
+                "location" => [
+                    "Relic-Wand-Ranged",
+                ],
                 "type" => "Bis",
                 "role" => "Tank",
                 "raid" => "Hors raid",
@@ -1012,7 +1239,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Libram de renouveau",
-                "location" => "Relic-Wand-Ranged",
+                "location" => [
+                    "Relic-Wand-Ranged",
+                ],
                 "type" => "Bis",
                 "role" => "Healer",
                 "raid" => "Hors raid",
@@ -1021,7 +1250,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Linceul en toile déchirée",
-                "location" => "Waist",
+                "location" => [
+                    "Waist",
+                ],
                 "type" => "Bis",
                 "role" => "CAC",
                 "raid" => "Naxxramas",
@@ -1030,7 +1261,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Malédiction du mourant",
-                "location" => "Trinket 1",
+                "location" => [
+                    "Trinket 1",
+                ],
                 "type" => "Contested",
                 "role" => "Caster",
                 "raid" => "Naxxramas",
@@ -1039,7 +1272,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Manchettes de la proie impuissante",
-                "location" => "Wrists",
+                "location" => [
+                    "Wrists",
+                ],
                 "type" => "Contested",
                 "role" => "Tank",
                 "raid" => "Naxxramas",
@@ -1048,7 +1283,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Manchettes du décati",
-                "location" => "Wrists",
+                "location" => [
+                    "Wrists",
+                ],
                 "type" => "Bis",
                 "role" => "Healer",
                 "raid" => "Naxxramas",
@@ -1057,7 +1294,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Manchettes du pécheur",
-                "location" => "Wrists",
+                "location" => [
+                    "Wrists",
+                ],
                 "type" => "Contested",
                 "role" => "CAC",
                 "raid" => "Naxxramas",
@@ -1066,7 +1305,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Manteau de dispersion",
-                "location" => "Shoulders",
+                "location" => [
+                    "Shoulders",
+                ],
                 "type" => "Bis",
                 "role" => "Caster",
                 "raid" => "L'oeil de l'éternité",
@@ -1075,7 +1316,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Mantelet des sauterelles",
-                "location" => "Shoulders",
+                "location" => [
+                    "Shoulders",
+                ],
                 "type" => "Bis",
                 "role" => "Healer",
                 "raid" => "Naxxramas",
@@ -1084,7 +1327,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Médaillon de lieur-de-vie",
-                "location" => "Neck",
+                "location" => [
+                    "Neck",
+                ],
                 "type" => "Contested",
                 "role" => "Healer",
                 "raid" => "L'oeil de l'éternité",
@@ -1093,7 +1338,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Membre excédentaire",
-                "location" => "Offhand",
+                "location" => [
+                    "Offhand",
+                ],
                 "type" => "Contested",
                 "role" => "Caster",
                 "raid" => "Naxxramas",
@@ -1102,7 +1349,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Miroir de vérité",
-                "location" => "Trinket 2",
+                "location" => [
+                    "Trinket 2",
+                ],
                 "type" => "Bis",
                 "role" => "CAC",
                 "raid" => "Hors raid",
@@ -1111,7 +1360,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Mort entoilée",
-                "location" => "Offhand",
+                "location" => [
+                    "Offhand",
+                ],
                 "type" => "Bis",
                 "role" => "CAC",
                 "raid" => "Naxxramas",
@@ -1120,7 +1371,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Mur de terreur",
-                "location" => "Offhand",
+                "location" => [
+                    "Offhand",
+                ],
                 "type" => "Contested",
                 "role" => "Tank",
                 "raid" => "Naxxramas",
@@ -1129,7 +1382,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Pas de Malygos",
-                "location" => "Feet",
+                "location" => [
+                    "Feet",
+                ],
                 "type" => "Bis",
                 "role" => "Caster",
                 "raid" => "L'oeil de l'éternité",
@@ -1138,7 +1393,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Pierre à aiguiser météorique",
-                "location" => "Trinket 2",
+                "location" => [
+                    "Trinket 2",
+                ],
                 "type" => "Bis",
                 "role" => "CAC",
                 "raid" => "Hors raid",
@@ -1147,7 +1404,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Piétineurs arcaniques - Caster",
-                "location" => "Feet",
+                "location" => [
+                    "Feet",
+                ],
                 "type" => "Contested",
                 "role" => "Caster",
                 "raid" => "L'oeil de l'éternité",
@@ -1156,7 +1415,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Piétineurs arcaniques - Healer",
-                "location" => "Feet",
+                "location" => [
+                    "Feet",
+                ],
                 "type" => "Contested",
                 "role" => "Healer",
                 "raid" => "L'oeil de l'éternité",
@@ -1165,7 +1426,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Piquant maudit",
-                "location" => "Offhand",
+                "location" => [
+                    "Offhand",
+                ],
                 "type" => "Bis",
                 "role" => "Caster",
                 "raid" => "Naxxramas",
@@ -1174,7 +1437,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Poignets de respect mutuel",
-                "location" => "Wrists",
+                "location" => [
+                    "Wrists",
+                ],
                 "type" => "Bis",
                 "role" => "Caster",
                 "raid" => "Naxxramas",
@@ -1183,7 +1448,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Poignets du ruisseau de vase",
-                "location" => "Wrists",
+                "location" => [
+                    "Wrists",
+                ],
                 "type" => "Bis",
                 "role" => "CAC",
                 "raid" => "Naxxramas",
@@ -1192,7 +1459,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Promesse rompue",
-                "location" => "Main Hand",
+                "location" => [
+                    "Main Hand",
+                ],
                 "type" => "Bis",
                 "role" => "Tank",
                 "raid" => "Naxxramas",
@@ -1201,16 +1470,20 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Protecteur d'âme",
-                "location" => "Trinket 2",
+                "location" => [
+                    "Trinket 2",
+                ],
                 "type" => "Bis",
                 "role" => "Healer",
-                "raid" => "A définir",
+                "raid" => "Hors raid",
                 "detail" => "https://www.wowhead.com/wotlk/fr/item=37111/protecteur-d%C3%A2me#english-comments",
             ],
 
             [
                 "name" => "Rejeton de la matriarche - Caster",
-                "location" => "Offhand",
+                "location" => [
+                    "Offhand",
+                ],
                 "type" => "Bis",
                 "role" => "Caster",
                 "raid" => "Naxxramas",
@@ -1219,7 +1492,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Rejeton de la matriarche - Healer",
-                "location" => "Offhand",
+                "location" => [
+                    "Offhand",
+                ],
                 "type" => "Contested",
                 "role" => "Healer",
                 "raid" => "Naxxramas",
@@ -1227,8 +1502,11 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
             ],
 
             [
-                "name" => "Représentation de l'Âme des dragons - Trinket 1",
-                "location" => "Trinket 1",
+                "name" => "Représentation de l'Âme des dragons - Healer",
+                "location" => [
+                    "Trinket 1",
+                    "Trinket 2",
+                ],
                 "type" => "Contested",
                 "role" => "Healer",
                 "raid" => "Le sanctum Obsidien",
@@ -1236,8 +1514,11 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
             ],
 
             [
-                "name" => "Représentation de l'Âme des dragons - Trinket 2",
-                "location" => "Trinket 2",
+                "name" => "Représentation de l'Âme des dragons - Caster",
+                "location" => [
+                    "Trinket 1",
+                    "Trinket 2",
+                ],
                 "type" => "Contested",
                 "role" => "Caster",
                 "raid" => "Le sanctum Obsidien",
@@ -1246,7 +1527,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Robes de neige couvrantes",
-                "location" => "Chest",
+                "location" => [
+                    "Chest",
+                ],
                 "type" => "Bis",
                 "role" => "Healer",
                 "raid" => "L'oeil de l'éternité",
@@ -1255,7 +1538,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Sangle de la grâce divine",
-                "location" => "Waist",
+                "location" => [
+                    "Waist",
+                ],
                 "type" => "Bis",
                 "role" => "Healer",
                 "raid" => "Naxxramas",
@@ -1264,7 +1549,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Soleret des représailles subites",
-                "location" => "Feet",
+                "location" => [
+                    "Feet",
+                ],
                 "type" => "Bis",
                 "role" => "CAC",
                 "raid" => "Naxxramas",
@@ -1273,7 +1560,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Solerets d'endurance",
-                "location" => "Feet",
+                "location" => [
+                    "Feet",
+                ],
                 "type" => "Bis",
                 "role" => "Tank",
                 "raid" => "Naxxramas",
@@ -1282,7 +1571,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Solerets de mélancolie",
-                "location" => "Feet",
+                "location" => [
+                    "Feet",
+                ],
                 "type" => "Contested",
                 "role" => "CAC",
                 "raid" => "L'oeil de l'éternité",
@@ -1291,7 +1582,9 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 "name" => "Solerets inexorables",
-                "location" => "Feet",
+                "location" => [
+                    "Feet",
+                ],
                 "type" => "Contested",
                 "role" => "Tank",
                 "raid" => "Naxxramas",
@@ -1299,100 +1592,127 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
             ],
 
             [
-                "name" => "Torche du saint feu - Caster",
-                "location" => "Main Hand",
+                "name" => "T7",
+                "location" => [
+                    "Chest",
+                    "Hands",
+                    "Head",
+                    "Legs",
+                    "Shoulders",
+                ],
                 "type" => "Contested",
-                "role" => "Contested",
+                "role" => "Tank",
+                "raid" => "Naxxramas",
+                "detail" => "https://www.wowhead.com/wotlk/fr/item=39717/solerets-inexorables",
+            ],   
+
+            [
+                "name" => "Torche du saint feu - Caster",
+                "location" => [
+                    "Main Hand",
+                ],
+                "type" => "Contested",
+                "role" => "Caster",
                 "raid" => "Naxxramas",
                 "detail" => "https://www.wowhead.com/wotlk/fr/item=40395/torche-du-saint-feu",
             ],
 
             [
                 "name" => "Torche du saint feu - Healer",
-                "location" => "Main Hand",
+                "location" => [
+                    "Main Hand",
+                ],
                 "type" => "Contested",
-                "role" => "Contested",
+                "role" => "Healer",
                 "raid" => "Naxxramas",
                 "detail" => "https://www.wowhead.com/wotlk/fr/item=40395/torche-du-saint-feu",
             ],
 
             [
                 "name" => "Torsade de la calamité",
-                "location" => "Main Hand",
+                "location" => [
+                    "Main Hand",
+                ],
                 "type" => "Bis",
-                "role" => "Bis",
+                "role" => "CAC",
                 "raid" => "Naxxramas",
                 "detail" => "https://www.wowhead.com/wotlk/fr/item=40383/torsade-de-la-calamit%C3%A9",
             ],
 
             [
                 "name" => "Totem de croissance forestière",
-                "location" => "Relic-Wand-Ranged",
+                "location" => [
+                    "Relic-Wand-Ranged",
+                ],
                 "type" => "Bis",
-                "role" => "Bis",
+                "role" => "Healer",
                 "raid" => "Hors raid",
                 "detail" => "https://www.wowhead.com/wotlk/fr/item=40709/totem-de-croissance-foresti%C3%A8re",
             ],
 
             [
                 "name" => "Totem de maléfice",
-                "location" => "Relic-Wand-Ranged",
+                "location" => [
+                    "Relic-Wand-Ranged",
+                ],
                 "type" => "Bis",
-                "role" => "Bis",
+                "role" => "Caster",
                 "raid" => "Naxxramas",
                 "detail" => "https://www.wowhead.com/wotlk/fr/item=40267/totem-de-mal%C3%A9fice",
             ],
 
             [
-                "name" => "Traître à l'humanité - Main Hand",
-                "location" => "Main Hand",
+                "name" => "Traître à l'humanité",
+                "location" => [
+                    "Main Hand",
+                    "Offhand",
+                ],
                 "type" => "Contested",
-                "role" => "Contested",
-                "raid" => "Naxxramas",
-                "detail" => "https://www.wowhead.com/wotlk/fr/item=40384/tra%C3%AEtre-%C3%A0-lhumanit%C3%A9",
-            ],
-
-            [
-                "name" => "Traître à l'humanité - Offhand",
-                "location" => "Offhand",
-                "type" => "Contested",
-                "role" => "Contested",
+                "role" => "CAC",
                 "raid" => "Naxxramas",
                 "detail" => "https://www.wowhead.com/wotlk/fr/item=40384/tra%C3%AEtre-%C3%A0-lhumanit%C3%A9",
             ],
 
             [
                 "name" => "Urne des souvenirs perdus",
-                "location" => "Offhand",
+                "location" => [
+                    "Offhand",
+                ],
                 "type" => "Bis",
-                "role" => "Bis",
+                "role" => "Healer",
                 "raid" => "Naxxramas",
                 "detail" => "https://www.wowhead.com/wotlk/fr/item=40350/urne-des-souvenirs-perdus",
             ],
 
             [
                 "name" => "Ventaille du trépassé",
-                "location" => "Head",
+                "location" => [
+                    "Head",
+                ],
                 "type" => "Bis",
-                "role" => "Bis",
+                "role" => "Healer",
                 "raid" => "Naxxramas",
                 "detail" => "https://www.wowhead.com/wotlk/fr/item=40298/ventaille-du-tr%C3%A9pass%C3%A9",
             ],
 
             [
                 "name" => "Voix de la raison - Caster",
-                "location" => "Offhand",
+                "location" => [
+                    "Offhand",
+                ],
                 "type" => "Bis",
-                "role" => "Bis",
+                "role" => "Caster",
                 "raid" => "Naxxramas",
                 "detail" => "https://www.wowhead.com/wotlk/fr/item=40401/voix-de-la-raison",
             ],
 
             [
                 "name" => "Voix de la raison - Healer",
-                "location" => "Offhand",
+                "location" => [
+                    "Offhand",
+                ],
                 "type" => "Contested",
-                "role" => "Contested",
+                "role" => "Healer",
                 "raid" => "Naxxramas",
                 "detail" => "https://www.wowhead.com/wotlk/fr/item=40401/voix-de-la-raison",
             ],
@@ -1405,13 +1725,21 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
             $itemObj = new Item();
 
             $itemObj->setName($currentItem['name']);
-            $itemObj->setLocation($currentItem['location']);
             $itemObj->setType($currentItem['type']);
             $itemObj->setSlug($this->slugger->slug(mb_strtolower($currentItem['name'])));
             $itemObj->setDetail($currentItem['detail']);
-
+            
             $raidObj = $this->getReference($currentItem["raid"]);
             $itemObj->setRaid($raidObj);
+            
+            // $locationObj = $this->getReference($currentItem["location"]);
+            // $itemObj->addLocation($locationObj);
+            
+            foreach ($currentItem["location"] as $currentLocationName) {
+
+                $currentLocationObj = $locationObjArray[md5($currentLocationName)];
+                $itemObj->addLocation($currentLocationObj);
+            }
 
             $roleObj = $this->getReference($currentItem["role"]);
             $itemObj->addRole($roleObj);
@@ -1420,8 +1748,8 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
 
             //* reference to link fixtures files
             $this->addReference($currentItem['name'], $itemObj);
- 
         }
+                
 
         $manager->flush();
     }

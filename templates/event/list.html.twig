@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}- Liste des évènements{% endblock %}
+
+{% block body %}
+
+<div class="button-top">        
+    <a href="{{ path('app_event_create') }}"class="button-top-add" title="Ajouter"><i class="bi bi-plus-circle"></i> Ajouter un évènement</a>
+</div>
+<div class="container">
+    <table>
+        <thead>
+            <tr>
+                <th colspan="1">Nom</th>
+                <th colspan="1">Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for event in events %}
+                <tr>
+                    <td>
+                        <a href="{{ path('app_event_read', {'id': event.id}) }}">
+                        {% for raid in event.raid %}
+                           {{ raid.name }}</br>
+                        {% endfor %}
+                        </a>
+                    </td>
+                    <td>{{ event.date }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
