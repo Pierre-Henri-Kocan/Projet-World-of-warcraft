@@ -6,6 +6,7 @@ use App\Repository\ItemRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ItemRepository::class)
@@ -21,11 +22,13 @@ class Item
 
     /**
      * @ORM\Column(type="string", length=64)
+     * @Assert\NotBlank(message="Merci de remplir ce champs")
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=10)
+     * @Assert\NotBlank(message="Merci de remplir ce champs")
      */
     private $type;
 
@@ -36,6 +39,7 @@ class Item
 
     /**  
      * @ORM\ManyToMany(targetEntity=Role::class, inversedBy="items")
+     * @Assert\NotBlank(message="Merci de remplir ce champs")
      */
     private $role;
 
@@ -52,16 +56,19 @@ class Item
     /**
      * @ORM\ManyToOne(targetEntity=Raid::class, inversedBy="item")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank(message="Merci de remplir ce champs")
      */
     private $raid;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Merci de remplir ce champs")
      */
     private $detail;
 
     /**
      * @ORM\ManyToMany(targetEntity=Location::class, mappedBy="item")
+     * @Assert\NotBlank(message="Merci de remplir ce champs")
      */
     private $locations;
 

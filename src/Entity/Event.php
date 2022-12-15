@@ -6,6 +6,7 @@ use App\Repository\EventRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=EventRepository::class)
@@ -21,6 +22,7 @@ class Event
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\NotBlank(message="Merci de remplir ce champs")
      */
     private $date;
 
@@ -31,16 +33,19 @@ class Event
 
     /**
      * @ORM\ManyToMany(targetEntity=Raid::class, inversedBy="events")
+     * @Assert\NotBlank(message="Merci de remplir ce champs")
      */
     private $raid;
 
     /**
      * @ORM\ManyToMany(targetEntity=Player::class, inversedBy="events")
+     * @Assert\NotBlank(message="Merci de remplir ce champs")
      */
     private $player;
 
     /**
      * @ORM\ManyToMany(targetEntity=Item::class, inversedBy="events")
+     * @Assert\NotBlank(message="Merci de remplir ce champs")
      */
     private $item;
 
@@ -56,9 +61,13 @@ class Event
         return $this->id;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    public function getDate(): ?string
     {
+        if(!is_null($this->date)) {
+           return $this->date->format('Y-m-d H:i:s'); 
+        }
         return $this->date;
+        
     }
 
     public function setDate(\DateTimeInterface $date): self

@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}- Liste des items{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <table>
+        <thead>
+            <tr>
+                <th colspan="1">Item</th>
+                <th colspan="1">Emplacement</th>
+                <th colspan="1">Raid</th>
+                <th colspan="1">Type</th>
+                <th colspan="1">Rôle</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+                <tr>
+                    <td>
+                        <a href="{{ path('app_item_read', {'id': item.id}) }}">
+                            {{item.name}}
+                        </a>
+                    </td>
+                    <td>
+                    {% for locations in item.locations %}
+                        {{ locations.name }}</br>
+                    {% endfor %}
+                    </td>
+                    <td>{{item.raid.name}}</td>
+                    <td>{{item.type}}</td>
+                    <td>
+                            {% for role in item.role %}
+                                {{ role.name }} 
+                            {% endfor %}
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

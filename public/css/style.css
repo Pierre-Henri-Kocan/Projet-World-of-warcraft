@@ -1,0 +1,265 @@
+/* ---------------------- NavBar + Footer ---------------------- */
+
+html, body {
+    margin:0;
+    padding:0;
+    height:100%;
+ }
+
+body {
+    position: relative;
+    background-image: url(../images/og-image.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    background-color: rgba(30, 131, 190, 0.418);
+    background-position:bottom;
+    width: 100%;
+    height: 10rem;
+    padding-left: 2rem;
+}
+    
+.logo-nav {
+    width: 8rem;
+    height: auto;
+    margin: 0 2rem;
+}
+
+.navbar-expand-lg .navbar-nav .nav-link {
+    color: white;
+    font-size: 1.3rem;
+    margin: 2rem;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;
+    background-color: rgb(30, 131, 190, 0.418);
+    padding: 0rem;
+    text-align: center;
+}
+
+.footer-list {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0.5rem;
+}
+
+.footer-list-text {
+    color: rgb(255, 255, 255);
+}
+
+/* ---------------------- calendrier ---------------------- */
+#calendar {
+    width: 45rem;
+    margin: auto;
+}
+
+
+/* ---------------------- container principaux ---------------------- */
+.title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 4rem auto;
+    height: auto;
+}
+
+.left-container {
+    width: 42rem;
+}
+
+.right-container {
+    width: 25rem;
+}
+
+
+/* ---------------------- textes ---------------------- */
+h1, h2 {
+    color: white;
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+a:hover, .navbar-expand-lg .navbar-nav .nav-link:hover {
+    color: rgb(211, 43, 226);
+}
+
+
+/* ---------------------- buttons ---------------------- */
+.button-top {
+    display: flex;
+    justify-content: space-evenly;
+    margin-right: 2rem;
+    margin-top: 4rem;
+}
+
+/*  search button  */
+body > div.button-top > form > button {
+    color: white;
+}
+
+.botom-button-update, .botom-button-back, .button-delete {
+    background-color: rgba(30, 131, 190, 0.418);
+    color: white;
+    border: #1b2f4ead solid 1px;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+}
+
+.button-delete:hover {
+    color: red;
+
+}
+
+/* ---------------------- tables ---------------------- */
+table {
+    padding: 2rem;
+    color: white;
+    margin: auto;
+    text-align: center;
+}
+
+.container table > thead > tr > th  {
+    background-color: #6179a180;
+    font-weight: bold;
+    color: white;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #88c9fbab;
+}
+
+table tbody tr:nth-child(odd) {
+    background-color: #1b2f4ead;
+}
+
+table tbody td {
+    padding: 0 1rem;
+    color: white;
+}
+
+/* ---------------------- accrodions ---------------------- */
+
+.accordion-item, .accordion-button, .accordion-button:not(.collapsed), .list-group-item {
+    background-color: rgba(0, 0, 0, 0.308);
+    color:white;
+}
+
+
+/* ---------------------- page item ---------------------- */
+
+.title-item{
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    margin: 2rem 0;
+    border: 4px solid rgba(255, 255, 255, 0.7);
+    border-radius: 20px;
+    margin: 5rem 20%;
+    font-size: 3rem;
+}
+
+.wowhead {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10rem;
+}
+
+.wowhead-link {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+}
+
+.wowhead-logo {
+    width: 30rem;
+    opacity: 70%;
+}
+
+.wowhead-title {
+    text-align: center;
+    font-size: 3rem;
+    margin: 7rem 0 0 0;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* ---------------------- form ---------------------- */
+form {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    color: white;
+ }
+ 
+ form #event {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: rgba(0, 0, 0, 0.308);
+    justify-content: space-between;
+    align-items: center;
+ }
+
+ form #event div {
+    margin: 1rem;
+ }
+
+ form #event div label {
+    margin-right: 1rem;
+ }
+ 
+ label.required {
+    display: flex;
+    background-color:  #88c9fbab;
+    margin: 1rem;
+    justify-content: center;
+ }
+
+ #event_item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+ }
+
+/* ---------------------- MEDIA-QUERIES ---------------------- */
+@media screen and (min-width: 384px) {
+    .logo-nav {
+        width: 13rem;
+    }       
+}
+
+@media screen and (max-width: 800px) {
+    .wowhead-link {
+        flex-direction: column-reverse;
+    }
+    .title-item{
+        font-size: 1.5rem;
+    }
+    .wowhead-logo {
+        width: 15rem;
+    }
+    .wowhead-title {
+        text-align: center;
+        font-size: 1.5rem;
+    }
+}
