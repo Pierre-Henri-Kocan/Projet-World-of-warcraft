@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}- Item{% endblock %}
+
+{% block body %}
+
+<h2 class="title-item">{{ item.name}}</h2>
+
+    <div class="wowhead">
+        <a href="{{ item.detail}}" target="_blank" rel="noopener noreferrer" class="wowhead-link">
+        <img src="{{ asset('../images/logo-wowhead.png') }}" class="wowhead-logo">
+        <p class="wowhead-title">Voir le détail sur</p>
+        </a>
+    </div>
+
+{% endblock %}

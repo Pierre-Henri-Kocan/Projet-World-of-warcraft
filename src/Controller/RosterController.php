@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Player;
+use App\Form\PlayerType;
 use App\Repository\PlayerRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -51,10 +52,11 @@ class RosterController extends AbstractController
     /**
      * @Route ("/{id<\d+>}", name="read", methods={"GET"})
      */
-    public function read(Player $player): Response
+    public function read(Player $player, PlayerRepository $playerRepository): Response
     {
         return $this->render('roster/read.html.twig', [
-            'event' => $player,
+            'player' => $player,
+            'rosters' => $playerRepository->findAll(),
         ]);
     }
 
