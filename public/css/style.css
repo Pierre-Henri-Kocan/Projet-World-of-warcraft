@@ -90,26 +90,30 @@ footer {
 }
 
 .result-bar-title {
-    margin: 1rem auto;
-    width: 55%;
+    width: 10%;
+    font-size: 1rem;
     text-align: center;
+    color: rgba(255, 255, 255, 0.7);
     background-color: rgba(30, 131, 190, 0.418);
-    color: white;
     border: #1b2f4ead solid 1px;
     border-radius: 0.5rem;
     padding: 0.5rem 1rem;
+    margin: 1rem auto;
 }
 
 .result-bar-response {
-    background-color: rgba(30, 131, 190, 0.418);
-    color: white;
-    border: #1b2f4ead solid 1px;
-    border-radius: 0.5rem;
+    width: 40%;
+    margin: 1rem auto;
     padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: #1b2f4ead solid 1px;
+    background-color: rgba(255, 255, 255);
 }
 
 .result-bar-choice {
     text-align: center;
+    color: #1b2f4ead;
+    margin: 0;
 }
 
 /* ---------------------- calendrier ---------------------- */
@@ -170,7 +174,7 @@ a:hover, .navbar-expand-lg .navbar-nav .nav-link:hover {
 
 .bottom-button-update, .bottom-button-back, .button-delete, .button-search {
     background-color: rgba(30, 131, 190, 0.418);
-    color: white;
+    color: rgba(255, 255, 255, 0.7);
     border: #1b2f4ead solid 1px;
     border-radius: 0.5rem;
     padding: 0.5rem 1rem;
