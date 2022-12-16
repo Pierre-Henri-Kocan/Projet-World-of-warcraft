@@ -90,7 +90,7 @@ footer {
 }
 
 .result-bar-title {
-    width: 10%;
+    width: 8rem;
     font-size: 1rem;
     text-align: center;
     color: rgba(255, 255, 255, 0.7);
@@ -102,7 +102,7 @@ footer {
 }
 
 .result-bar-response {
-    width: 40%;
+    width: 30%;
     margin: 1rem auto;
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
@@ -313,5 +313,12 @@ form {
     .wowhead-title {
         text-align: center;
         font-size: 1.5rem;
+    }
+
+    .result-bar-response {
+        width: 50%;
+    }
+    .result-bar-choice {
+        font-size: 0.8rem;
     }
 }

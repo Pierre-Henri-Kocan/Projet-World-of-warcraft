@@ -3,15 +3,10 @@
 {% block title %}- Liste des joueurs{% endblock %}
 
 {% block body %}
+{{ render(controller(
+        'App\\Controller\\SearchController::playerSearchBar'
+ )) }}
 
-<div class="button-top">
-    <form class="d-flex search-bar" role="search">
-        <input class="form-control me-2" type="search" placeholder="Nom du joueur" aria-label="Search">
-        <button class="button-search" type="submit">Search</button>
-    </form>
-    <a href="{{ path('app_event_create') }}" class="button-top-add" title="Ajouter"><i class="bi bi-plus-circle"></i>
-        Ajouter un joueur</a>
-</div>
 <div class="container">
     <div class="left-container">
         <table>
@@ -24,16 +19,16 @@
                 </tr>
             </thead>
             <tbody>
-                {% for roster in rosters %}
+                {% for player in players %}
                 <tr>
                     <td>
-                        <a href="{{ path('app_roster_read', {'id': roster.id}) }}">
-                            {{ roster.name }}
+                        <a href="{{ path('app_player_show_by_slug', {'slug': player.slug}) }}">
+                            {{ player.name }}
                         </a>
                     </td>
-                    <td>{{ roster.role.name }}</td>
-                    <td>{{ roster.class }}</td>
-                    <td>{{ roster.rank }}</td>
+                    <td>{{ player.role.name }}</td>
+                    <td>{{ player.class }}</td>
+                    <td>{{ player.rank }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
