@@ -25,7 +25,7 @@
                         {% endfor %}
                         </a>
                     </td>
-                    <td>{{ event.date }}</td>
+                    <td>{{ event.date ? event.date|date('d M Y - H:i') : ''  }}</td>
                 </tr>
             {% endfor %}
         </tbody>
