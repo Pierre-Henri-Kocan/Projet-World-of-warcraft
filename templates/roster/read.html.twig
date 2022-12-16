@@ -25,7 +25,7 @@
                 {# pour chaque event du player, event date + event raids + item event player de type bis + item event player de type contested #}
                 {% for event in player.events %}
                 <tr>
-                    <td>{{ event.date }}</td>
+                    <td>{{ event.date ? event.date|date('d M Y - H:i') : ''  }}</td>
                     <td>
                         {% for raid in event.raid %}
                         {{ raid.name }}</br>
