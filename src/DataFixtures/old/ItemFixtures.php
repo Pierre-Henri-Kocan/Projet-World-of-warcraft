@@ -113,10 +113,10 @@ class ItemFixtures extends Fixture implements DependentFixtureInterface
             $locationObj->setName($currentLocation['name']);
             $locationObj->setSlug($this->slugger->slug(mb_strtolower($currentLocation['name'])));
             
-            //* to be able to link categories to posts
             $locationObjArray[md5($currentLocation['name'])] = $locationObj;
             $manager->persist($locationObj);
         }
+        
         $items = [
             [
                 "name" => "Ambition infinie",

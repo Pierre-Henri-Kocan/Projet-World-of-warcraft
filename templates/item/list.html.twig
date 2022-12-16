@@ -3,7 +3,10 @@
 {% block title %}- Liste des items{% endblock %}
 
 {% block body %}
-
+{{ render(controller(
+        'App\\Controller\\SearchController::searchBar'
+ )) }}
+ 
 <div class="container">
     <table>
         <thead>
@@ -19,7 +22,7 @@
             {% for item in items %}
                 <tr>
                     <td>
-                        <a href="{{ path('app_item_read', {'id': item.id}) }}">
+                        <a href="{{ path('app_item_show_by_slug', {'slug': item.slug}) }}">
                             {{item.name}}
                         </a>
                     </td>
