@@ -27,7 +27,7 @@ class DataFixtures extends Fixture
     {
 
         // ------------------------------- Raids -------------------------------
-            $raids = [
+            $raidsObjArray = [
                 [
                     "name" => "Hors raid",
                 ],
@@ -46,12 +46,15 @@ class DataFixtures extends Fixture
 
             ];
 
-            $raidsObjArray = [];
-            foreach ($raids as $currentRaid) {
+            // $raidsObjArray = [];
+            foreach ($raidsObjArray as $currentRaid) {
                 
                 $raidObj = new Raid();
+
                 $raidObj->setName($currentRaid['name']);
                 $raidObj->setSlug($this->slugger->slug(mb_strtolower($currentRaid['name'])));
+
+                $raidsObjArray[md5($currentRaid['name'])] = $raidObj;
 
                 $manager->persist($raidObj);
 
@@ -92,6 +95,7 @@ class DataFixtures extends Fixture
                 $roleObj->setSlug($this->slugger->slug(mb_strtolower($currentRole['name'])));
 
                 $rolesObjArray[md5($currentRole['name'])] = $roleObj;
+
                 $manager->persist($roleObj);
 
                 //* reference to link fixtures files
@@ -188,6 +192,7 @@ class DataFixtures extends Fixture
                 $locationObj->setSlug($this->slugger->slug(mb_strtolower($currentLocation['name'])));
                 
                 $locationObjArray[md5($currentLocation['name'])] = $locationObj;
+
                 $manager->persist($locationObj);
             }
 
@@ -1948,7 +1953,7 @@ class DataFixtures extends Fixture
 
                     $currentLocationObj = $locationObjArray[md5($currentLocationName)];
                     $itemObj->addLocation($currentLocationObj);
-                }
+                };
 
                 // $roleObj = $this->getReference($currentItem["role"]);
                 // $itemObj->addRole($roleObj);
@@ -1956,7 +1961,9 @@ class DataFixtures extends Fixture
 
                     $currentRoleObj = $rolesObjArray[md5($currentRoleName)];
                     $itemObj->addRole($currentRoleObj);
-                }
+                };
+
+                $itemsObjArray[md5($currentItem['name'])] = $itemObj;
 
                 $manager->persist($itemObj);
 
@@ -1965,7 +1972,7 @@ class DataFixtures extends Fixture
             }
 
         // ------------------------------- Players -------------------------------
-            $players = [
+            $playersObjArray = [
 
                 [
                     "name" => "Arianhrod",
@@ -1974,14 +1981,10 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Ambition infinie",
-                    // "item" => [
-                    //     "Ambition infinie",
-                    //     "Vide",
-                    // ],
-                    // item doit pouvoir avoir pluseiurs datas ET doit contenir raid car le raid n'est pas propre au player mais à l'item
-                    "raid" => "Naxxramas",
-                    // le player participe aux events pas aux raids, la table event_player existe
+                    "item" => [
+                        "Ambition infinie",
+                        "Vide",
+                    ],
                 ],
 
                 [
@@ -1991,11 +1994,9 @@ class DataFixtures extends Fixture
                     "role" => "Healer",
                     "rank" => "Demi",
                     "is_actif" => "1",
-                    "item" => "Bottes des énergies soignantes",
-                    // "item" => [
-                    //     "Bottes des énergies soignantes",
-                    // ],
-                    "raid" => "L'oeil de l'éternité",
+                    "item" => [
+                        "Bottes des énergies soignantes",
+                    ],
                 ],
                 
                 [
@@ -2005,8 +2006,9 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                    ],
                 ],
                 
                 [
@@ -2016,8 +2018,9 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2027,8 +2030,9 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Demi",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2038,8 +2042,9 @@ class DataFixtures extends Fixture
                     "role" => "Healer",
                     "rank" => "Galopin",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2049,8 +2054,9 @@ class DataFixtures extends Fixture
                     "role" => "Healer",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2060,8 +2066,9 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Galopin",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2071,8 +2078,9 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Demi",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2082,8 +2090,9 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Galopin",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2093,8 +2102,9 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2104,8 +2114,9 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2115,8 +2126,9 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2126,8 +2138,9 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Galopin",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2137,8 +2150,9 @@ class DataFixtures extends Fixture
                     "role" => "Tank",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2148,8 +2162,9 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Galopin",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2159,8 +2174,9 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Galopin",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2170,8 +2186,9 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Galopin",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2181,8 +2198,9 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Galopin",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2192,8 +2210,9 @@ class DataFixtures extends Fixture
                     "role" => "Healer",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2203,8 +2222,9 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2214,8 +2234,9 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2225,8 +2246,9 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2236,8 +2258,9 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2247,8 +2270,9 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2258,8 +2282,9 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                             
                 [
@@ -2269,8 +2294,9 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Demi",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2280,8 +2306,9 @@ class DataFixtures extends Fixture
                     "role" => "Healer",
                     "rank" => "Galopin",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                             
                 [
@@ -2291,8 +2318,9 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Galopin",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2302,8 +2330,9 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                             
                 [
@@ -2313,8 +2342,9 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2324,8 +2354,9 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                             
                 [
@@ -2335,8 +2366,9 @@ class DataFixtures extends Fixture
                     "role" => "Healer",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2346,8 +2378,9 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                             
                 [
@@ -2357,8 +2390,9 @@ class DataFixtures extends Fixture
                     "role" => "Healer",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2368,8 +2402,9 @@ class DataFixtures extends Fixture
                     "role" => "Healer",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                             
                 [
@@ -2379,8 +2414,9 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Demi",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2390,8 +2426,9 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                             
                 [
@@ -2401,8 +2438,9 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2412,8 +2450,9 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                             
                 [
@@ -2423,8 +2462,9 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Galopin",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2434,8 +2474,9 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Demi",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                             
                 [
@@ -2445,8 +2486,9 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2456,8 +2498,9 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Demi",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                             
                 [
@@ -2467,8 +2510,9 @@ class DataFixtures extends Fixture
                     "role" => "Tank",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2478,8 +2522,9 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                             
                 [
@@ -2489,8 +2534,9 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Demi",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2500,14 +2546,15 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
             ];
 
-            $playersObjArray = [];
-            foreach ($players as $currentPlayer) {
+            // $playersObjArray = [];
+            foreach ($playersObjArray as $currentPlayer) {
                 
                 $playerObj = new Player();
 
@@ -2522,15 +2569,14 @@ class DataFixtures extends Fixture
                 $roleObj = $this->getReference($currentPlayer["role"]);
                 $playerObj->setRole($roleObj);
 
-                $itemObj = $this->getReference($currentPlayer["item"]);
-                $playerObj->addItem($itemObj);               
-                // foreach ($currentPlayer["item"] as $currentItemName) {
-                //     $currentItemObj = $itemsObjArray[md5($currentItemName)];
-                //     $playerObj->addItem($currentItemObj);
-                // }
+                // $itemObj = $this->getReference($currentPlayer["item"]);
+                // $playerObj->addItem($itemObj);               
+                foreach ($currentPlayer["item"] as $currentItemName) {
+                    $currentItemObj = $itemsObjArray[md5($currentItemName)];
+                    $playerObj->addItem($currentItemObj);
+                };
 
-                $raidObj = $this->getReference($currentPlayer["raid"]);
-                $playerObj->addRaid($raidObj);
+                $playersObjArray[md5($currentPlayer['name'])] = $playerObj;
 
                 $manager->persist($playerObj);
 
@@ -2545,19 +2591,32 @@ class DataFixtures extends Fixture
                 [
                     "date" => "2022-11-30 20:45:00",
                     "log" => "https://classic.warcraftlogs.com/reports/GtrmZdLaC7Pykh2c/#boss=-2&difficulty=0&wipes=2&view=rankings",
-                    "raid" => "Naxxramas",
-                    "player" => "Arianhrod",
-                    "item" => "Ambition infinie",
-                    "is_bench" => true,
+                    "raid" => [
+                        "Naxxramas",
+                        "L'oeil de l'éternité",
+                    ],
+                    "player" => [
+                        "Arianhrod",
+                        "Atanea",
+                    ],
+                    "item" => [
+                        "Ambition infinie",
+                        "Bottes des énergies soignantes",
+                    ],
                 ],
 
                 [
                     "date" => "2022-12-15 20:45:00",
                     "log" => "https://classic.warcraftlogs.com/reports/GtrmZdLaC7Pykh2c/#boss=-2&difficulty=0&wipes=2&view=rankings",
-                    "raid" => "L'oeil de l'éternité",
-                    "player" => "Atanea",
-                    "item" => "Bottes des énergies soignantes",
-                    "is_bench" => true,
+                    "raid" => [
+                        "L'oeil de l'éternité",
+                    ],
+                    "player" => [
+                        "Atanea",
+                    ],
+                    "item" => [
+                        "Bottes des énergies soignantes",
+                    ],
                 ],
 
             ];
@@ -2568,17 +2627,27 @@ class DataFixtures extends Fixture
 
                 $eventObj->setDate(new DateTimeImmutable($currentEvent["date"]));
                 $eventObj->setLog($currentEvent['log']);
-            
-
-
-                $raidObj = $this->getReference($currentEvent["raid"]);
-                $eventObj->addRaid($raidObj);
+    
+                // $raidObj = $this->getReference($currentEvent["raid"]);
+                // $eventObj->addRaid($raidObj);
+                foreach ($currentEvent["raid"] as $currentRaidName) {
+                    $currentEventObj = $raidsObjArray[md5($currentRaidName)];
+                    $eventObj->addRaid($currentEventObj);
+                };
                 
-                $playerObj = $this->getReference($currentEvent["player"]);
-                $eventObj->addPlayer($playerObj);
+                // $playerObj = $this->getReference($currentEvent["player"]);
+                // $eventObj->addPlayer($playerObj);
+                foreach ($currentEvent["player"] as $currentPlayerName) {
+                    $currentEventObj = $playersObjArray[md5($currentPlayerName)];
+                    $eventObj->addPlayer($currentEventObj);
+                };
                 
-                $itemObj = $this->getReference($currentEvent["item"]);
-                $eventObj->addItem($itemObj);
+                // $itemObj = $this->getReference($currentEvent["item"]);
+                // $eventObj->addItem($itemObj);
+                foreach ($currentEvent["item"] as $currentItemName) {
+                    $currentEventObj = $itemsObjArray[md5($currentItemName)];
+                    $eventObj->addItem($currentEventObj);
+                };
 
                 $manager->persist($eventObj);
 
