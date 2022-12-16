@@ -74,7 +74,43 @@ footer {
     margin: 2rem;
 }
 
+/* ---------------------- searchbar ---------------------- */
 
+.search-bar {
+    width: 55%;
+    margin-bottom: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: #1b2f4ead solid 1px;
+}
+
+.search-bar:hover {
+    -webkit-box-shadow: 2px -2px 9px 6px rgba(0,0,0,0.34); 
+    box-shadow: 2px -2px 9px 6px rgba(0,0,0,0.34);
+}
+
+.result-bar-title {
+    margin: 1rem auto;
+    width: 55%;
+    text-align: center;
+    background-color: rgba(30, 131, 190, 0.418);
+    color: white;
+    border: #1b2f4ead solid 1px;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+}
+
+.result-bar-response {
+    background-color: rgba(30, 131, 190, 0.418);
+    color: white;
+    border: #1b2f4ead solid 1px;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+}
+
+.result-bar-choice {
+    text-align: center;
+}
 
 /* ---------------------- calendrier ---------------------- */
 #calendar {
@@ -132,12 +168,7 @@ a:hover, .navbar-expand-lg .navbar-nav .nav-link:hover {
     margin-top: 4rem;
 }
 
-/*  search button  */
-body > div.button-top > form > button {
-    color: white;
-}
-
-.botom-button-update, .botom-button-back, .button-delete {
+.bottom-button-update, .bottom-button-back, .button-delete, .button-search {
     background-color: rgba(30, 131, 190, 0.418);
     color: white;
     border: #1b2f4ead solid 1px;

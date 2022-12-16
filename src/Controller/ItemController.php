@@ -52,7 +52,8 @@ class ItemController extends AbstractController
     }
 
     /**
-     * @Route ("/{id<\d+>}", name="read", methods={"GET"})
+     * @Route ("/{id<\d+>}", name="read", methods={"GET"}, requirements={"id"="\d+"})
+     * @Route ("/{slug}", name="show_by_slug", methods={"GET"})
      */
     public function read(Item $item): Response
     {
