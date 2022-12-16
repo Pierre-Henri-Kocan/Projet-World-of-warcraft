@@ -39,6 +39,24 @@ class ItemRepository extends ServiceEntityRepository
         }
     }
 
+    public function findItemsByName(string $query)
+    {
+        $qb = $this->createQueryBuilder('p');
+        $qb
+            ->where(
+                $qb->expr()->andX(
+                    $qb->expr()->orX(
+                        $qb->expr()->like('p.name', ':query'),
+                    ),
+                )
+            )
+            ->setParameter('query', '%' . $query . '%')
+        ;
+        return $qb
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Item[] Returns an array of Item objects
 //     */
