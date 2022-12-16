@@ -49,11 +49,17 @@ class Event
      */
     private $item;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Participation::class, mappedBy="event")
+     */
+    private $participations;
+
     public function __construct()
     {
         $this->raid = new ArrayCollection();
         $this->player = new ArrayCollection();
         $this->item = new ArrayCollection();
+        $this->participations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -154,6 +160,36 @@ class Event
     public function removeItem(item $item): self
     {
         $this->item->removeElement($item);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Participation>
+     */
+    public function getParticipations(): Collection
+    {
+        return $this->participations;
+    }
+
+    public function addParticipation(Participation $participation): self
+    {
+        if (!$this->participations->contains($participation)) {
+            $this->participations[] = $participation;
+            $participation->setEvent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParticipation(Participation $participation): self
+    {
+        if ($this->participations->removeElement($participation)) {
+            // set the owning side to null (unless already changed)
+            if ($participation->getEvent() === $this) {
+                $participation->setEvent(null);
+            }
+        }
 
         return $this;
     }
