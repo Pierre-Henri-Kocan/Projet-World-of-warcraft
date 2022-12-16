@@ -44,14 +44,20 @@
             <thead>
                 <tr>
                     <th>Joueurs</th>
+                    <th>Statut</th>
                 </tr>
+
             </thead>
             <tbody>
-                {% for player in event.player %}
                 <tr>
-                    <td> {{ player.name }}</td>
+                    {% for player in event.player %}
+                    <td>{{ player.name }}</td>
+                    {% endfor %}
+                    {% for player in event.participation %}
+                    <td>{{ participation.isBench }}</td>
+                    {% endfor %}
                 </tr>
-                {% endfor %}
+
             </tbody>
         </table>
     </div>
