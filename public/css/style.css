@@ -73,10 +73,6 @@ footer {
     margin: 2rem;
 }
 
-#navbarNav {
-    justify-content: center;
-}
-
 /* ---------------------- searchbar ---------------------- */
 
 .search-bar {
@@ -268,7 +264,6 @@ form {
  }
  
  form > div:nth-child(1) {
-    background-color: rgba(0, 0, 0, 0.308);
     margin-bottom: 2rem;
     display: flex;
     flex-direction: column;
