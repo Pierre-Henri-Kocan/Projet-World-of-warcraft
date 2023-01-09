@@ -4,7 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Event;
 use App\Entity\Item;
-use App\Entity\Location;
+use App\Entity\Slot;
 use App\Entity\Player;
 use App\Entity\Raid;
 use App\Entity\Role;
@@ -27,7 +27,7 @@ class DataFixtures extends Fixture
     {
 
         // ------------------------------- Raids -------------------------------
-            $raids = [
+            $raidsObjArray = [
                 [
                     "name" => "Hors raid",
                 ],
@@ -46,12 +46,15 @@ class DataFixtures extends Fixture
 
             ];
 
-            $raidsObjArray = [];
-            foreach ($raids as $currentRaid) {
+            // $raidsObjArray = [];
+            foreach ($raidsObjArray as $currentRaid) {
                 
                 $raidObj = new Raid();
+
                 $raidObj->setName($currentRaid['name']);
                 $raidObj->setSlug($this->slugger->slug(mb_strtolower($currentRaid['name'])));
+
+                $raidsObjArray[md5($currentRaid['name'])] = $raidObj;
 
                 $manager->persist($raidObj);
 
@@ -92,6 +95,7 @@ class DataFixtures extends Fixture
                 $roleObj->setSlug($this->slugger->slug(mb_strtolower($currentRole['name'])));
 
                 $rolesObjArray[md5($currentRole['name'])] = $roleObj;
+
                 $manager->persist($roleObj);
 
                 //* reference to link fixtures files
@@ -99,8 +103,8 @@ class DataFixtures extends Fixture
 
             }
 
-        // ------------------------------- Locations -------------------------------
-            $locationObjArray = [
+        // ------------------------------- Slots -------------------------------
+            $slotObjArray = [
 
                 [
                     "name" => "...",
@@ -179,23 +183,24 @@ class DataFixtures extends Fixture
                 ],
             ];
 
-            // $locationObjArray = [];
-            foreach ($locationObjArray as $currentLocation) {
+            // $slotObjArray = [];
+            foreach ($slotObjArray as $currentSlot) {
 
-                $locationObj = new Location();
+                $slotObj = new Slot();
 
-                $locationObj->setName($currentLocation['name']);
-                $locationObj->setSlug($this->slugger->slug(mb_strtolower($currentLocation['name'])));
+                $slotObj->setName($currentSlot['name']);
+                $slotObj->setSlug($this->slugger->slug(mb_strtolower($currentSlot['name'])));
                 
-                $locationObjArray[md5($currentLocation['name'])] = $locationObj;
-                $manager->persist($locationObj);
+                $slotObjArray[md5($currentSlot['name'])] = $slotObj;
+
+                $manager->persist($slotObj);
             }
 
         // ------------------------------- Items -------------------------------
             $itemsObjArray = [
                 [
                     "name" => "Vide",
-                    "location" => [
+                    "slot" => [
                         "...",
                     ],
                     "type" => "...",
@@ -209,7 +214,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Ambition infinie",
-                    "location" => [
+                    "slot" => [
                         "Neck",
                     ],
                     "type" => "Contested",
@@ -222,7 +227,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Anneau d'invincibilité",
-                    "location" => [
+                    "slot" => [
                         "Ring 1",
                         "Ring 2",
                     ],
@@ -236,7 +241,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Anneau de beauté décomposée",
-                    "location" => [
+                    "slot" => [
                         "Ring 2",
                     ],
                     "type" => "Contested",
@@ -249,7 +254,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Anneau de la main lourde",
-                    "location" => [
+                    "slot" => [
                         "Ring 1",
                     ],
                     "type" => "Contested",
@@ -262,7 +267,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Anneau du capteur tellurique",
-                    "location" => [
+                    "slot" => [
                         "Ring 2",
                     ],
                     "type" => "Contested",
@@ -275,7 +280,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Averse de grêle",
-                    "location" => [
+                    "slot" => [
                         "Offhand",
                     ],
                     "type" => "Bis",
@@ -288,7 +293,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Bague de magie canalisée",
-                    "location" => [
+                    "slot" => [
                         "Ring 1",
                     ],
                     "type" => "Bis",
@@ -302,7 +307,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Bague usée par le sable",
-                    "location" => [
+                    "slot" => [
                         "Ring 1",
                     ],
                     "type" => "Contested",
@@ -315,7 +320,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Baguette de l'archiliche",
-                    "location" => [
+                    "slot" => [
                         "Relic-Wand-Ranged",
                     ],
                     "type" => "Bis",
@@ -328,7 +333,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Baguette des nérubiens ornée",
-                    "location" => [
+                    "slot" => [
                         "Relic-Wand-Ranged",
                     ],
                     "type" => "Contested",
@@ -341,7 +346,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Beauté ravie",
-                    "location" => [
+                    "slot" => [
                         "Ring 2",
                     ],
                     "type" => "Bis",
@@ -354,7 +359,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Bottes de persuasion",
-                    "location" => [
+                    "slot" => [
                         "Feet",
                     ],
                     "type" => "Bis",
@@ -367,7 +372,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Bottes des énergies soignantes",
-                    "location" => [
+                    "slot" => [
                         "Feet",
                     ],
                     "type" => "Bis",
@@ -380,7 +385,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Bottes des idéaux impétueux",
-                    "location" => [
+                    "slot" => [
                         "Feet",
                     ],
                     "type" => "Bis",
@@ -393,7 +398,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Bottes du vol renouvelé",
-                    "location" => [
+                    "slot" => [
                         "Feet",
                     ],
                     "type" => "Bis",
@@ -406,7 +411,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Bottillons de la vile duperie",
-                    "location" => [
+                    "slot" => [
                         "Feet",
                     ],
                     "type" => "Bis",
@@ -419,7 +424,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Brassards de complicité",
-                    "location" => [
+                    "slot" => [
                         "Wrists",
                     ],
                     "type" => "Bis",
@@ -432,7 +437,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Brassards de l'attaque implacable",
-                    "location" => [
+                    "slot" => [
                         "Wrists",
                     ],
                     "type" => "Contested",
@@ -445,7 +450,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Brassards du chevalier impie",
-                    "location" => [
+                    "slot" => [
                         "Wrists",
                     ],
                     "type" => "Bis",
@@ -458,7 +463,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Brodequins de l'aube",
-                    "location" => [
+                    "slot" => [
                         "Feet",
                     ],
                     "type" => "Bis",
@@ -471,7 +476,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Cachet de la conscience gelée",
-                    "location" => [
+                    "slot" => [
                         "Relic-Wand-Ranged",
                     ],
                     "type" => "Bis",
@@ -484,7 +489,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Cachet de lutte du gladiateur fatal",
-                    "location" => [
+                    "slot" => [
                         "Relic-Wand-Ranged",
                     ],
                     "type" => "Bis",
@@ -497,7 +502,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Cachet de vigilance",
-                    "location" => [
+                    "slot" => [
                         "Relic-Wand-Ranged",
                     ],
                     "type" => "Bis",
@@ -510,7 +515,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Cadran solaire de l'exilé",
-                    "location" => [
+                    "slot" => [
                         "Trinket 2",
                     ],
                     "type" => "Bis",
@@ -523,7 +528,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Cape des plumes de kea",
-                    "location" => [
+                    "slot" => [
                         "Back",
                     ],
                     "type" => "Bis",
@@ -536,7 +541,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Cape du pennon",
-                    "location" => [
+                    "slot" => [
                         "Back",
                     ],
                     "type" => "Contested",
@@ -550,7 +555,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Cape du sorcier déméritant",
-                    "location" => [
+                    "slot" => [
                         "Back",
                     ],
                     "type" => "Bis",
@@ -563,7 +568,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Cape maillée en platine",
-                    "location" => [
+                    "slot" => [
                         "Back",
                     ],
                     "type" => "Contested",
@@ -576,7 +581,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Carte de Sombrelune : Grandeur",
-                    "location" => [
+                    "slot" => [
                         "Trinket 1",
                     ],
                     "type" => "Bis",
@@ -590,7 +595,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Ceinture de traque-peau",
-                    "location" => [
+                    "slot" => [
                         "Waist",
                     ],
                     "type" => "Contested",
@@ -603,7 +608,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Ceinture rivetée dépravée",
-                    "location" => [
+                    "slot" => [
                         "Waist",
                     ],
                     "type" => "Bis",
@@ -616,7 +621,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Ceinturon ablatif en chitine",
-                    "location" => [
+                    "slot" => [
                         "Waist",
                     ],
                     "type" => "Contested",
@@ -629,7 +634,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Ceinturon de chevalerie",
-                    "location" => [
+                    "slot" => [
                         "Waist",
                     ],
                     "type" => "Contested",
@@ -642,7 +647,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Ceinturon de récupération",
-                    "location" => [
+                    "slot" => [
                         "Waist",
                     ],
                     "type" => "Bis",
@@ -656,7 +661,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Cercle de mort",
-                    "location" => [
+                    "slot" => [
                         "Ring 2",
                     ],
                     "type" => "Bis",
@@ -669,7 +674,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Chaîne d'adoration",
-                    "location" => [
+                    "slot" => [
                         "Neck",
                     ],
                     "type" => "Bis",
@@ -682,7 +687,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Chapel de réconciliation",
-                    "location" => [
+                    "slot" => [
                         "Head",
                     ],
                     "type" => "Bis",
@@ -695,7 +700,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Chaperon de rationalité",
-                    "location" => [
+                    "slot" => [
                         "Head",
                     ],
                     "type" => "Bis",
@@ -708,7 +713,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Chevalière de la forteresse imprenable",
-                    "location" => [
+                    "slot" => [
                         "Ring 2",
                     ],
                     "type" => "Contested",
@@ -721,7 +726,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Chevalière de la souffrance manifeste",
-                    "location" => [
+                    "slot" => [
                         "Ring 1",
                         "Ring 2",
                     ],
@@ -735,7 +740,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Chevalière du malveillant",
-                    "location" => [
+                    "slot" => [
                         "Ring 1",
                     ],
                     "type" => "Bis",
@@ -748,7 +753,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Clé de l'iris de focalisation",
-                    "location" => [
+                    "slot" => [
                         "Neck",
                     ],
                     "type" => "Contested",
@@ -761,7 +766,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Cloche d'Af'Romaj",
-                    "location" => [
+                    "slot" => [
                         "Trinket 2",
                     ],
                     "type" => "Bis",
@@ -774,7 +779,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Code du défenseur",
-                    "location" => [
+                    "slot" => [
                         "Trinket 1",
                     ],
                     "type" => "Bis",
@@ -787,7 +792,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Collier de puissance du Repos du ver",
-                    "location" => [
+                    "slot" => [
                         "Neck",
                     ],
                     "type" => "Contested",
@@ -800,7 +805,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Cordelette de polarité",
-                    "location" => [
+                    "slot" => [
                         "Waist",
                     ],
                     "type" => "Bis",
@@ -813,7 +818,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Corselet des prouesses indéniables",
-                    "location" => [
+                    "slot" => [
                         "Chest",
                     ],
                     "type" => "Bis",
@@ -826,7 +831,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Corselet du solitaire",
-                    "location" => [
+                    "slot" => [
                         "Chest",
                     ],
                     "type" => "Contested",
@@ -839,7 +844,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Crispins sans souillure",
-                    "location" => [
+                    "slot" => [
                         "Wrists",
                     ],
                     "type" => "Contested",
@@ -853,7 +858,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Cuirasse de l'orage draconique",
-                    "location" => [
+                    "slot" => [
                         "Chest",
                     ],
                     "type" => "Bis",
@@ -866,7 +871,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Cuissards de souveraineté",
-                    "location" => [
+                    "slot" => [
                         "Legs",
                     ],
                     "type" => "Contested",
@@ -879,7 +884,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Drapé de l'ennemi mortel",
-                    "location" => [
+                    "slot" => [
                         "Back",
                     ],
                     "type" => "Contested",
@@ -892,7 +897,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Effroi coléreux",
-                    "location" => [
+                    "slot" => [
                         "Main Hand",
                         "Offhand",
                     ],
@@ -906,7 +911,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Emissaire de mortalité",
-                    "location" => [
+                    "slot" => [
                         "Relic-Wand-Ranged",
                     ],
                     "type" => "Contested",
@@ -919,7 +924,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Espauliers de mort non naturelle",
-                    "location" => [
+                    "slot" => [
                         "Shoulders",
                     ],
                     "type" => "Bis",
@@ -932,7 +937,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Essence de tulle",
-                    "location" => [
+                    "slot" => [
                         "Trinket 1",
                     ],
                     "type" => "Bis",
@@ -945,7 +950,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Etreinte de l'araignée",
-                    "location" => [
+                    "slot" => [
                         "Trinket 1",
                         "Trinket 2",
                     ],
@@ -959,7 +964,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Faveur de la reine dragon",
-                    "location" => [
+                    "slot" => [
                         "Neck",
                     ],
                     "type" => "Contested",
@@ -972,7 +977,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Figurine de crabe monarchique",
-                    "location" => [
+                    "slot" => [
                         "Trinket 2",
                     ],
                     "type" => "Bis",
@@ -985,7 +990,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Figurine de lièvre de rubis",
-                    "location" => [
+                    "slot" => [
                         "Trinket 1",
                     ],
                     "type" => "Bis",
@@ -998,7 +1003,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Fin du voyage",
-                    "location" => [
+                    "slot" => [
                         "Main Hand",
                     ],
                     "type" => "Contested",
@@ -1011,7 +1016,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Fureur des cinq vols",
-                    "location" => [
+                    "slot" => [
                         "Trinket 2",
                         "Trinket 3",
                     ],
@@ -1025,7 +1030,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Fusil de combat blindé",
-                    "location" => [
+                    "slot" => [
                         "Relic-Wand-Ranged",
                     ],
                     "type" => "Bis",
@@ -1038,7 +1043,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Gantelets de Zeliek",
-                    "location" => [
+                    "slot" => [
                         "Hands",
                     ],
                     "type" => "Bis",
@@ -1051,7 +1056,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Gants du spectacle d'hiver",
-                    "location" => [
+                    "slot" => [
                         "Hands",
                     ],
                     "type" => "Bis",
@@ -1064,7 +1069,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Garde-jambes de l'ossuaire",
-                    "location" => [
+                    "slot" => [
                         "Legs",
                     ],
                     "type" => "Bis",
@@ -1077,7 +1082,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Garde-mains adroits givrés",
-                    "location" => [
+                    "slot" => [
                         "Hands",
                     ],
                     "type" => "Contested",
@@ -1090,7 +1095,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Garde-porte",
-                    "location" => [
+                    "slot" => [
                         "Ring 1",
                     ],
                     "type" => "Bis",
@@ -1103,7 +1108,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Grand anneau de collision",
-                    "location" => [
+                    "slot" => [
                         "Ring 2",
                     ],
                     "type" => "Bis",
@@ -1116,7 +1121,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Grand heaume en obsidienne",
-                    "location" => [
+                    "slot" => [
                         "Head",
                     ],
                     "type" => "Contested",
@@ -1129,7 +1134,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Grèves d'expiation",
-                    "location" => [
+                    "slot" => [
                         "Feet",
                     ],
                     "type" => "Bis",
@@ -1142,7 +1147,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Habits putrides de Heigan",
-                    "location" => [
+                    "slot" => [
                         "Chest",
                     ],
                     "type" => "Bis",
@@ -1155,7 +1160,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Halo pâlissant",
-                    "location" => [
+                    "slot" => [
                         "Relic-Wand-Ranged",
                     ],
                     "type" => "Contested",
@@ -1168,7 +1173,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Heaume de l'aspect bleu",
-                    "location" => [
+                    "slot" => [
                         "Head",
                     ],
                     "type" => "Bis",
@@ -1181,7 +1186,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Idole d'adoration",
-                    "location" => [
+                    "slot" => [
                         "Relic-Wand-Ranged",
                     ],
                     "type" => "Bis",
@@ -1194,7 +1199,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Idole d'éveil",
-                    "location" => [
+                    "slot" => [
                         "Relic-Wand-Ranged",
                     ],
                     "type" => "Bis",
@@ -1207,7 +1212,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Idole de l'étoile filante",
-                    "location" => [
+                    "slot" => [
                         "Relic-Wand-Ranged",
                     ],
                     "type" => "Bis",
@@ -1220,7 +1225,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Impitoyable",
-                    "location" => [
+                    "slot" => [
                         "Ring 1",
                     ],
                     "type" => "Contested",
@@ -1233,7 +1238,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Jambards du dragon vaincu",
-                    "location" => [
+                    "slot" => [
                         "Legs",
                     ],
                     "type" => "Bis",
@@ -1246,7 +1251,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Jambières d'abomination rivetées",
-                    "location" => [
+                    "slot" => [
                         "Legs",
                     ],
                     "type" => "Bis",
@@ -1259,7 +1264,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Jambières d'arrogance mortelle",
-                    "location" => [
+                    "slot" => [
                         "Legs",
                     ],
                     "type" => "Contested",
@@ -1272,7 +1277,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Jambières de fuite ratée",
-                    "location" => [
+                    "slot" => [
                         "Legs",
                     ],
                     "type" => "Bis",
@@ -1285,7 +1290,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Jambières des honorés",
-                    "location" => [
+                    "slot" => [
                         "Legs",
                     ],
                     "type" => "Contested",
@@ -1298,7 +1303,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Jambières du lanceur de sorts dévergondé",
-                    "location" => [
+                    "slot" => [
                         "Legs",
                     ],
                     "type" => "Contested",
@@ -1311,7 +1316,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Joyau perdu",
-                    "location" => [
+                    "slot" => [
                         "Ring 1",
                         "Ring 2",
                     ],
@@ -1325,7 +1330,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "L'œuf d'essence mortelle",
-                    "location" => [
+                    "slot" => [
                         "Trinket 1",
                     ],
                     "type" => "Bis",
@@ -1338,7 +1343,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "La Marée décisive",
-                    "location" => [
+                    "slot" => [
                         "Main Hand",
                     ],
                     "type" => "Contested",
@@ -1352,7 +1357,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Laisse de magie insouciante",
-                    "location" => [
+                    "slot" => [
                         "Waist",
                     ],
                     "type" => "Contested",
@@ -1366,7 +1371,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Le dernier sourire",
-                    "location" => [
+                    "slot" => [
                         "Main Hand",
                     ],
                     "type" => "Contested",
@@ -1380,7 +1385,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Le glas sinistre",
-                    "location" => [
+                    "slot" => [
                         "Trinket 2",
                         "Trinket 3",
                     ],
@@ -1394,7 +1399,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Les habits flottants du Sanctum",
-                    "location" => [
+                    "slot" => [
                         "Chest",
                     ],
                     "type" => "Bis",
@@ -1408,7 +1413,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Libram d'obstruction",
-                    "location" => [
+                    "slot" => [
                         "Relic-Wand-Ranged",
                     ],
                     "type" => "Bis",
@@ -1421,7 +1426,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Libram de renouveau",
-                    "location" => [
+                    "slot" => [
                         "Relic-Wand-Ranged",
                     ],
                     "type" => "Bis",
@@ -1434,7 +1439,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Linceul en toile déchirée",
-                    "location" => [
+                    "slot" => [
                         "Waist",
                     ],
                     "type" => "Bis",
@@ -1447,7 +1452,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Malédiction du mourant",
-                    "location" => [
+                    "slot" => [
                         "Trinket 1",
                     ],
                     "type" => "Contested",
@@ -1460,7 +1465,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Manchettes de la proie impuissante",
-                    "location" => [
+                    "slot" => [
                         "Wrists",
                     ],
                     "type" => "Contested",
@@ -1473,7 +1478,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Manchettes du décati",
-                    "location" => [
+                    "slot" => [
                         "Wrists",
                     ],
                     "type" => "Bis",
@@ -1486,7 +1491,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Manchettes du pécheur",
-                    "location" => [
+                    "slot" => [
                         "Wrists",
                     ],
                     "type" => "Contested",
@@ -1499,7 +1504,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Manteau de dispersion",
-                    "location" => [
+                    "slot" => [
                         "Shoulders",
                     ],
                     "type" => "Bis",
@@ -1512,7 +1517,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Mantelet des sauterelles",
-                    "location" => [
+                    "slot" => [
                         "Shoulders",
                     ],
                     "type" => "Bis",
@@ -1525,7 +1530,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Médaillon de lieur-de-vie",
-                    "location" => [
+                    "slot" => [
                         "Neck",
                     ],
                     "type" => "Contested",
@@ -1538,7 +1543,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Membre excédentaire",
-                    "location" => [
+                    "slot" => [
                         "Offhand",
                     ],
                     "type" => "Contested",
@@ -1551,7 +1556,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Miroir de vérité",
-                    "location" => [
+                    "slot" => [
                         "Trinket 2",
                     ],
                     "type" => "Bis",
@@ -1564,7 +1569,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Mort entoilée",
-                    "location" => [
+                    "slot" => [
                         "Offhand",
                     ],
                     "type" => "Bis",
@@ -1577,7 +1582,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Mur de terreur",
-                    "location" => [
+                    "slot" => [
                         "Offhand",
                     ],
                     "type" => "Contested",
@@ -1590,7 +1595,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Pas de Malygos",
-                    "location" => [
+                    "slot" => [
                         "Feet",
                     ],
                     "type" => "Bis",
@@ -1603,7 +1608,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Pierre à aiguiser météorique",
-                    "location" => [
+                    "slot" => [
                         "Trinket 2",
                     ],
                     "type" => "Bis",
@@ -1616,7 +1621,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Piétineurs arcaniques",
-                    "location" => [
+                    "slot" => [
                         "Feet",
                     ],
                     "type" => "Contested",
@@ -1630,7 +1635,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Piquant maudit",
-                    "location" => [
+                    "slot" => [
                         "Offhand",
                     ],
                     "type" => "Bis",
@@ -1643,7 +1648,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Poignets de respect mutuel",
-                    "location" => [
+                    "slot" => [
                         "Wrists",
                     ],
                     "type" => "Bis",
@@ -1656,7 +1661,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Poignets du ruisseau de vase",
-                    "location" => [
+                    "slot" => [
                         "Wrists",
                     ],
                     "type" => "Bis",
@@ -1669,7 +1674,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Promesse rompue",
-                    "location" => [
+                    "slot" => [
                         "Main Hand",
                     ],
                     "type" => "Bis",
@@ -1682,7 +1687,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Protecteur d'âme",
-                    "location" => [
+                    "slot" => [
                         "Trinket 2",
                     ],
                     "type" => "Bis",
@@ -1695,7 +1700,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Rejeton de la matriarche",
-                    "location" => [
+                    "slot" => [
                         "Offhand",
                     ],
                     "type" => "Bis",
@@ -1709,7 +1714,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Représentation de l'Âme des dragons",
-                    "location" => [
+                    "slot" => [
                         "Trinket 1",
                         "Trinket 2",
                     ],
@@ -1724,7 +1729,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Robes de neige couvrantes",
-                    "location" => [
+                    "slot" => [
                         "Chest",
                     ],
                     "type" => "Bis",
@@ -1737,7 +1742,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Sangle de la grâce divine",
-                    "location" => [
+                    "slot" => [
                         "Waist",
                     ],
                     "type" => "Bis",
@@ -1750,7 +1755,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Soleret des représailles subites",
-                    "location" => [
+                    "slot" => [
                         "Feet",
                     ],
                     "type" => "Bis",
@@ -1763,7 +1768,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Solerets d'endurance",
-                    "location" => [
+                    "slot" => [
                         "Feet",
                     ],
                     "type" => "Bis",
@@ -1776,7 +1781,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Solerets de mélancolie",
-                    "location" => [
+                    "slot" => [
                         "Feet",
                     ],
                     "type" => "Contested",
@@ -1789,7 +1794,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Solerets inexorables",
-                    "location" => [
+                    "slot" => [
                         "Feet",
                     ],
                     "type" => "Contested",
@@ -1802,7 +1807,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "T7",
-                    "location" => [
+                    "slot" => [
                         "Chest",
                         "Hands",
                         "Head",
@@ -1822,7 +1827,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Torche du saint feu",
-                    "location" => [
+                    "slot" => [
                         "Main Hand",
                     ],
                     "type" => "Contested",
@@ -1836,7 +1841,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Torsade de la calamité",
-                    "location" => [
+                    "slot" => [
                         "Main Hand",
                     ],
                     "type" => "Bis",
@@ -1849,7 +1854,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Totem de croissance forestière",
-                    "location" => [
+                    "slot" => [
                         "Relic-Wand-Ranged",
                     ],
                     "type" => "Bis",
@@ -1862,7 +1867,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Totem de maléfice",
-                    "location" => [
+                    "slot" => [
                         "Relic-Wand-Ranged",
                     ],
                     "type" => "Bis",
@@ -1875,7 +1880,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Traître à l'humanité",
-                    "location" => [
+                    "slot" => [
                         "Main Hand",
                         "Offhand",
                     ],
@@ -1889,7 +1894,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Urne des souvenirs perdus",
-                    "location" => [
+                    "slot" => [
                         "Offhand",
                     ],
                     "type" => "Bis",
@@ -1902,7 +1907,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Ventaille du trépassé",
-                    "location" => [
+                    "slot" => [
                         "Head",
                     ],
                     "type" => "Bis",
@@ -1915,7 +1920,7 @@ class DataFixtures extends Fixture
 
                 [
                     "name" => "Voix de la raison",
-                    "location" => [
+                    "slot" => [
                         "Offhand",
                     ],
                     "type" => "Contested",
@@ -1942,13 +1947,13 @@ class DataFixtures extends Fixture
                 $raidObj = $this->getReference($currentItem["raid"]);
                 $itemObj->setRaid($raidObj);
                 
-                // $locationObj = $this->getReference($currentItem["location"]);
-                // $itemObj->addLocation($locationObj);
-                foreach ($currentItem["location"] as $currentLocationName) {
+                // $slotObj = $this->getReference($currentItem["slot"]);
+                // $itemObj->addSlot($slotObj);
+                foreach ($currentItem["slot"] as $currentSlotName) {
 
-                    $currentLocationObj = $locationObjArray[md5($currentLocationName)];
-                    $itemObj->addLocation($currentLocationObj);
-                }
+                    $currentSlotObj = $slotObjArray[md5($currentSlotName)];
+                    $itemObj->addSlot($currentSlotObj);
+                };
 
                 // $roleObj = $this->getReference($currentItem["role"]);
                 // $itemObj->addRole($roleObj);
@@ -1956,7 +1961,9 @@ class DataFixtures extends Fixture
 
                     $currentRoleObj = $rolesObjArray[md5($currentRoleName)];
                     $itemObj->addRole($currentRoleObj);
-                }
+                };
+
+                $itemsObjArray[md5($currentItem['name'])] = $itemObj;
 
                 $manager->persist($itemObj);
 
@@ -1965,7 +1972,7 @@ class DataFixtures extends Fixture
             }
 
         // ------------------------------- Players -------------------------------
-            $players = [
+            $playersObjArray = [
 
                 [
                     "name" => "Arianhrod",
@@ -1974,14 +1981,10 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Ambition infinie",
-                    // "item" => [
-                    //     "Ambition infinie",
-                    //     "Vide",
-                    // ],
-                    // item doit pouvoir avoir pluseiurs datas ET doit contenir raid car le raid n'est pas propre au player mais à l'item
-                    "raid" => "Naxxramas",
-                    // le player participe aux events pas aux raids, la table event_player existe
+                    "item" => [
+                        "Ambition infinie",
+                        "Vide",
+                    ],
                 ],
 
                 [
@@ -1991,11 +1994,9 @@ class DataFixtures extends Fixture
                     "role" => "Healer",
                     "rank" => "Demi",
                     "is_actif" => "1",
-                    "item" => "Bottes des énergies soignantes",
-                    // "item" => [
-                    //     "Bottes des énergies soignantes",
-                    // ],
-                    "raid" => "L'oeil de l'éternité",
+                    "item" => [
+                        "Bottes des énergies soignantes",
+                    ],
                 ],
                 
                 [
@@ -2005,8 +2006,9 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                    ],
                 ],
                 
                 [
@@ -2016,8 +2018,9 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2027,8 +2030,9 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Demi",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2038,8 +2042,9 @@ class DataFixtures extends Fixture
                     "role" => "Healer",
                     "rank" => "Galopin",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2049,8 +2054,9 @@ class DataFixtures extends Fixture
                     "role" => "Healer",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2060,8 +2066,9 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Galopin",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2071,8 +2078,9 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Demi",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2082,8 +2090,9 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Galopin",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2093,8 +2102,9 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2104,8 +2114,9 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2115,8 +2126,9 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2126,8 +2138,9 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Galopin",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2137,8 +2150,9 @@ class DataFixtures extends Fixture
                     "role" => "Tank",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2148,8 +2162,9 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Galopin",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2159,8 +2174,9 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Galopin",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2170,8 +2186,9 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Galopin",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2181,8 +2198,9 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Galopin",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2192,8 +2210,9 @@ class DataFixtures extends Fixture
                     "role" => "Healer",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2203,8 +2222,9 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2214,8 +2234,9 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2225,8 +2246,9 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2236,8 +2258,9 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2247,8 +2270,9 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2258,8 +2282,9 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                             
                 [
@@ -2269,8 +2294,9 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Demi",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2280,8 +2306,9 @@ class DataFixtures extends Fixture
                     "role" => "Healer",
                     "rank" => "Galopin",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                             
                 [
@@ -2291,8 +2318,9 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Galopin",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2302,8 +2330,9 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                             
                 [
@@ -2313,8 +2342,9 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2324,8 +2354,9 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                             
                 [
@@ -2335,8 +2366,9 @@ class DataFixtures extends Fixture
                     "role" => "Healer",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2346,8 +2378,9 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                             
                 [
@@ -2357,8 +2390,9 @@ class DataFixtures extends Fixture
                     "role" => "Healer",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2368,8 +2402,9 @@ class DataFixtures extends Fixture
                     "role" => "Healer",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                             
                 [
@@ -2379,8 +2414,9 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Demi",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2390,8 +2426,9 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                             
                 [
@@ -2401,8 +2438,9 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2412,8 +2450,9 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                             
                 [
@@ -2423,8 +2462,9 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Galopin",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2434,8 +2474,9 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Demi",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                             
                 [
@@ -2445,8 +2486,9 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2456,8 +2498,9 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Demi",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                             
                 [
@@ -2467,8 +2510,9 @@ class DataFixtures extends Fixture
                     "role" => "Tank",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2478,8 +2522,9 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                             
                 [
@@ -2489,8 +2534,9 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Demi",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
                 [
@@ -2500,14 +2546,15 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => "Vide",
-                    "raid" => "Hors raid",
+                    "item" => [
+                        "Vide",
+                     ],
                 ],
                 
             ];
 
-            $playersObjArray = [];
-            foreach ($players as $currentPlayer) {
+            // $playersObjArray = [];
+            foreach ($playersObjArray as $currentPlayer) {
                 
                 $playerObj = new Player();
 
@@ -2522,15 +2569,14 @@ class DataFixtures extends Fixture
                 $roleObj = $this->getReference($currentPlayer["role"]);
                 $playerObj->setRole($roleObj);
 
-                $itemObj = $this->getReference($currentPlayer["item"]);
-                $playerObj->addItem($itemObj);               
-                // foreach ($currentPlayer["item"] as $currentItemName) {
-                //     $currentItemObj = $itemsObjArray[md5($currentItemName)];
-                //     $playerObj->addItem($currentItemObj);
-                // }
+                // $itemObj = $this->getReference($currentPlayer["item"]);
+                // $playerObj->addItem($itemObj);               
+                foreach ($currentPlayer["item"] as $currentItemName) {
+                    $currentItemObj = $itemsObjArray[md5($currentItemName)];
+                    $playerObj->addItem($currentItemObj);
+                };
 
-                $raidObj = $this->getReference($currentPlayer["raid"]);
-                $playerObj->addRaid($raidObj);
+                $playersObjArray[md5($currentPlayer['name'])] = $playerObj;
 
                 $manager->persist($playerObj);
 
@@ -2545,19 +2591,32 @@ class DataFixtures extends Fixture
                 [
                     "date" => "2022-11-30 20:45:00",
                     "log" => "https://classic.warcraftlogs.com/reports/GtrmZdLaC7Pykh2c/#boss=-2&difficulty=0&wipes=2&view=rankings",
-                    "raid" => "Naxxramas",
-                    "player" => "Arianhrod",
-                    "item" => "Ambition infinie",
-                    "is_bench" => true,
+                    "raid" => [
+                        "Naxxramas",
+                        "L'oeil de l'éternité",
+                    ],
+                    "player" => [
+                        "Arianhrod",
+                        "Atanea",
+                    ],
+                    "item" => [
+                        "Ambition infinie",
+                        "Bottes des énergies soignantes",
+                    ],
                 ],
 
                 [
                     "date" => "2022-12-15 20:45:00",
                     "log" => "https://classic.warcraftlogs.com/reports/GtrmZdLaC7Pykh2c/#boss=-2&difficulty=0&wipes=2&view=rankings",
-                    "raid" => "L'oeil de l'éternité",
-                    "player" => "Atanea",
-                    "item" => "Bottes des énergies soignantes",
-                    "is_bench" => true,
+                    "raid" => [
+                        "L'oeil de l'éternité",
+                    ],
+                    "player" => [
+                        "Atanea",
+                    ],
+                    "item" => [
+                        "Bottes des énergies soignantes",
+                    ],
                 ],
 
             ];
@@ -2568,17 +2627,27 @@ class DataFixtures extends Fixture
 
                 $eventObj->setDate(new DateTimeImmutable($currentEvent["date"]));
                 $eventObj->setLog($currentEvent['log']);
-            
-
-
-                $raidObj = $this->getReference($currentEvent["raid"]);
-                $eventObj->addRaid($raidObj);
+    
+                // $raidObj = $this->getReference($currentEvent["raid"]);
+                // $eventObj->addRaid($raidObj);
+                foreach ($currentEvent["raid"] as $currentRaidName) {
+                    $currentEventObj = $raidsObjArray[md5($currentRaidName)];
+                    $eventObj->addRaid($currentEventObj);
+                };
                 
-                $playerObj = $this->getReference($currentEvent["player"]);
-                $eventObj->addPlayer($playerObj);
+                // $playerObj = $this->getReference($currentEvent["player"]);
+                // $eventObj->addPlayer($playerObj);
+                foreach ($currentEvent["player"] as $currentPlayerName) {
+                    $currentEventObj = $playersObjArray[md5($currentPlayerName)];
+                    $eventObj->addPlayer($currentEventObj);
+                };
                 
-                $itemObj = $this->getReference($currentEvent["item"]);
-                $eventObj->addItem($itemObj);
+                // $itemObj = $this->getReference($currentEvent["item"]);
+                // $eventObj->addItem($itemObj);
+                foreach ($currentEvent["item"] as $currentItemName) {
+                    $currentEventObj = $itemsObjArray[md5($currentItemName)];
+                    $eventObj->addItem($currentEventObj);
+                };
 
                 $manager->persist($eventObj);
 

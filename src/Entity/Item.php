@@ -67,17 +67,17 @@ class Item
     private $detail;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Location::class, mappedBy="item")
+     * @ORM\ManyToMany(targetEntity=Slot::class, mappedBy="item")
      * @Assert\NotBlank(message="Merci de remplir ce champs")
      */
-    private $locations;
+    private $slots;
 
     public function __construct()
     {
         $this->role = new ArrayCollection();
         $this->player = new ArrayCollection();
         $this->events = new ArrayCollection();
-        $this->locations = new ArrayCollection();
+        $this->slots = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -221,27 +221,27 @@ class Item
     }
 
     /**
-     * @return Collection<int, Location>
+     * @return Collection<int, Slot>
      */
-    public function getLocations(): Collection
+    public function getSlots(): Collection
     {
-        return $this->locations;
+        return $this->slots;
     }
 
-    public function addLocation(Location $location): self
+    public function addSlot(Slot $slot): self
     {
-        if (!$this->locations->contains($location)) {
-            $this->locations[] = $location;
-            $location->addItem($this);
+        if (!$this->slots->contains($slot)) {
+            $this->slots[] = $slot;
+            $slot->addItem($this);
         }
 
         return $this;
     }
 
-    public function removeLocation(Location $location): self
+    public function removeSlot(Slot $slot): self
     {
-        if ($this->locations->removeElement($location)) {
-            $location->removeItem($this);
+        if ($this->slots->removeElement($slot)) {
+            $slot->removeItem($this);
         }
 
         return $this;

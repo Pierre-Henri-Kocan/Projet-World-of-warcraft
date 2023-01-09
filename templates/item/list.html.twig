@@ -4,7 +4,7 @@
 
 {% block body %}
 {{ render(controller(
-        'App\\Controller\\SearchController::searchBar'
+        'App\\Controller\\SearchController::itemSearchBar'
  )) }}
  
 <div class="container">
@@ -27,15 +27,15 @@
                         </a>
                     </td>
                     <td>
-                    {% for locations in item.locations %}
-                        {{ locations.name }}</br>
+                    {% for slots in item.slots %}
+                        {{ slots.name }}</br>
                     {% endfor %}
                     </td>
                     <td>{{item.raid.name}}</td>
                     <td>{{item.type}}</td>
                     <td>
                             {% for role in item.role %}
-                                {{ role.name }} 
+                                {{ role.name }}</br>
                             {% endfor %}
                         </a>
                     </td>

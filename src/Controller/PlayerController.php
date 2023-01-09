@@ -11,18 +11,18 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/roster", name="app_roster_")
+ * @Route("/player", name="app_player_")
  */
-class RosterController extends AbstractController
+class PlayerController extends AbstractController
 {
     /**
      * @Route("/", name="list", methods={"GET"})
      */
     public function list(PlayerRepository $playerRepository): Response
     {
-        return $this->render('roster/list.html.twig', [
-            'controller_name' => 'RosterController',
-            'rosters' => $playerRepository->findAll(),
+        return $this->render('player/list.html.twig', [
+            'controller_name' => 'PlayerController',
+            'players' => $playerRepository->findAll(),
         ]);
     }
 
@@ -40,23 +40,24 @@ class RosterController extends AbstractController
             $playerRepository->add($player, true);
 
             $this->addFlash('success', 'Joueur ajouté');
-            return $this->redirectToRoute('app_roster_list', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_player_list', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('roster/create.html.twig', [
+        return $this->renderForm('player/create.html.twig', [
             'player' => $player,
             'form' => $form,
         ]);
     }
 
     /**
-     * @Route ("/{id<\d+>}", name="read", methods={"GET"})
+     * @Route ("/{id<\d+>}", name="read", methods={"GET"}, requirements={"id"="\d+"})
+     * @Route ("/{slug}", name="show_by_slug", methods={"GET"})
      */
     public function read(Player $player, PlayerRepository $playerRepository): Response
     {
-        return $this->render('roster/read.html.twig', [
+        return $this->render('player/read.html.twig', [
             'player' => $player,
-            'rosters' => $playerRepository->findAll(),
+            'players' => $playerRepository->findAll(),
         ]);
     }
 
@@ -72,10 +73,10 @@ class RosterController extends AbstractController
             $playerRepository->add($player, true);
 
             $this->addFlash('warning', 'Joueur modifié');
-            return $this->redirectToRoute('app_roster_list', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_player_list', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('roster/update.html.twig', [
+        return $this->renderForm('player/update.html.twig', [
             'player' => $player,
             'form' => $form,
         ]);
@@ -91,6 +92,6 @@ class RosterController extends AbstractController
         }
 
         $this->addFlash('success', 'Joueur supprimé');
-        return $this->redirectToRoute('app_roster_list', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_player_list', [], Response::HTTP_SEE_OTHER);
     }
 }
