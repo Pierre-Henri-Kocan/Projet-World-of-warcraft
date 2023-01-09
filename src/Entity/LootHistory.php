@@ -22,17 +22,17 @@ class LootHistory
     /**
      * @ORM\OneToOne(targetEntity=Event::class, cascade={"persist", "remove"})
      */
-    private $Event;
+    private $event;
 
     /**
      * @ORM\OneToOne(targetEntity=Player::class, cascade={"persist", "remove"})
      */
-    private $Player;
+    private $player;
 
     /**
      * @ORM\ManyToOne(targetEntity=Item::class, inversedBy="lootHistory")
      */
-    private $Item;
+    private $item;
 
     public function getId(): ?int
     {
@@ -41,24 +41,24 @@ class LootHistory
 
     public function getEvent(): ?Event
     {
-        return $this->Event;
+        return $this->event;
     }
 
-    public function setEvent(?Event $Event): self
+    public function setEvent(?Event $event): self
     {
-        $this->Event = $Event;
+        $this->event = $event;
 
         return $this;
     }
 
     public function getPlayer(): ?Player
     {
-        return $this->Player;
+        return $this->player;
     }
 
-    public function setPlayer(?Player $Player): self
+    public function setPlayer(?Player $player): self
     {
-        $this->Player = $Player;
+        $this->player = $player;
 
         return $this;
     }
@@ -68,13 +68,13 @@ class LootHistory
      */
     public function getItem(): Collection
     {
-        return $this->Item;
+        return $this->item;
     }
 
     public function addItem(Item $item): self
     {
-        if (!$this->Item->contains($item)) {
-            $this->Item[] = $item;
+        if (!$this->item->contains($item)) {
+            $this->item[] = $item;
             $item->setLootHistory($this);
         }
 
@@ -83,7 +83,7 @@ class LootHistory
 
     public function removeItem(Item $item): self
     {
-        if ($this->Item->removeElement($item)) {
+        if ($this->item->removeElement($item)) {
             // set the owning side to null (unless already changed)
             if ($item->getLootHistory() === $this) {
                 $item->setLootHistory(null);
