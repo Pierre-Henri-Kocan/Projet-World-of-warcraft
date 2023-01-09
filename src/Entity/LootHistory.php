@@ -75,7 +75,6 @@ class LootHistory
     {
         if (!$this->item->contains($item)) {
             $this->item[] = $item;
-            $item->setLootHistory($this);
         }
 
         return $this;
@@ -83,12 +82,7 @@ class LootHistory
 
     public function removeItem(Item $item): self
     {
-        if ($this->item->removeElement($item)) {
-            // set the owning side to null (unless already changed)
-            if ($item->getLootHistory() === $this) {
-                $item->setLootHistory(null);
-            }
-        }
+        $this->item->removeElement($item);
 
         return $this;
     }
