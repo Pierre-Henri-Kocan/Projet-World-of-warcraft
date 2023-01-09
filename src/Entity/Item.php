@@ -61,10 +61,16 @@ class Item
      */
     private $slots;
 
+    /**
+     * @ORM\OneToMany(targetEntity=LootHistory::class, mappedBy="item")
+     */
+    private $lootHistory;
+
     public function __construct()
     {
         $this->events = new ArrayCollection();
         $this->slots = new ArrayCollection();
+        $this->lootHistory = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -182,6 +188,18 @@ class Item
         if ($this->slots->removeElement($slot)) {
             $slot->removeItem($this);
         }
+
+        return $this;
+    }
+
+    public function getLootHistory(): ?LootHistory
+    {
+        return $this->lootHistory;
+    }
+
+    public function setLootHistory(?LootHistory $lootHistory): self
+    {
+        $this->lootHistory = $lootHistory;
 
         return $this;
     }
