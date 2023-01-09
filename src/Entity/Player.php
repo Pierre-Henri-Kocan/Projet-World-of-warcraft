@@ -57,16 +57,6 @@ class Player
     private $slug;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Item::class, mappedBy="player")
-     */
-    private $items;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=Event::class, mappedBy="player")
-     */
-    private $events;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Role::class, inversedBy="players")
      * @ORM\JoinColumn(nullable=false)
      * @Assert\NotBlank(message="Merci de remplir ce champs")
@@ -74,15 +64,13 @@ class Player
     private $role;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Raid::class, mappedBy="player")
+     * @ORM\OneToMany(targetEntity=Participation::class, mappedBy="player")
      */
-    private $raids;
+    private $participations;
 
     public function __construct()
     {
-        $this->items = new ArrayCollection();
-        $this->events = new ArrayCollection();
-        $this->raids = new ArrayCollection();
+        $this->participations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -162,60 +150,6 @@ class Player
         return $this;
     }
 
-    /**
-     * @return Collection<int, Item>
-     */
-    public function getItems(): Collection
-    {
-        return $this->items;
-    }
-
-    public function addItem(Item $item): self
-    {
-        if (!$this->items->contains($item)) {
-            $this->items[] = $item;
-            $item->addPlayer($this);
-        }
-
-        return $this;
-    }
-
-    public function removeItem(Item $item): self
-    {
-        if ($this->items->removeElement($item)) {
-            $item->removePlayer($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Event>
-     */
-    public function getEvents(): Collection
-    {
-        return $this->events;
-    }
-
-    public function addEvent(Event $event): self
-    {
-        if (!$this->events->contains($event)) {
-            $this->events[] = $event;
-            $event->addPlayer($this);
-        }
-
-        return $this;
-    }
-
-    public function removeEvent(Event $event): self
-    {
-        if ($this->events->removeElement($event)) {
-            $event->removePlayer($this);
-        }
-
-        return $this;
-    }
-
     public function getRole(): ?role
     {
         return $this->role;
@@ -229,27 +163,30 @@ class Player
     }
 
     /**
-     * @return Collection<int, Raid>
+     * @return Collection<int, Participation>
      */
-    public function getRaids(): Collection
+    public function getParticipations(): Collection
     {
-        return $this->raids;
+        return $this->participations;
     }
 
-    public function addRaid(Raid $raid): self
+    public function addParticipation(Participation $participation): self
     {
-        if (!$this->raids->contains($raid)) {
-            $this->raids[] = $raid;
-            $raid->addPlayer($this);
+        if (!$this->participations->contains($participation)) {
+            $this->participations[] = $participation;
+            $participation->setPlayer($this);
         }
 
         return $this;
     }
 
-    public function removeRaid(Raid $raid): self
+    public function removeParticipation(Participation $participation): self
     {
-        if ($this->raids->removeElement($raid)) {
-            $raid->removePlayer($this);
+        if ($this->participations->removeElement($participation)) {
+            // set the owning side to null (unless already changed)
+            if ($participation->getPlayer() === $this) {
+                $participation->setPlayer(null);
+            }
         }
 
         return $this;
