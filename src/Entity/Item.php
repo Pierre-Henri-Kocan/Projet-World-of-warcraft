@@ -37,17 +37,6 @@ class Item
      */
     private $slug;
 
-    /**  
-     * @ORM\ManyToMany(targetEntity=Role::class, inversedBy="items")
-     * @Assert\NotBlank(message="Merci de remplir ce champs")
-     */
-    private $role;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=Player::class, inversedBy="items")
-     */
-    private $player;
-
     /**
      * @ORM\ManyToMany(targetEntity=Event::class, mappedBy="item")
      */
@@ -72,12 +61,16 @@ class Item
      */
     private $slots;
 
+    /**
+     * @ORM\OneToMany(targetEntity=LootHistory::class, mappedBy="item")
+     */
+    private $lootHistory;
+
     public function __construct()
     {
-        $this->role = new ArrayCollection();
-        $this->player = new ArrayCollection();
         $this->events = new ArrayCollection();
         $this->slots = new ArrayCollection();
+        $this->lootHistory = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -117,54 +110,6 @@ class Item
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, role>
-     */
-    public function getRole(): Collection
-    {
-        return $this->role;
-    }
-
-    public function addRole(role $role): self
-    {
-        if (!$this->role->contains($role)) {
-            $this->role[] = $role;
-        }
-
-        return $this;
-    }
-
-    public function removeRole(role $role): self
-    {
-        $this->role->removeElement($role);
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, player>
-     */
-    public function getPlayer(): Collection
-    {
-        return $this->player;
-    }
-
-    public function addPlayer(player $player): self
-    {
-        if (!$this->player->contains($player)) {
-            $this->player[] = $player;
-        }
-
-        return $this;
-    }
-
-    public function removePlayer(player $player): self
-    {
-        $this->player->removeElement($player);
 
         return $this;
     }
@@ -243,6 +188,18 @@ class Item
         if ($this->slots->removeElement($slot)) {
             $slot->removeItem($this);
         }
+
+        return $this;
+    }
+
+    public function getLootHistory(): ?LootHistory
+    {
+        return $this->lootHistory;
+    }
+
+    public function setLootHistory(?LootHistory $lootHistory): self
+    {
+        $this->lootHistory = $lootHistory;
 
         return $this;
     }

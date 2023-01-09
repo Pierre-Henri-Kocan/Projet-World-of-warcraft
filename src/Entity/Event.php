@@ -38,12 +38,6 @@ class Event
     private $raid;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Player::class, inversedBy="events")
-     * @Assert\NotBlank(message="Merci de remplir ce champs")
-     */
-    private $player;
-
-    /**
      * @ORM\ManyToMany(targetEntity=Item::class, inversedBy="events")
      * @Assert\NotBlank(message="Merci de remplir ce champs")
      */
@@ -57,7 +51,6 @@ class Event
     public function __construct()
     {
         $this->raid = new ArrayCollection();
-        $this->player = new ArrayCollection();
         $this->item = new ArrayCollection();
         $this->participations = new ArrayCollection();
     }
@@ -112,30 +105,6 @@ class Event
     public function removeRaid(raid $raid): self
     {
         $this->raid->removeElement($raid);
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, player>
-     */
-    public function getPlayer(): Collection
-    {
-        return $this->player;
-    }
-
-    public function addPlayer(player $player): self
-    {
-        if (!$this->player->contains($player)) {
-            $this->player[] = $player;
-        }
-
-        return $this;
-    }
-
-    public function removePlayer(player $player): self
-    {
-        $this->player->removeElement($player);
 
         return $this;
     }
