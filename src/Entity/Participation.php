@@ -23,12 +23,12 @@ class Participation
     private $isBench;
 
     /**
-     * @ORM\ManyToOne(targetEntity=event::class, inversedBy="participations")
+     * @ORM\ManyToOne(targetEntity=Event::class, inversedBy="participations")
      */
     private $event;
 
     /**
-     * @ORM\ManyToOne(targetEntity=player::class, inversedBy="participations")
+     * @ORM\ManyToOne(targetEntity=Player::class, inversedBy="participations")
      */
     private $player;
 
