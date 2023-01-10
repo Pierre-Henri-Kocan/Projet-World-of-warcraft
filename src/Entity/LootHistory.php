@@ -30,7 +30,7 @@ class LootHistory
     private $player;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Item::class, inversedBy="lootHistory")
+     * @ORM\ManyToOne(targetEntity=Item::class, inversedBy="lootHistories")
      */
     private $item;
 

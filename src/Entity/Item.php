@@ -64,13 +64,13 @@ class Item
     /**
      * @ORM\OneToMany(targetEntity=LootHistory::class, mappedBy="item")
      */
-    private $lootHistory;
+    private $lootHistories;
 
     public function __construct()
     {
         $this->events = new ArrayCollection();
         $this->slots = new ArrayCollection();
-        $this->lootHistory = new ArrayCollection();
+        $this->lootHistories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -197,13 +197,13 @@ class Item
      */
     public function getLootHistories(): Collection
     {
-        return $this->lootHistory;
+        return $this->lootHistories;
     }
 
     public function addLootHistory(LootHistory $lootHistory): self
     {
-        if (!$this->lootHistory->contains($lootHistory)) {
-            $this->lootHistory[] = $lootHistory;
+        if (!$this->lootHistories->contains($lootHistory)) {
+            $this->lootHistories[] = $lootHistory;
             $lootHistory->addItem($this);
         }
 
@@ -212,7 +212,7 @@ class Item
 
     public function removeLootHistory(LootHistory $lootHistory): self
     {
-        if ($this->lootHistory->removeElement($lootHistory)) {
+        if ($this->lootHistories->removeElement($lootHistory)) {
             $lootHistory->removeItem($this);
         }
 
