@@ -170,7 +170,7 @@ class Player
         return $this->participations;
     }
 
-    public function addParticipation(Participation $participation): self
+    public function addParticipations(Participation $participation): self
     {
         if (!$this->participations->contains($participation)) {
             $this->participations[] = $participation;
@@ -180,7 +180,7 @@ class Player
         return $this;
     }
 
-    public function removeParticipation(Participation $participation): self
+    public function removeParticipations(Participation $participation): self
     {
         if ($this->participations->removeElement($participation)) {
             // set the owning side to null (unless already changed)

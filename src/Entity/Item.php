@@ -122,7 +122,7 @@ class Item
         return $this->events;
     }
 
-    public function addEvent(Event $event): self
+    public function addEvents(Event $event): self
     {
         if (!$this->events->contains($event)) {
             $this->events[] = $event;
@@ -132,7 +132,7 @@ class Item
         return $this;
     }
 
-    public function removeEvent(Event $event): self
+    public function removeEvents(Event $event): self
     {
         if ($this->events->removeElement($event)) {
             $event->removeItem($this);
