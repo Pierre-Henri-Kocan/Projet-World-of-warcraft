@@ -4,7 +4,9 @@ namespace App\DataFixtures;
 
 use App\Entity\Event;
 use App\Entity\Item;
+use App\Entity\LootHistory;
 use App\Entity\Slot;
+use App\Entity\Participation;
 use App\Entity\Player;
 use App\Entity\Raid;
 use App\Entity\Role;
@@ -15,17 +17,15 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 class DataFixtures extends Fixture
 {
-
     private $slugger;
 
     public function __construct(SluggerInterface $slugger)
     {
-         $this->slugger = $slugger;
+        $this->slugger = $slugger;
     }
 
     public function load(ObjectManager $manager): void
     {
-
         // ------------------------------- Raids -------------------------------
             $raidsObjArray = [
                 [
@@ -48,7 +48,6 @@ class DataFixtures extends Fixture
 
             // $raidsObjArray = [];
             foreach ($raidsObjArray as $currentRaid) {
-                
                 $raidObj = new Raid();
 
                 $raidObj->setName($currentRaid['name']);
@@ -60,7 +59,6 @@ class DataFixtures extends Fixture
 
                 //* reference to link fixtures files
                 $this->addReference($currentRaid['name'], $raidObj);
-
             }
 
         // ------------------------------- Roles -------------------------------
@@ -88,9 +86,8 @@ class DataFixtures extends Fixture
             ];
             // $rolesObjArray = [];
             foreach ($rolesObjArray as $currentRole) {
-                
                 $roleObj = new Role();
-                
+
                 $roleObj->setName($currentRole['name']);
                 $roleObj->setSlug($this->slugger->slug(mb_strtolower($currentRole['name'])));
 
@@ -100,7 +97,6 @@ class DataFixtures extends Fixture
 
                 //* reference to link fixtures files
                 $this->addReference($currentRole['name'], $roleObj);
-
             }
 
         // ------------------------------- Slots -------------------------------
@@ -185,12 +181,11 @@ class DataFixtures extends Fixture
 
             // $slotObjArray = [];
             foreach ($slotObjArray as $currentSlot) {
-
                 $slotObj = new Slot();
 
                 $slotObj->setName($currentSlot['name']);
                 $slotObj->setSlug($this->slugger->slug(mb_strtolower($currentSlot['name'])));
-                
+
                 $slotObjArray[md5($currentSlot['name'])] = $slotObj;
 
                 $manager->persist($slotObj);
@@ -204,10 +199,6 @@ class DataFixtures extends Fixture
                         "...",
                     ],
                     "type" => "...",
-                    "role" => [
-                        "...",
-                        "CAC",
-                    ],
                     "raid" => "Hors raid",
                     "detail" => "...",
                 ],
@@ -218,9 +209,6 @@ class DataFixtures extends Fixture
                         "Neck",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                         "Tank",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40387/ambition-infinie",
                 ],
@@ -232,9 +220,6 @@ class DataFixtures extends Fixture
                         "Ring 2",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                         "CAC",
-                    ],
                     "raid" => "Hors raid",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40717/anneau-dinvincibilit%C3%A9",
                 ],
@@ -245,9 +230,6 @@ class DataFixtures extends Fixture
                         "Ring 2",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "Healer",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40375/anneau-de-beaut%C3%A9-d%C3%A9compos%C3%A9e",
                 ],
@@ -258,9 +240,6 @@ class DataFixtures extends Fixture
                         "Ring 1",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "CAC",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40074/anneau-de-la-main-lourde",
                 ],
@@ -271,9 +250,6 @@ class DataFixtures extends Fixture
                         "Ring 2",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "CAC",
-                    ],
                     "raid" => "L'oeil de l'éternité",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40474/anneau-du-capteur-tellurique",
                 ],
@@ -284,9 +260,6 @@ class DataFixtures extends Fixture
                         "Offhand",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "CAC",
-                    ],
                     "raid" => "L'oeil de l'éternité",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40491/averse-de-gr%C3%AAle",
                 ],
@@ -297,10 +270,6 @@ class DataFixtures extends Fixture
                         "Ring 1",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Caster",
-                        "Healer",
-                    ],
                     "raid" => "Hors raid",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40719/bague-de-magie-canalis%C3%A9e",
                 ],
@@ -311,9 +280,6 @@ class DataFixtures extends Fixture
                         "Ring 1",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "Tank",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40107/bague-us%C3%A9e-par-le-sable",
                 ],
@@ -324,9 +290,6 @@ class DataFixtures extends Fixture
                         "Relic-Wand-Ranged",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Caster",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=39426/baguette-de-larchiliche",
                 ],
@@ -337,9 +300,6 @@ class DataFixtures extends Fixture
                         "Relic-Wand-Ranged",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "Caster",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=39712/baguette-des-n%C3%A9rubiens-orn%C3%A9e",
                 ],
@@ -350,9 +310,6 @@ class DataFixtures extends Fixture
                         "Ring 2",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Healer",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40108/beaut%C3%A9-ravie",
                 ],
@@ -363,9 +320,6 @@ class DataFixtures extends Fixture
                         "Feet",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Healer",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40269/bottes-de-persuasion",
                 ],
@@ -376,9 +330,6 @@ class DataFixtures extends Fixture
                         "Feet",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Healer",
-                    ],
                     "raid" => "L'oeil de l'éternité",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40592/bottes-des-%C3%A9nergies-soignantes",
                 ],
@@ -389,9 +340,6 @@ class DataFixtures extends Fixture
                         "Feet",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Caster",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40246/bottes-des-id%C3%A9aux-imp%C3%A9tueux",
                 ],
@@ -402,9 +350,6 @@ class DataFixtures extends Fixture
                         "Feet",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "CAC",
-                    ],
                     "raid" => "L'oeil de l'éternité",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40549/bottes-du-vol-renouvel%C3%A9",
                 ],
@@ -415,9 +360,6 @@ class DataFixtures extends Fixture
                         "Feet",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "CAC",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40243/bottillons-de-la-vile-duperie",
                 ],
@@ -428,9 +370,6 @@ class DataFixtures extends Fixture
                         "Wrists",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Healer",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40332/brassards-de-complicit%C3%A9",
                 ],
@@ -441,9 +380,6 @@ class DataFixtures extends Fixture
                         "Wrists",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "CAC",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40330/brassards-de-lattaque-implacable",
                 ],
@@ -454,9 +390,6 @@ class DataFixtures extends Fixture
                         "Wrists",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Tank",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40306/brassards-du-chevalier-impie",
                 ],
@@ -467,9 +400,6 @@ class DataFixtures extends Fixture
                         "Feet",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "CAC",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=39701/brodequins-de-laube",
                 ],
@@ -480,9 +410,6 @@ class DataFixtures extends Fixture
                         "Relic-Wand-Ranged",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Tank",
-                    ],
                     "raid" => "Hors raid",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40822/cachet-de-la-conscience-gel%C3%A9e",
                 ],
@@ -493,9 +420,6 @@ class DataFixtures extends Fixture
                         "Relic-Wand-Ranged",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "CAC",
-                    ],
                     "raid" => "Hors raid",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=42620/cachet-de-lutte-du-gladiateur-fatal",
                 ],
@@ -506,9 +430,6 @@ class DataFixtures extends Fixture
                         "Relic-Wand-Ranged",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "CAC",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40207/cachet-de-vigilance",
                 ],
@@ -519,9 +440,6 @@ class DataFixtures extends Fixture
                         "Trinket 2",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Caster",
-                    ],
                     "raid" => "Hors raid",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40682/cadran-solaire-de-lexil%C3%A9",
                 ],
@@ -532,9 +450,6 @@ class DataFixtures extends Fixture
                         "Back",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Healer",
-                    ],
                     "raid" => "Hors raid",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40724/cape-des-plumes-de-kea",
                 ],
@@ -545,10 +460,6 @@ class DataFixtures extends Fixture
                         "Back",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "Caster",
-                        "Healer",
-                    ],
                     "raid" => "Le sanctum Obsidien",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=44005/cape-du-pennon",
                 ],
@@ -559,9 +470,6 @@ class DataFixtures extends Fixture
                         "Back",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Caster",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40405/cape-du-sorcier-d%C3%A9m%C3%A9ritant",
                 ],
@@ -572,9 +480,6 @@ class DataFixtures extends Fixture
                         "Back",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "Tank",
-                    ],
                     "raid" => "Hors raid",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40722/cape-maill%C3%A9e-en-platine",
                 ],
@@ -585,10 +490,6 @@ class DataFixtures extends Fixture
                         "Trinket 1",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "CAC",
-                        "Healer",
-                    ],
                     "raid" => "Hors raid",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=44253/carte-de-sombrelune-grandeur",
                 ],
@@ -599,9 +500,6 @@ class DataFixtures extends Fixture
                         "Waist",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "CAC",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40205/ceinture-de-traque-peau",
                 ],
@@ -612,9 +510,6 @@ class DataFixtures extends Fixture
                         "Waist",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "CAC",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40275/ceinture-rivet%C3%A9e-d%C3%A9prav%C3%A9e",
                 ],
@@ -625,9 +520,6 @@ class DataFixtures extends Fixture
                         "Waist",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "Tank",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=39759/ceinturon-ablatif-en-chitine",
                 ],
@@ -638,9 +530,6 @@ class DataFixtures extends Fixture
                         "Waist",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "CAC",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40278/ceinturon-de-chevalerie",
                 ],
@@ -651,10 +540,6 @@ class DataFixtures extends Fixture
                         "Waist",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Caster",
-                        "Healer",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40327/ceinturon-de-r%C3%A9cup%C3%A9ration",
                 ],
@@ -665,9 +550,6 @@ class DataFixtures extends Fixture
                         "Ring 2",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "CAC",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=39401/cercle-de-mort",
                 ],
@@ -678,9 +560,6 @@ class DataFixtures extends Fixture
                         "Neck",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Healer",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40071/cha%C3%AEne-dadoration",
                 ],
@@ -691,9 +570,6 @@ class DataFixtures extends Fixture
                         "Head",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Healer",
-                    ],
                     "raid" => "Le sanctum Obsidien",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=44007/chapel-de-r%C3%A9conciliation",
                 ],
@@ -704,9 +580,6 @@ class DataFixtures extends Fixture
                         "Head",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Caster",
-                    ],
                     "raid" => "L'oeil de l'éternité",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40562/chaperon-de-rationalit%C3%A9",
                 ],
@@ -717,9 +590,6 @@ class DataFixtures extends Fixture
                         "Ring 2",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "Tank",
-                    ],
                     "raid" => "Hors raid",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40718/chevali%C3%A8re-de-la-forteresse-imprenable",
                 ],
@@ -731,9 +601,6 @@ class DataFixtures extends Fixture
                         "Ring 2",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "Healer",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40399/chevali%C3%A8re-de-la-souffrance-manifeste",
                 ],
@@ -744,9 +611,6 @@ class DataFixtures extends Fixture
                         "Ring 1",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Caster",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=39389/chevali%C3%A8re-du-malveillant",
                 ],
@@ -757,9 +621,6 @@ class DataFixtures extends Fixture
                         "Neck",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "Tank",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=44577/cl%C3%A9-h%C3%A9ro%C3%AFque-de-liris-de-focalisation",
                 ],
@@ -770,9 +631,6 @@ class DataFixtures extends Fixture
                         "Trinket 2",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Healer",
-                    ],
                     "raid" => "Hors raid",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=37835/cloche-dafromaj",
                 ],
@@ -783,9 +641,6 @@ class DataFixtures extends Fixture
                         "Trinket 1",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Tank",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40257/code-du-d%C3%A9fenseur",
                 ],
@@ -796,9 +651,6 @@ class DataFixtures extends Fixture
                         "Neck",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "Caster",
-                    ],
                     "raid" => "L'oeil de l'éternité",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=44661/collier-de-puissance-du-repos-du-ver",
                 ],
@@ -809,9 +661,6 @@ class DataFixtures extends Fixture
                         "Waist",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Caster",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40301/cordelette-de-polarit%C3%A9",
                 ],
@@ -822,9 +671,6 @@ class DataFixtures extends Fixture
                         "Chest",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "CAC",
-                    ],
                     "raid" => "Le sanctum Obsidien",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=43998/corselet-des-prouesses-ind%C3%A9niables",
                 ],
@@ -835,9 +681,6 @@ class DataFixtures extends Fixture
                         "Chest",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "CAC",
-                    ],
                     "raid" => "L'oeil de l'éternité",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40539/corselet-du-solitaire",
                 ],
@@ -848,10 +691,6 @@ class DataFixtures extends Fixture
                         "Wrists",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "Caster",
-                        "Healer",
-                    ],
                     "raid" => "Le sanctum Obsidien",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=44008/crispins-sans-souillure",
                 ],
@@ -862,9 +701,6 @@ class DataFixtures extends Fixture
                         "Chest",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Tank",
-                    ],
                     "raid" => "Le sanctum Obsidien",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=44000/cuirasse-de-lorage-draconique",
                 ],
@@ -875,9 +711,6 @@ class DataFixtures extends Fixture
                         "Legs",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "Tank",
-                    ],
                     "raid" => "L'oeil de l'éternité",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40589/cuissards-de-souverainet%C3%A9",
                 ],
@@ -888,9 +721,6 @@ class DataFixtures extends Fixture
                         "Back",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "CAC",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40403/drap%C3%A9-de-lennemi-mortel",
                 ],
@@ -902,9 +732,6 @@ class DataFixtures extends Fixture
                         "Offhand",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "CAC",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40189/effroi-col%C3%A9reux",
                 ],
@@ -915,9 +742,6 @@ class DataFixtures extends Fixture
                         "Relic-Wand-Ranged",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "CAC",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40385/emissaire-de-mortalit%C3%A9",
                 ],
@@ -928,9 +752,6 @@ class DataFixtures extends Fixture
                         "Shoulders",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Tank",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=39704/espauliers-de-mort-non-naturelle",
                 ],
@@ -941,9 +762,6 @@ class DataFixtures extends Fixture
                         "Trinket 1",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Tank",
-                    ],
                     "raid" => "Hors raid",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=37220/essence-de-tulle",
                 ],
@@ -955,9 +773,6 @@ class DataFixtures extends Fixture
                         "Trinket 2",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Caster",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=39229/etreinte-de-laraign%C3%A9e",
                 ],
@@ -968,9 +783,6 @@ class DataFixtures extends Fixture
                         "Neck",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "CAC",
-                    ],
                     "raid" => "L'oeil de l'éternité",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=44664/faveur-de-la-reine-dragon",
                 ],
@@ -981,9 +793,6 @@ class DataFixtures extends Fixture
                         "Trinket 2",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Tank",
-                    ],
                     "raid" => "Hors raid",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=44063/figurine-de-crabe-monarchique",
                 ],
@@ -994,9 +803,6 @@ class DataFixtures extends Fixture
                         "Trinket 1",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Tank",
-                    ],
                     "raid" => "Hors raid",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=42341/figurine-de-li%C3%A8vre-de-rubis",
                 ],
@@ -1007,9 +813,6 @@ class DataFixtures extends Fixture
                         "Main Hand",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "CAC",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40388/fin-du-voyage",
                 ],
@@ -1021,9 +824,6 @@ class DataFixtures extends Fixture
                         "Trinket 3",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "CAC",
-                    ],
                     "raid" => "Le sanctum Obsidien",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40431/fureur-des-cinq-vols",
                 ],
@@ -1034,9 +834,6 @@ class DataFixtures extends Fixture
                         "Relic-Wand-Ranged",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Tank",
-                    ],
                     "raid" => "Hors raid",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=41168/fusil-de-combat-blind%C3%A9",
                 ],
@@ -1047,9 +844,6 @@ class DataFixtures extends Fixture
                         "Hands",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "CAC",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40347/gantelets-de-zeliek",
                 ],
@@ -1060,9 +854,6 @@ class DataFixtures extends Fixture
                         "Hands",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Healer",
-                    ],
                     "raid" => "L'oeil de l'éternité",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40564/gants-du-spectacle-dhiver",
                 ],
@@ -1073,9 +864,6 @@ class DataFixtures extends Fixture
                         "Legs",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Healer",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40379/garde-jambes-de-lossuaire",
                 ],
@@ -1086,9 +874,6 @@ class DataFixtures extends Fixture
                         "Hands",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "CAC",
-                    ],
                     "raid" => "L'oeil de l'éternité",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40541/garde-mains-adroits-givr%C3%A9s",
                 ],
@@ -1099,9 +884,6 @@ class DataFixtures extends Fixture
                         "Ring 1",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Tank",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40370/garde-porte",
                 ],
@@ -1112,9 +894,6 @@ class DataFixtures extends Fixture
                         "Ring 2",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "CAC",
-                    ],
                     "raid" => "Le sanctum Obsidien",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=43993/grand-anneau-de-collision",
                 ],
@@ -1125,9 +904,6 @@ class DataFixtures extends Fixture
                         "Head",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "CAC",
-                    ],
                     "raid" => "Le sanctum Obsidien",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=44006/grand-heaume-en-obsidienne",
                 ],
@@ -1138,9 +914,6 @@ class DataFixtures extends Fixture
                         "Feet",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Healer",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=39734/gr%C3%A8ves-dexpiation",
                 ],
@@ -1151,9 +924,6 @@ class DataFixtures extends Fixture
                         "Chest",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Caster",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40234/habits-putrides-de-heigan",
                 ],
@@ -1164,9 +934,6 @@ class DataFixtures extends Fixture
                         "Relic-Wand-Ranged",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "Healer",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40245/halo-p%C3%A2lissant",
                 ],
@@ -1177,9 +944,6 @@ class DataFixtures extends Fixture
                         "Head",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "CAC",
-                    ],
                     "raid" => "L'oeil de l'éternité",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40543/heaume-de-laspect-bleu",
                 ],
@@ -1190,9 +954,6 @@ class DataFixtures extends Fixture
                         "Relic-Wand-Ranged",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "CAC",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=39757/idole-dadoration",
                 ],
@@ -1203,9 +964,6 @@ class DataFixtures extends Fixture
                         "Relic-Wand-Ranged",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Healer",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40342/idole-d%C3%A9veil",
                 ],
@@ -1216,9 +974,6 @@ class DataFixtures extends Fixture
                         "Relic-Wand-Ranged",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Caster",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40321/idole-de-l%C3%A9toile-filante",
                 ],
@@ -1229,9 +984,6 @@ class DataFixtures extends Fixture
                         "Ring 1",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "CAC",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40075/impitoyable",
                 ],
@@ -1242,9 +994,6 @@ class DataFixtures extends Fixture
                         "Legs",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Caster",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40376/jambards-du-dragon-vaincu",
                 ],
@@ -1255,9 +1004,6 @@ class DataFixtures extends Fixture
                         "Legs",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "CAC",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40294/jambi%C3%A8res-dabomination-rivet%C3%A9es",
                 ],
@@ -1268,9 +1014,6 @@ class DataFixtures extends Fixture
                         "Legs",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "Healer",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40398/jambi%C3%A8res-darrogance-mortelle",
                 ],
@@ -1281,9 +1024,6 @@ class DataFixtures extends Fixture
                         "Legs",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "CAC",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40331/jambi%C3%A8res-de-fuite-rat%C3%A9e",
                 ],
@@ -1294,9 +1034,6 @@ class DataFixtures extends Fixture
                         "Legs",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "CAC",
-                    ],
                     "raid" => "Le sanctum Obsidien",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=44011/jambi%C3%A8res-des-honor%C3%A9s",
                 ],
@@ -1307,9 +1044,6 @@ class DataFixtures extends Fixture
                         "Legs",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "Caster",
-                    ],
                     "raid" => "L'oeil de l'éternité",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40560/jambi%C3%A8res-du-lanceur-de-sorts-d%C3%A9vergond%C3%A9",
                 ],
@@ -1321,9 +1055,6 @@ class DataFixtures extends Fixture
                         "Ring 2",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Caster",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40080/joyau-perdu",
                 ],
@@ -1334,9 +1065,6 @@ class DataFixtures extends Fixture
                         "Trinket 1",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Healer",
-                    ],
                     "raid" => "Hors raid",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40685/l%C5%93uf-dessence-mortelle",
                 ],
@@ -1347,10 +1075,6 @@ class DataFixtures extends Fixture
                         "Main Hand",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "Caster",
-                        "Healer",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40396/la-mar%C3%A9e-d%C3%A9cisive",
                 ],
@@ -1361,10 +1085,6 @@ class DataFixtures extends Fixture
                         "Waist",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "Caster",
-                        "Healer",
-                    ],
                     "raid" => "L'oeil de l'éternité",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40561/laisse-de-magie-insouciante",
                 ],
@@ -1375,10 +1095,6 @@ class DataFixtures extends Fixture
                         "Main Hand",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "CAC",
-                        "Tank",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40402/le-dernier-sourire",
                 ],
@@ -1390,9 +1106,6 @@ class DataFixtures extends Fixture
                         "Trinket 3",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "CAC",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40256/le-glas-sinistre",
                 ],
@@ -1403,10 +1116,6 @@ class DataFixtures extends Fixture
                         "Chest",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Caster",
-                        "Healer",
-                    ],
                     "raid" => "Le sanctum Obsidien",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=44002/les-habits-flottants-du-sanctum",
                 ],
@@ -1417,9 +1126,6 @@ class DataFixtures extends Fixture
                         "Relic-Wand-Ranged",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Tank",
-                    ],
                     "raid" => "Hors raid",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40707/libram-dobstruction",
                 ],
@@ -1430,9 +1136,6 @@ class DataFixtures extends Fixture
                         "Relic-Wand-Ranged",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Healer",
-                    ],
                     "raid" => "Hors raid",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40705/libram-de-renouveau",
                 ],
@@ -1443,9 +1146,6 @@ class DataFixtures extends Fixture
                         "Waist",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "CAC",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=39762/linceul-en-toile-d%C3%A9chir%C3%A9e",
                 ],
@@ -1456,9 +1156,6 @@ class DataFixtures extends Fixture
                         "Trinket 1",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "Caster",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40255/mal%C3%A9diction-du-mourant",
                 ],
@@ -1469,9 +1166,6 @@ class DataFixtures extends Fixture
                         "Wrists",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "Tank",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=39764/manchettes-de-la-proie-impuissante",
                 ],
@@ -1482,9 +1176,6 @@ class DataFixtures extends Fixture
                         "Wrists",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Healer",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40209/manchettes-du-d%C3%A9cati",
                 ],
@@ -1495,9 +1186,6 @@ class DataFixtures extends Fixture
                         "Wrists",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "CAC",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=39765/manchettes-du-p%C3%A9cheur",
                 ],
@@ -1508,9 +1196,6 @@ class DataFixtures extends Fixture
                         "Shoulders",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Caster",
-                    ],
                     "raid" => "L'oeil de l'éternité",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40555/manteau-de-dispersion",
                 ],
@@ -1521,9 +1206,6 @@ class DataFixtures extends Fixture
                         "Shoulders",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Healer",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=39719/mantelet-des-sauterelles",
                 ],
@@ -1534,9 +1216,6 @@ class DataFixtures extends Fixture
                         "Neck",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "Healer",
-                    ],
                     "raid" => "L'oeil de l'éternité",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=44662/m%C3%A9daillon-de-lieur-de-vie",
                 ],
@@ -1547,9 +1226,6 @@ class DataFixtures extends Fixture
                         "Offhand",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "Caster",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40273/membre-exc%C3%A9dentaire",
                 ],
@@ -1560,9 +1236,6 @@ class DataFixtures extends Fixture
                         "Trinket 2",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "CAC",
-                    ],
                     "raid" => "Hors raid",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40684/miroir-de-v%C3%A9rit%C3%A9",
                 ],
@@ -1573,9 +1246,6 @@ class DataFixtures extends Fixture
                         "Offhand",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "CAC",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=39714/mort-entoil%C3%A9e",
                 ],
@@ -1586,9 +1256,6 @@ class DataFixtures extends Fixture
                         "Offhand",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "Tank",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40400/mur-de-terreur",
                 ],
@@ -1599,9 +1266,6 @@ class DataFixtures extends Fixture
                         "Feet",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Caster",
-                    ],
                     "raid" => "L'oeil de l'éternité",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40519/pas-de-malygos",
                 ],
@@ -1612,9 +1276,6 @@ class DataFixtures extends Fixture
                         "Trinket 2",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "CAC",
-                    ],
                     "raid" => "Hors raid",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=37390/pierre-%C3%A0-aiguiser-m%C3%A9t%C3%A9orique",
                 ],
@@ -1625,10 +1286,6 @@ class DataFixtures extends Fixture
                         "Feet",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "Caster",
-                        "Healer",
-                    ],
                     "raid" => "L'oeil de l'éternité",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40558/pi%C3%A9tineurs-arcaniques",
                 ],
@@ -1639,9 +1296,6 @@ class DataFixtures extends Fixture
                         "Offhand",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Caster",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40192/piquant-maudit",
                 ],
@@ -1652,9 +1306,6 @@ class DataFixtures extends Fixture
                         "Wrists",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Caster",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40324/poignets-de-respect-mutuel",
                 ],
@@ -1665,9 +1316,6 @@ class DataFixtures extends Fixture
                         "Wrists",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "CAC",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40282/poignets-du-ruisseau-de-vase",
                 ],
@@ -1678,9 +1326,6 @@ class DataFixtures extends Fixture
                         "Main Hand",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Tank",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40345/promesse-rompue",
                 ],
@@ -1691,9 +1336,6 @@ class DataFixtures extends Fixture
                         "Trinket 2",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Healer",
-                    ],
                     "raid" => "Hors raid",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=37111/protecteur-d%C3%A2me#english-comments",
                 ],
@@ -1704,10 +1346,6 @@ class DataFixtures extends Fixture
                         "Offhand",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Caster",
-                        "Healer",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=39719/mantelet-des-sauterelles",
                 ],
@@ -1719,10 +1357,6 @@ class DataFixtures extends Fixture
                         "Trinket 2",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "Caster",
-                        "Healer",
-                    ],
                     "raid" => "Le sanctum Obsidien",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40432/repr%C3%A9sentation-de-l%C3%A2me-des-dragons",
                 ],
@@ -1733,9 +1367,6 @@ class DataFixtures extends Fixture
                         "Chest",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Healer",
-                    ],
                     "raid" => "L'oeil de l'éternité",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40194/robes-de-neige-couvrantes",
                 ],
@@ -1746,9 +1377,6 @@ class DataFixtures extends Fixture
                         "Waist",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Healer",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40259/sangle-de-la-gr%C3%A2ce-divine",
                 ],
@@ -1759,9 +1387,6 @@ class DataFixtures extends Fixture
                         "Feet",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "CAC",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=39706/soleret-des-repr%C3%A9sailles-subites",
                 ],
@@ -1772,9 +1397,6 @@ class DataFixtures extends Fixture
                         "Feet",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Tank",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40297/solerets-dendurance",
                 ],
@@ -1785,9 +1407,6 @@ class DataFixtures extends Fixture
                         "Feet",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "CAC",
-                    ],
                     "raid" => "L'oeil de l'éternité",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40591/solerets-de-m%C3%A9lancolie",
                 ],
@@ -1798,9 +1417,6 @@ class DataFixtures extends Fixture
                         "Feet",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "Tank",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=39717/solerets-inexorables",
                 ],
@@ -1815,15 +1431,9 @@ class DataFixtures extends Fixture
                         "Shoulders",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "CAC",
-                        "Caster",
-                        "Healer",
-                        "Tank",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/guide/raids/tier-7-raid-sets",
-                ],   
+                ],
 
                 [
                     "name" => "Torche du saint feu",
@@ -1831,10 +1441,6 @@ class DataFixtures extends Fixture
                         "Main Hand",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "Caster",
-                        "Healer",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40395/torche-du-saint-feu",
                 ],
@@ -1845,9 +1451,6 @@ class DataFixtures extends Fixture
                         "Main Hand",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "CAC",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40383/torsade-de-la-calamit%C3%A9",
                 ],
@@ -1858,9 +1461,6 @@ class DataFixtures extends Fixture
                         "Relic-Wand-Ranged",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Healer",
-                    ],
                     "raid" => "Hors raid",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40709/totem-de-croissance-foresti%C3%A8re",
                 ],
@@ -1871,9 +1471,6 @@ class DataFixtures extends Fixture
                         "Relic-Wand-Ranged",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Caster",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40267/totem-de-mal%C3%A9fice",
                 ],
@@ -1885,9 +1482,6 @@ class DataFixtures extends Fixture
                         "Offhand",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "CAC",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40384/tra%C3%AEtre-%C3%A0-lhumanit%C3%A9",
                 ],
@@ -1898,9 +1492,6 @@ class DataFixtures extends Fixture
                         "Offhand",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Healer",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40350/urne-des-souvenirs-perdus",
                 ],
@@ -1911,9 +1502,6 @@ class DataFixtures extends Fixture
                         "Head",
                     ],
                     "type" => "Bis",
-                    "role" => [
-                        "Healer",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40298/ventaille-du-tr%C3%A9pass%C3%A9",
                 ],
@@ -1924,43 +1512,29 @@ class DataFixtures extends Fixture
                         "Offhand",
                     ],
                     "type" => "Contested",
-                    "role" => [
-                        "Caster",
-                        "Healer",
-                    ],
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40401/voix-de-la-raison",
                 ],
-            
+
             ];
 
             // $itemsObjArray = [];
             foreach ($itemsObjArray as $currentItem) {
-                
                 $itemObj = new Item();
 
                 $itemObj->setName($currentItem['name']);
                 $itemObj->setType($currentItem['type']);
                 $itemObj->setSlug($this->slugger->slug(mb_strtolower($currentItem['name'])));
                 $itemObj->setDetail($currentItem['detail']);
-                
+
                 $raidObj = $this->getReference($currentItem["raid"]);
                 $itemObj->setRaid($raidObj);
-                
+
                 // $slotObj = $this->getReference($currentItem["slot"]);
                 // $itemObj->addSlot($slotObj);
                 foreach ($currentItem["slot"] as $currentSlotName) {
-
                     $currentSlotObj = $slotObjArray[md5($currentSlotName)];
                     $itemObj->addSlot($currentSlotObj);
-                };
-
-                // $roleObj = $this->getReference($currentItem["role"]);
-                // $itemObj->addRole($roleObj);
-                foreach ($currentItem["role"] as $currentRoleName) {
-
-                    $currentRoleObj = $rolesObjArray[md5($currentRoleName)];
-                    $itemObj->addRole($currentRoleObj);
                 };
 
                 $itemsObjArray[md5($currentItem['name'])] = $itemObj;
@@ -1981,10 +1555,6 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => [
-                        "Ambition infinie",
-                        "Vide",
-                    ],
                 ],
 
                 [
@@ -1994,11 +1564,8 @@ class DataFixtures extends Fixture
                     "role" => "Healer",
                     "rank" => "Demi",
                     "is_actif" => "1",
-                    "item" => [
-                        "Bottes des énergies soignantes",
-                    ],
                 ],
-                
+
                 [
                     "name" => "Belzedar",
                     "class" => "Prêtre",
@@ -2006,11 +1573,8 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => [
-                        "Vide",
-                    ],
                 ],
-                
+
                 [
                     "name" => "Bourla",
                     "class" => "Paladin",
@@ -2018,11 +1582,8 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => [
-                        "Vide",
-                     ],
                 ],
-                
+
                 [
                     "name" => "Burgrogue",
                     "class" => "Voleur",
@@ -2030,11 +1591,8 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Demi",
                     "is_actif" => "1",
-                    "item" => [
-                        "Vide",
-                     ],
                 ],
-                
+
                 [
                     "name" => "Camchoupette",
                     "class" => "Paladin",
@@ -2042,11 +1600,8 @@ class DataFixtures extends Fixture
                     "role" => "Healer",
                     "rank" => "Galopin",
                     "is_actif" => "1",
-                    "item" => [
-                        "Vide",
-                     ],
                 ],
-                
+
                 [
                     "name" => "Cegar",
                     "class" => "Paladin",
@@ -2054,11 +1609,8 @@ class DataFixtures extends Fixture
                     "role" => "Healer",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => [
-                        "Vide",
-                     ],
                 ],
-                
+
                 [
                     "name" => "Cheren",
                     "class" => "Chasseur",
@@ -2066,11 +1618,8 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Galopin",
                     "is_actif" => "1",
-                    "item" => [
-                        "Vide",
-                     ],
                 ],
-                
+
                 [
                     "name" => "Chipmage",
                     "class" => "Mage",
@@ -2078,11 +1627,8 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Demi",
                     "is_actif" => "1",
-                    "item" => [
-                        "Vide",
-                     ],
                 ],
-                
+
                 [
                     "name" => "Chpok",
                     "class" => "Mage",
@@ -2090,11 +1636,8 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Galopin",
                     "is_actif" => "1",
-                    "item" => [
-                        "Vide",
-                     ],
                 ],
-                
+
                 [
                     "name" => "Demoralyse",
                     "class" => "Démoniste",
@@ -2102,11 +1645,8 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => [
-                        "Vide",
-                     ],
                 ],
-                
+
                 [
                     "name" => "Ekte",
                     "class" => "Paladin",
@@ -2114,11 +1654,8 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => [
-                        "Vide",
-                     ],
                 ],
-                
+
                 [
                     "name" => "Elvi",
                     "class" => "Chevalier de la mort",
@@ -2126,11 +1663,8 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => [
-                        "Vide",
-                     ],
                 ],
-                
+
                 [
                     "name" => "Euphorus",
                     "class" => "Voleur",
@@ -2138,11 +1672,8 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Galopin",
                     "is_actif" => "1",
-                    "item" => [
-                        "Vide",
-                     ],
                 ],
-                
+
                 [
                     "name" => "Farah",
                     "class" => "Chevalier de la mort",
@@ -2150,11 +1681,8 @@ class DataFixtures extends Fixture
                     "role" => "Tank",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => [
-                        "Vide",
-                     ],
                 ],
-                
+
                 [
                     "name" => "Floriel",
                     "class" => "Druide",
@@ -2162,11 +1690,8 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Galopin",
                     "is_actif" => "1",
-                    "item" => [
-                        "Vide",
-                     ],
                 ],
-                
+
                 [
                     "name" => "Gazzole",
                     "class" => "Voleur",
@@ -2174,11 +1699,8 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Galopin",
                     "is_actif" => "1",
-                    "item" => [
-                        "Vide",
-                     ],
                 ],
-                
+
                 [
                     "name" => "Grymn",
                     "class" => "Guerrier",
@@ -2186,11 +1708,8 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Galopin",
                     "is_actif" => "1",
-                    "item" => [
-                        "Vide",
-                     ],
                 ],
-                
+
                 [
                     "name" => "Gulliver",
                     "class" => "Démoniste",
@@ -2198,11 +1717,8 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Galopin",
                     "is_actif" => "1",
-                    "item" => [
-                        "Vide",
-                     ],
                 ],
-                
+
                 [
                     "name" => "Gwen",
                     "class" => "Druide",
@@ -2210,11 +1726,8 @@ class DataFixtures extends Fixture
                     "role" => "Healer",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => [
-                        "Vide",
-                     ],
                 ],
-                
+
                 [
                     "name" => "Icekarr",
                     "class" => "Chaman",
@@ -2222,11 +1735,8 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => [
-                        "Vide",
-                     ],
                 ],
-                
+
                 [
                     "name" => "Judgentix",
                     "class" => "Paladin",
@@ -2234,11 +1744,8 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => [
-                        "Vide",
-                     ],
                 ],
-                
+
                 [
                     "name" => "Kamari",
                     "class" => "Chasseur",
@@ -2246,11 +1753,8 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => [
-                        "Vide",
-                     ],
                 ],
-                
+
                 [
                     "name" => "Keny",
                     "class" => "Chevalier de la mort",
@@ -2258,11 +1762,8 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => [
-                        "Vide",
-                     ],
                 ],
-                
+
                 [
                     "name" => "Kwaky",
                     "class" => "Démoniste",
@@ -2270,11 +1771,8 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => [
-                        "Vide",
-                     ],
                 ],
-                
+
                 [
                     "name" => "Lady",
                     "class" => "Mage",
@@ -2282,11 +1780,8 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => [
-                        "Vide",
-                     ],
                 ],
-                            
+
                 [
                     "name" => "Limdul",
                     "class" => "Prêtre",
@@ -2294,11 +1789,8 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Demi",
                     "is_actif" => "1",
-                    "item" => [
-                        "Vide",
-                     ],
                 ],
-                
+
                 [
                     "name" => "Lucamar",
                     "class" => "Druide",
@@ -2306,11 +1798,8 @@ class DataFixtures extends Fixture
                     "role" => "Healer",
                     "rank" => "Galopin",
                     "is_actif" => "1",
-                    "item" => [
-                        "Vide",
-                     ],
                 ],
-                            
+
                 [
                     "name" => "Maxxam",
                     "class" => "Mage",
@@ -2318,11 +1807,8 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Galopin",
                     "is_actif" => "1",
-                    "item" => [
-                        "Vide",
-                     ],
                 ],
-                
+
                 [
                     "name" => "Mealyn",
                     "class" => "Mage",
@@ -2330,11 +1816,8 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => [
-                        "Vide",
-                     ],
                 ],
-                            
+
                 [
                     "name" => "Mjol",
                     "class" => "Mage",
@@ -2342,11 +1825,8 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => [
-                        "Vide",
-                     ],
                 ],
-                
+
                 [
                     "name" => "Necrogirl",
                     "class" => "Démoniste",
@@ -2354,11 +1834,8 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => [
-                        "Vide",
-                     ],
                 ],
-                            
+
                 [
                     "name" => "Portish",
                     "class" => "Prêtre",
@@ -2366,11 +1843,8 @@ class DataFixtures extends Fixture
                     "role" => "Healer",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => [
-                        "Vide",
-                     ],
                 ],
-                
+
                 [
                     "name" => "Pyro",
                     "class" => "Guerrier",
@@ -2378,11 +1852,8 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => [
-                        "Vide",
-                     ],
                 ],
-                            
+
                 [
                     "name" => "Rim",
                     "class" => "Paladin",
@@ -2390,11 +1861,8 @@ class DataFixtures extends Fixture
                     "role" => "Healer",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => [
-                        "Vide",
-                     ],
                 ],
-                
+
                 [
                     "name" => "Schaga",
                     "class" => "Chaman",
@@ -2402,11 +1870,8 @@ class DataFixtures extends Fixture
                     "role" => "Healer",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => [
-                        "Vide",
-                     ],
                 ],
-                            
+
                 [
                     "name" => "Selena",
                     "class" => "Druide",
@@ -2414,11 +1879,8 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Demi",
                     "is_actif" => "1",
-                    "item" => [
-                        "Vide",
-                     ],
                 ],
-                
+
                 [
                     "name" => "Sha",
                     "class" => "Chevalier de la mort",
@@ -2426,11 +1888,8 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => [
-                        "Vide",
-                     ],
                 ],
-                            
+
                 [
                     "name" => "Skenz",
                     "class" => "Chaman",
@@ -2438,11 +1897,8 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => [
-                        "Vide",
-                     ],
                 ],
-                
+
                 [
                     "name" => "Sunks",
                     "class" => "Voleur",
@@ -2450,11 +1906,8 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => [
-                        "Vide",
-                     ],
                 ],
-                            
+
                 [
                     "name" => "Tanriel",
                     "class" => "Chasseur",
@@ -2462,11 +1915,8 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Galopin",
                     "is_actif" => "1",
-                    "item" => [
-                        "Vide",
-                     ],
                 ],
-                
+
                 [
                     "name" => "Tindu",
                     "class" => "Guerrier",
@@ -2474,11 +1924,8 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Demi",
                     "is_actif" => "1",
-                    "item" => [
-                        "Vide",
-                     ],
                 ],
-                            
+
                 [
                     "name" => "Ulmo",
                     "class" => "Voleur",
@@ -2486,11 +1933,8 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => [
-                        "Vide",
-                     ],
                 ],
-                
+
                 [
                     "name" => "Untardo",
                     "class" => "Chasseur",
@@ -2498,11 +1942,8 @@ class DataFixtures extends Fixture
                     "role" => "CAC",
                     "rank" => "Demi",
                     "is_actif" => "1",
-                    "item" => [
-                        "Vide",
-                     ],
                 ],
-                            
+
                 [
                     "name" => "Vali",
                     "class" => "Paladin",
@@ -2510,11 +1951,8 @@ class DataFixtures extends Fixture
                     "role" => "Tank",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => [
-                        "Vide",
-                     ],
                 ],
-                
+
                 [
                     "name" => "Vultris",
                     "class" => "Démoniste",
@@ -2522,11 +1960,8 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => [
-                        "Vide",
-                     ],
                 ],
-                            
+
                 [
                     "name" => "Xamena",
                     "class" => "Mage",
@@ -2534,11 +1969,8 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Demi",
                     "is_actif" => "1",
-                    "item" => [
-                        "Vide",
-                     ],
                 ],
-                
+
                 [
                     "name" => "Youyou",
                     "class" => "Druide",
@@ -2546,16 +1978,12 @@ class DataFixtures extends Fixture
                     "role" => "Caster",
                     "rank" => "Sérieux",
                     "is_actif" => "1",
-                    "item" => [
-                        "Vide",
-                     ],
                 ],
-                
+
             ];
 
             // $playersObjArray = [];
             foreach ($playersObjArray as $currentPlayer) {
-                
                 $playerObj = new Player();
 
                 $playerObj->setName($currentPlayer['name']);
@@ -2569,22 +1997,13 @@ class DataFixtures extends Fixture
                 $roleObj = $this->getReference($currentPlayer["role"]);
                 $playerObj->setRole($roleObj);
 
-                // $itemObj = $this->getReference($currentPlayer["item"]);
-                // $playerObj->addItem($itemObj);               
-                foreach ($currentPlayer["item"] as $currentItemName) {
-                    $currentItemObj = $itemsObjArray[md5($currentItemName)];
-                    $playerObj->addItem($currentItemObj);
-                };
-
                 $playersObjArray[md5($currentPlayer['name'])] = $playerObj;
 
                 $manager->persist($playerObj);
 
                 //* reference to link fixtures files
                 $this->addReference($currentPlayer['name'], $playerObj);
-
             }
-
 
         // ------------------------------- Events -------------------------------
             $events = [
@@ -2594,10 +2013,6 @@ class DataFixtures extends Fixture
                     "raid" => [
                         "Naxxramas",
                         "L'oeil de l'éternité",
-                    ],
-                    "player" => [
-                        "Arianhrod",
-                        "Atanea",
                     ],
                     "item" => [
                         "Ambition infinie",
@@ -2611,9 +2026,6 @@ class DataFixtures extends Fixture
                     "raid" => [
                         "L'oeil de l'éternité",
                     ],
-                    "player" => [
-                        "Atanea",
-                    ],
                     "item" => [
                         "Bottes des énergies soignantes",
                     ],
@@ -2622,39 +2034,116 @@ class DataFixtures extends Fixture
             ];
 
             foreach ($events as $currentEvent) {
-                
                 $eventObj = new Event();
 
                 $eventObj->setDate(new DateTimeImmutable($currentEvent["date"]));
                 $eventObj->setLog($currentEvent['log']);
-    
+
                 // $raidObj = $this->getReference($currentEvent["raid"]);
                 // $eventObj->addRaid($raidObj);
                 foreach ($currentEvent["raid"] as $currentRaidName) {
                     $currentEventObj = $raidsObjArray[md5($currentRaidName)];
                     $eventObj->addRaid($currentEventObj);
                 };
-                
-                // $playerObj = $this->getReference($currentEvent["player"]);
-                // $eventObj->addPlayer($playerObj);
-                foreach ($currentEvent["player"] as $currentPlayerName) {
-                    $currentEventObj = $playersObjArray[md5($currentPlayerName)];
-                    $eventObj->addPlayer($currentEventObj);
-                };
-                
+
                 // $itemObj = $this->getReference($currentEvent["item"]);
                 // $eventObj->addItem($itemObj);
                 foreach ($currentEvent["item"] as $currentItemName) {
-                    $currentEventObj = $itemsObjArray[md5($currentItemName)];
-                    $eventObj->addItem($currentEventObj);
+                        $currentEventObj = $itemsObjArray[md5($currentItemName)];
+                        $eventObj->addItem($currentEventObj);
                 };
 
                 $manager->persist($eventObj);
 
+                //* reference to link fixtures files
+                $this->addReference($currentEvent['date'], $eventObj);
             }
 
+        // ------------------------------- LootHistories -------------------------------
+            $lootHistories = [
+                [
+                    "event" => "2022-11-30 20:45:00",
+                    "player" => "Lucamar",
+                    "item" => [
+                        "Ambition infinie",
+                        "Bottes des énergies soignantes",
+                    ],
 
-        $manager->flush();
-    
-    }
+                ],
+
+                [
+                    "event" => "2022-12-15 20:45:00",
+                    "player" => "Youyou",
+                    "item" => [
+                        "Ambition infinie",
+                        "Bottes des énergies soignantes",
+                    ],
+
+                ],
+            ];
+
+            foreach ($lootHistories as $currentLoot) {
+                $lootObj = new LootHistory();
+
+                $eventObj = $this->getReference($currentLoot["event"]);
+                $lootObj->setEvent($eventObj);
+
+                $playerObj = $this->getReference($currentLoot["player"]);
+                $lootObj->setPlayer($playerObj);
+
+                foreach ($currentLoot["item"] as $currentItemName) {
+                    $currentLootObj = $itemsObjArray[md5($currentItemName)];
+                    $lootObj->addItem($currentLootObj);
+                };
+
+                $manager->persist($lootObj);
+            }
+         
+        // ------------------------------- Participations -------------------------------
+            $participations = [
+                [
+                    "event" => "2022-11-30 20:45:00",
+                    "player" => "Lucamar",
+                    "isBench" => 1,
+
+                ],
+
+                [
+                    "event" => "2022-11-30 20:45:00",
+                    "player" => "Youyou",
+                    "isBench" => 0,
+
+                ],
+
+                [
+                    "event" => "2022-12-15 20:45:00",
+                    "player" => "Youyou",
+                    "isBench" => 1,
+
+                ],
+
+                [
+                    "event" => "2022-12-15 20:45:00",
+                    "player" => "Lucamar",
+                    "isBench" => 0,
+
+                ],
+            ];
+
+            foreach ($participations as $currentParticipation) {
+                $participationObj = new Participation();
+
+                $eventObj = $this->getReference($currentParticipation["event"]);
+                $participationObj->setEvent($eventObj);
+
+                $playerObj = $this->getReference($currentParticipation["player"]);
+                $participationObj->setPlayer($playerObj);
+
+                $participationObj->setIsBench($currentParticipation['isBench']);
+
+                $manager->persist($participationObj);
+            }
+
+            $manager->flush();
+        }
 }

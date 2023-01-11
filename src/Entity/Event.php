@@ -38,12 +38,6 @@ class Event
     private $raid;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Player::class, inversedBy="events")
-     * @Assert\NotBlank(message="Merci de remplir ce champs")
-     */
-    private $player;
-
-    /**
      * @ORM\ManyToMany(targetEntity=Item::class, inversedBy="events")
      * @Assert\NotBlank(message="Merci de remplir ce champs")
      */
@@ -57,7 +51,6 @@ class Event
     public function __construct()
     {
         $this->raid = new ArrayCollection();
-        $this->player = new ArrayCollection();
         $this->item = new ArrayCollection();
         $this->participations = new ArrayCollection();
     }
@@ -117,30 +110,6 @@ class Event
     }
 
     /**
-     * @return Collection<int, player>
-     */
-    public function getPlayer(): Collection
-    {
-        return $this->player;
-    }
-
-    public function addPlayer(player $player): self
-    {
-        if (!$this->player->contains($player)) {
-            $this->player[] = $player;
-        }
-
-        return $this;
-    }
-
-    public function removePlayer(player $player): self
-    {
-        $this->player->removeElement($player);
-
-        return $this;
-    }
-
-    /**
      * @return Collection<int, item>
      */
     public function getItem(): Collection
@@ -172,7 +141,7 @@ class Event
         return $this->participations;
     }
 
-    public function addParticipation(Participation $participation): self
+    public function addParticipations(Participation $participation): self
     {
         if (!$this->participations->contains($participation)) {
             $this->participations[] = $participation;
@@ -182,7 +151,7 @@ class Event
         return $this;
     }
 
-    public function removeParticipation(Participation $participation): self
+    public function removeParticipations(Participation $participation): self
     {
         if ($this->participations->removeElement($participation)) {
             // set the owning side to null (unless already changed)
