@@ -62,7 +62,7 @@ class Item
     private $slots;
 
     /**
-     * @ORM\OneToMany(targetEntity=LootHistory::class, mappedBy="item")
+     * @ORM\ManyToMany(targetEntity=LootHistory::class, mappedBy="item")
      */
     private $lootHistories;
 

@@ -20,6 +20,11 @@ class LootHistory
     private $id;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $name;
+
+    /**
      * @ORM\OneToOne(targetEntity=Event::class, cascade={"persist", "remove"})
      */
     private $event;
@@ -30,13 +35,30 @@ class LootHistory
     private $player;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Item::class, inversedBy="lootHistories")
+     * @ORM\ManyToMany(targetEntity=Item::class, inversedBy="lootHistories")
      */
     private $item;
+
+    public function __construct()
+    {
+        $this->item = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(?string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
     }
 
     public function getEvent(): ?Event
