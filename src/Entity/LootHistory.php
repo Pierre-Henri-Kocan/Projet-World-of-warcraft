@@ -20,11 +20,6 @@ class LootHistory
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $name;
-
-    /**
      * @ORM\OneToOne(targetEntity=Event::class, cascade={"persist", "remove"})
      */
     private $event;
@@ -47,18 +42,6 @@ class LootHistory
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(?string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
     }
 
     public function getEvent(): ?Event
