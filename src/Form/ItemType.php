@@ -4,7 +4,7 @@ namespace App\Form;
 
 use App\Entity\Event;
 use App\Entity\Item;
-use App\Entity\Location;
+use App\Entity\Slot;
 use App\Entity\Player;
 use App\Entity\Raid;
 use App\Entity\Role;
@@ -68,9 +68,9 @@ class ItemType extends AbstractType
                 'expanded' => true,
                 'required' => true,]
             )
-            ->add('locations',
+            ->add('slots',
             EntityType::class, [
-                'class' => Location::class,
+                'class' => Slot::class,
                 'choice_label' => 'name',
                 'multiple' => true,
                 'expanded' => true,

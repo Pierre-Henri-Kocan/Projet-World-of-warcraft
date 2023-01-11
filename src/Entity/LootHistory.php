@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\LocationRepository;
+use App\Repository\LootHistoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=LocationRepository::class)
+ * @ORM\Entity(repositoryClass=LootHistoryRepository::class)
  */
-class Location
+class LootHistory
 {
     /**
      * @ORM\Id
@@ -20,17 +20,17 @@ class Location
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=64)
+     * @ORM\OneToOne(targetEntity=Event::class, cascade={"persist", "remove"})
      */
-    private $name;
+    private $event;
 
     /**
-     * @ORM\Column(type="string", length=64, nullable=true)
+     * @ORM\OneToOne(targetEntity=Player::class, cascade={"persist", "remove"})
      */
-    private $slug;
+    private $player;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Item::class, inversedBy="locations")
+     * @ORM\ManyToMany(targetEntity=Item::class, inversedBy="lootHistories")
      */
     private $item;
 
@@ -44,26 +44,26 @@ class Location
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getEvent(): ?Event
     {
-        return $this->name;
+        return $this->event;
     }
 
-    public function setName(string $name): self
+    public function setEvent(?Event $event): self
     {
-        $this->name = $name;
+        $this->event = $event;
 
         return $this;
     }
 
-    public function getSlug(): ?string
+    public function getPlayer(): ?Player
     {
-        return $this->slug;
+        return $this->player;
     }
 
-    public function setSlug(string $slug): self
+    public function setPlayer(?Player $player): self
     {
-        $this->slug = $slug;
+        $this->player = $player;
 
         return $this;
     }

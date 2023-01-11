@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\RoleRepository;
+use App\Repository\SlotRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=RoleRepository::class)
+ * @ORM\Entity(repositoryClass=SlotRepository::class)
  */
-class Role
+class Slot
 {
     /**
      * @ORM\Id
@@ -25,18 +25,18 @@ class Role
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=64)
+     * @ORM\Column(type="string", length=64, nullable=true)
      */
     private $slug;
 
     /**
-     * @ORM\OneToMany(targetEntity=Player::class, mappedBy="role")
+     * @ORM\ManyToMany(targetEntity=Item::class, inversedBy="slots")
      */
-    private $players;
+    private $item;
 
     public function __construct()
     {
-        $this->players = new ArrayCollection();
+        $this->item = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -69,31 +69,25 @@ class Role
     }
 
     /**
-     * @return Collection<int, Player>
+     * @return Collection<int, Item>
      */
-    public function getPlayers(): Collection
+    public function getItem(): Collection
     {
-        return $this->players;
+        return $this->item;
     }
 
-    public function addPlayer(Player $player): self
+    public function addItem(Item $item): self
     {
-        if (!$this->players->contains($player)) {
-            $this->players[] = $player;
-            $player->setRole($this);
+        if (!$this->item->contains($item)) {
+            $this->item[] = $item;
         }
 
         return $this;
     }
 
-    public function removePlayer(Player $player): self
+    public function removeItem(Item $item): self
     {
-        if ($this->players->removeElement($player)) {
-            // set the owning side to null (unless already changed)
-            if ($player->getRole() === $this) {
-                $player->setRole(null);
-            }
-        }
+        $this->item->removeElement($item);
 
         return $this;
     }
