@@ -4,7 +4,9 @@ namespace App\DataFixtures;
 
 use App\Entity\Event;
 use App\Entity\Item;
+use App\Entity\LootHistory;
 use App\Entity\Slot;
+use App\Entity\Participation;
 use App\Entity\Player;
 use App\Entity\Raid;
 use App\Entity\Role;
@@ -15,17 +17,15 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 class DataFixtures extends Fixture
 {
-
     private $slugger;
 
     public function __construct(SluggerInterface $slugger)
     {
-         $this->slugger = $slugger;
+        $this->slugger = $slugger;
     }
 
     public function load(ObjectManager $manager): void
     {
-
         // ------------------------------- Raids -------------------------------
             $raidsObjArray = [
                 [
@@ -48,7 +48,6 @@ class DataFixtures extends Fixture
 
             // $raidsObjArray = [];
             foreach ($raidsObjArray as $currentRaid) {
-                
                 $raidObj = new Raid();
 
                 $raidObj->setName($currentRaid['name']);
@@ -60,7 +59,6 @@ class DataFixtures extends Fixture
 
                 //* reference to link fixtures files
                 $this->addReference($currentRaid['name'], $raidObj);
-
             }
 
         // ------------------------------- Roles -------------------------------
@@ -88,9 +86,8 @@ class DataFixtures extends Fixture
             ];
             // $rolesObjArray = [];
             foreach ($rolesObjArray as $currentRole) {
-                
                 $roleObj = new Role();
-                
+
                 $roleObj->setName($currentRole['name']);
                 $roleObj->setSlug($this->slugger->slug(mb_strtolower($currentRole['name'])));
 
@@ -100,7 +97,6 @@ class DataFixtures extends Fixture
 
                 //* reference to link fixtures files
                 $this->addReference($currentRole['name'], $roleObj);
-
             }
 
         // ------------------------------- Slots -------------------------------
@@ -185,12 +181,11 @@ class DataFixtures extends Fixture
 
             // $slotObjArray = [];
             foreach ($slotObjArray as $currentSlot) {
-
                 $slotObj = new Slot();
 
                 $slotObj->setName($currentSlot['name']);
                 $slotObj->setSlug($this->slugger->slug(mb_strtolower($currentSlot['name'])));
-                
+
                 $slotObjArray[md5($currentSlot['name'])] = $slotObj;
 
                 $manager->persist($slotObj);
@@ -1438,7 +1433,7 @@ class DataFixtures extends Fixture
                     "type" => "Contested",
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/guide/raids/tier-7-raid-sets",
-                ],   
+                ],
 
                 [
                     "name" => "Torche du saint feu",
@@ -1520,26 +1515,24 @@ class DataFixtures extends Fixture
                     "raid" => "Naxxramas",
                     "detail" => "https://www.wowhead.com/wotlk/fr/item=40401/voix-de-la-raison",
                 ],
-            
+
             ];
 
             // $itemsObjArray = [];
             foreach ($itemsObjArray as $currentItem) {
-                
                 $itemObj = new Item();
 
                 $itemObj->setName($currentItem['name']);
                 $itemObj->setType($currentItem['type']);
                 $itemObj->setSlug($this->slugger->slug(mb_strtolower($currentItem['name'])));
                 $itemObj->setDetail($currentItem['detail']);
-                
+
                 $raidObj = $this->getReference($currentItem["raid"]);
                 $itemObj->setRaid($raidObj);
-                
+
                 // $slotObj = $this->getReference($currentItem["slot"]);
                 // $itemObj->addSlot($slotObj);
                 foreach ($currentItem["slot"] as $currentSlotName) {
-
                     $currentSlotObj = $slotObjArray[md5($currentSlotName)];
                     $itemObj->addSlot($currentSlotObj);
                 };
@@ -1572,7 +1565,7 @@ class DataFixtures extends Fixture
                     "rank" => "Demi",
                     "is_actif" => "1",
                 ],
-                
+
                 [
                     "name" => "Belzedar",
                     "class" => "Prêtre",
@@ -1581,7 +1574,7 @@ class DataFixtures extends Fixture
                     "rank" => "Sérieux",
                     "is_actif" => "1",
                 ],
-                
+
                 [
                     "name" => "Bourla",
                     "class" => "Paladin",
@@ -1590,7 +1583,7 @@ class DataFixtures extends Fixture
                     "rank" => "Sérieux",
                     "is_actif" => "1",
                 ],
-                
+
                 [
                     "name" => "Burgrogue",
                     "class" => "Voleur",
@@ -1599,7 +1592,7 @@ class DataFixtures extends Fixture
                     "rank" => "Demi",
                     "is_actif" => "1",
                 ],
-                
+
                 [
                     "name" => "Camchoupette",
                     "class" => "Paladin",
@@ -1608,7 +1601,7 @@ class DataFixtures extends Fixture
                     "rank" => "Galopin",
                     "is_actif" => "1",
                 ],
-                
+
                 [
                     "name" => "Cegar",
                     "class" => "Paladin",
@@ -1617,7 +1610,7 @@ class DataFixtures extends Fixture
                     "rank" => "Sérieux",
                     "is_actif" => "1",
                 ],
-                
+
                 [
                     "name" => "Cheren",
                     "class" => "Chasseur",
@@ -1626,7 +1619,7 @@ class DataFixtures extends Fixture
                     "rank" => "Galopin",
                     "is_actif" => "1",
                 ],
-                
+
                 [
                     "name" => "Chipmage",
                     "class" => "Mage",
@@ -1635,7 +1628,7 @@ class DataFixtures extends Fixture
                     "rank" => "Demi",
                     "is_actif" => "1",
                 ],
-                
+
                 [
                     "name" => "Chpok",
                     "class" => "Mage",
@@ -1644,7 +1637,7 @@ class DataFixtures extends Fixture
                     "rank" => "Galopin",
                     "is_actif" => "1",
                 ],
-                
+
                 [
                     "name" => "Demoralyse",
                     "class" => "Démoniste",
@@ -1653,7 +1646,7 @@ class DataFixtures extends Fixture
                     "rank" => "Sérieux",
                     "is_actif" => "1",
                 ],
-                
+
                 [
                     "name" => "Ekte",
                     "class" => "Paladin",
@@ -1662,7 +1655,7 @@ class DataFixtures extends Fixture
                     "rank" => "Sérieux",
                     "is_actif" => "1",
                 ],
-                
+
                 [
                     "name" => "Elvi",
                     "class" => "Chevalier de la mort",
@@ -1671,7 +1664,7 @@ class DataFixtures extends Fixture
                     "rank" => "Sérieux",
                     "is_actif" => "1",
                 ],
-                
+
                 [
                     "name" => "Euphorus",
                     "class" => "Voleur",
@@ -1680,7 +1673,7 @@ class DataFixtures extends Fixture
                     "rank" => "Galopin",
                     "is_actif" => "1",
                 ],
-                
+
                 [
                     "name" => "Farah",
                     "class" => "Chevalier de la mort",
@@ -1689,7 +1682,7 @@ class DataFixtures extends Fixture
                     "rank" => "Sérieux",
                     "is_actif" => "1",
                 ],
-                
+
                 [
                     "name" => "Floriel",
                     "class" => "Druide",
@@ -1698,7 +1691,7 @@ class DataFixtures extends Fixture
                     "rank" => "Galopin",
                     "is_actif" => "1",
                 ],
-                
+
                 [
                     "name" => "Gazzole",
                     "class" => "Voleur",
@@ -1707,7 +1700,7 @@ class DataFixtures extends Fixture
                     "rank" => "Galopin",
                     "is_actif" => "1",
                 ],
-                
+
                 [
                     "name" => "Grymn",
                     "class" => "Guerrier",
@@ -1716,7 +1709,7 @@ class DataFixtures extends Fixture
                     "rank" => "Galopin",
                     "is_actif" => "1",
                 ],
-                
+
                 [
                     "name" => "Gulliver",
                     "class" => "Démoniste",
@@ -1725,7 +1718,7 @@ class DataFixtures extends Fixture
                     "rank" => "Galopin",
                     "is_actif" => "1",
                 ],
-                
+
                 [
                     "name" => "Gwen",
                     "class" => "Druide",
@@ -1734,7 +1727,7 @@ class DataFixtures extends Fixture
                     "rank" => "Sérieux",
                     "is_actif" => "1",
                 ],
-                
+
                 [
                     "name" => "Icekarr",
                     "class" => "Chaman",
@@ -1743,7 +1736,7 @@ class DataFixtures extends Fixture
                     "rank" => "Sérieux",
                     "is_actif" => "1",
                 ],
-                
+
                 [
                     "name" => "Judgentix",
                     "class" => "Paladin",
@@ -1752,7 +1745,7 @@ class DataFixtures extends Fixture
                     "rank" => "Sérieux",
                     "is_actif" => "1",
                 ],
-                
+
                 [
                     "name" => "Kamari",
                     "class" => "Chasseur",
@@ -1761,7 +1754,7 @@ class DataFixtures extends Fixture
                     "rank" => "Sérieux",
                     "is_actif" => "1",
                 ],
-                
+
                 [
                     "name" => "Keny",
                     "class" => "Chevalier de la mort",
@@ -1770,7 +1763,7 @@ class DataFixtures extends Fixture
                     "rank" => "Sérieux",
                     "is_actif" => "1",
                 ],
-                
+
                 [
                     "name" => "Kwaky",
                     "class" => "Démoniste",
@@ -1779,7 +1772,7 @@ class DataFixtures extends Fixture
                     "rank" => "Sérieux",
                     "is_actif" => "1",
                 ],
-                
+
                 [
                     "name" => "Lady",
                     "class" => "Mage",
@@ -1788,7 +1781,7 @@ class DataFixtures extends Fixture
                     "rank" => "Sérieux",
                     "is_actif" => "1",
                 ],
-                            
+
                 [
                     "name" => "Limdul",
                     "class" => "Prêtre",
@@ -1797,7 +1790,7 @@ class DataFixtures extends Fixture
                     "rank" => "Demi",
                     "is_actif" => "1",
                 ],
-                
+
                 [
                     "name" => "Lucamar",
                     "class" => "Druide",
@@ -1806,7 +1799,7 @@ class DataFixtures extends Fixture
                     "rank" => "Galopin",
                     "is_actif" => "1",
                 ],
-                            
+
                 [
                     "name" => "Maxxam",
                     "class" => "Mage",
@@ -1815,7 +1808,7 @@ class DataFixtures extends Fixture
                     "rank" => "Galopin",
                     "is_actif" => "1",
                 ],
-                
+
                 [
                     "name" => "Mealyn",
                     "class" => "Mage",
@@ -1824,7 +1817,7 @@ class DataFixtures extends Fixture
                     "rank" => "Sérieux",
                     "is_actif" => "1",
                 ],
-                            
+
                 [
                     "name" => "Mjol",
                     "class" => "Mage",
@@ -1833,7 +1826,7 @@ class DataFixtures extends Fixture
                     "rank" => "Sérieux",
                     "is_actif" => "1",
                 ],
-                
+
                 [
                     "name" => "Necrogirl",
                     "class" => "Démoniste",
@@ -1842,7 +1835,7 @@ class DataFixtures extends Fixture
                     "rank" => "Sérieux",
                     "is_actif" => "1",
                 ],
-                            
+
                 [
                     "name" => "Portish",
                     "class" => "Prêtre",
@@ -1851,7 +1844,7 @@ class DataFixtures extends Fixture
                     "rank" => "Sérieux",
                     "is_actif" => "1",
                 ],
-                
+
                 [
                     "name" => "Pyro",
                     "class" => "Guerrier",
@@ -1860,7 +1853,7 @@ class DataFixtures extends Fixture
                     "rank" => "Sérieux",
                     "is_actif" => "1",
                 ],
-                            
+
                 [
                     "name" => "Rim",
                     "class" => "Paladin",
@@ -1869,7 +1862,7 @@ class DataFixtures extends Fixture
                     "rank" => "Sérieux",
                     "is_actif" => "1",
                 ],
-                
+
                 [
                     "name" => "Schaga",
                     "class" => "Chaman",
@@ -1878,7 +1871,7 @@ class DataFixtures extends Fixture
                     "rank" => "Sérieux",
                     "is_actif" => "1",
                 ],
-                            
+
                 [
                     "name" => "Selena",
                     "class" => "Druide",
@@ -1887,7 +1880,7 @@ class DataFixtures extends Fixture
                     "rank" => "Demi",
                     "is_actif" => "1",
                 ],
-                
+
                 [
                     "name" => "Sha",
                     "class" => "Chevalier de la mort",
@@ -1896,7 +1889,7 @@ class DataFixtures extends Fixture
                     "rank" => "Sérieux",
                     "is_actif" => "1",
                 ],
-                            
+
                 [
                     "name" => "Skenz",
                     "class" => "Chaman",
@@ -1905,7 +1898,7 @@ class DataFixtures extends Fixture
                     "rank" => "Sérieux",
                     "is_actif" => "1",
                 ],
-                
+
                 [
                     "name" => "Sunks",
                     "class" => "Voleur",
@@ -1914,7 +1907,7 @@ class DataFixtures extends Fixture
                     "rank" => "Sérieux",
                     "is_actif" => "1",
                 ],
-                            
+
                 [
                     "name" => "Tanriel",
                     "class" => "Chasseur",
@@ -1923,7 +1916,7 @@ class DataFixtures extends Fixture
                     "rank" => "Galopin",
                     "is_actif" => "1",
                 ],
-                
+
                 [
                     "name" => "Tindu",
                     "class" => "Guerrier",
@@ -1932,7 +1925,7 @@ class DataFixtures extends Fixture
                     "rank" => "Demi",
                     "is_actif" => "1",
                 ],
-                            
+
                 [
                     "name" => "Ulmo",
                     "class" => "Voleur",
@@ -1941,7 +1934,7 @@ class DataFixtures extends Fixture
                     "rank" => "Sérieux",
                     "is_actif" => "1",
                 ],
-                
+
                 [
                     "name" => "Untardo",
                     "class" => "Chasseur",
@@ -1950,7 +1943,7 @@ class DataFixtures extends Fixture
                     "rank" => "Demi",
                     "is_actif" => "1",
                 ],
-                            
+
                 [
                     "name" => "Vali",
                     "class" => "Paladin",
@@ -1959,7 +1952,7 @@ class DataFixtures extends Fixture
                     "rank" => "Sérieux",
                     "is_actif" => "1",
                 ],
-                
+
                 [
                     "name" => "Vultris",
                     "class" => "Démoniste",
@@ -1968,7 +1961,7 @@ class DataFixtures extends Fixture
                     "rank" => "Sérieux",
                     "is_actif" => "1",
                 ],
-                            
+
                 [
                     "name" => "Xamena",
                     "class" => "Mage",
@@ -1977,7 +1970,7 @@ class DataFixtures extends Fixture
                     "rank" => "Demi",
                     "is_actif" => "1",
                 ],
-                
+
                 [
                     "name" => "Youyou",
                     "class" => "Druide",
@@ -1986,12 +1979,11 @@ class DataFixtures extends Fixture
                     "rank" => "Sérieux",
                     "is_actif" => "1",
                 ],
-                
+
             ];
 
             // $playersObjArray = [];
             foreach ($playersObjArray as $currentPlayer) {
-                
                 $playerObj = new Player();
 
                 $playerObj->setName($currentPlayer['name']);
@@ -2011,9 +2003,7 @@ class DataFixtures extends Fixture
 
                 //* reference to link fixtures files
                 $this->addReference($currentPlayer['name'], $playerObj);
-
             }
-
 
         // ------------------------------- Events -------------------------------
             $events = [
@@ -2044,32 +2034,116 @@ class DataFixtures extends Fixture
             ];
 
             foreach ($events as $currentEvent) {
-                
                 $eventObj = new Event();
 
                 $eventObj->setDate(new DateTimeImmutable($currentEvent["date"]));
                 $eventObj->setLog($currentEvent['log']);
-    
+
                 // $raidObj = $this->getReference($currentEvent["raid"]);
                 // $eventObj->addRaid($raidObj);
                 foreach ($currentEvent["raid"] as $currentRaidName) {
                     $currentEventObj = $raidsObjArray[md5($currentRaidName)];
                     $eventObj->addRaid($currentEventObj);
                 };
-                
+
                 // $itemObj = $this->getReference($currentEvent["item"]);
                 // $eventObj->addItem($itemObj);
                 foreach ($currentEvent["item"] as $currentItemName) {
-                    $currentEventObj = $itemsObjArray[md5($currentItemName)];
-                    $eventObj->addItem($currentEventObj);
+                        $currentEventObj = $itemsObjArray[md5($currentItemName)];
+                        $eventObj->addItem($currentEventObj);
                 };
 
                 $manager->persist($eventObj);
 
+                //* reference to link fixtures files
+                $this->addReference($currentEvent['date'], $eventObj);
             }
 
+        // ------------------------------- LootHistories -------------------------------
+            $lootHistories = [
+                [
+                    "event" => "2022-11-30 20:45:00",
+                    "player" => "Lucamar",
+                    "item" => [
+                        "Ambition infinie",
+                        "Bottes des énergies soignantes",
+                    ],
 
-        $manager->flush();
-    
-    }
+                ],
+
+                [
+                    "event" => "2022-12-15 20:45:00",
+                    "player" => "Youyou",
+                    "item" => [
+                        "Ambition infinie",
+                        "Bottes des énergies soignantes",
+                    ],
+
+                ],
+            ];
+
+            foreach ($lootHistories as $currentLoot) {
+                $lootObj = new LootHistory();
+
+                $eventObj = $this->getReference($currentLoot["event"]);
+                $lootObj->setEvent($eventObj);
+
+                $playerObj = $this->getReference($currentLoot["player"]);
+                $lootObj->setPlayer($playerObj);
+
+                foreach ($currentLoot["item"] as $currentItemName) {
+                    $currentLootObj = $itemsObjArray[md5($currentItemName)];
+                    $lootObj->addItem($currentLootObj);
+                };
+
+                $manager->persist($lootObj);
+            }
+         
+        // ------------------------------- Participations -------------------------------
+            $participations = [
+                [
+                    "event" => "2022-11-30 20:45:00",
+                    "player" => "Lucamar",
+                    "isBench" => 1,
+
+                ],
+
+                [
+                    "event" => "2022-11-30 20:45:00",
+                    "player" => "Youyou",
+                    "isBench" => 0,
+
+                ],
+
+                [
+                    "event" => "2022-12-15 20:45:00",
+                    "player" => "Youyou",
+                    "isBench" => 1,
+
+                ],
+
+                [
+                    "event" => "2022-12-15 20:45:00",
+                    "player" => "Lucamar",
+                    "isBench" => 0,
+
+                ],
+            ];
+
+            foreach ($participations as $currentParticipation) {
+                $participationObj = new Participation();
+
+                $eventObj = $this->getReference($currentParticipation["event"]);
+                $participationObj->setEvent($eventObj);
+
+                $playerObj = $this->getReference($currentParticipation["player"]);
+                $participationObj->setPlayer($playerObj);
+
+                $participationObj->setIsBench($currentParticipation['isBench']);
+
+                $manager->persist($participationObj);
+            }
+
+            $manager->flush();
+        }
 }
