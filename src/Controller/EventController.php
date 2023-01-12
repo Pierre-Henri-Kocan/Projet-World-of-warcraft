@@ -72,7 +72,8 @@ class EventController extends AbstractController
             $eventRepository->add($event, true);
 
             $this->addFlash('warning', 'Evènement modifié');
-            return $this->redirectToRoute('app_event_list', [], Response::HTTP_SEE_OTHER);
+            // return $this->redirectToRoute('app_event_list', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_event_read', ['id' => $event->getId()]);
         }
 
         return $this->renderForm('event/update.html.twig', [
