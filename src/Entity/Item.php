@@ -61,16 +61,10 @@ class Item
      */
     private $slots;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=LootHistory::class, mappedBy="item")
-     */
-    private $lootHistories;
-
     public function __construct()
     {
         $this->events = new ArrayCollection();
         $this->slots = new ArrayCollection();
-        $this->lootHistories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -187,33 +181,6 @@ class Item
     {
         if ($this->slots->removeElement($slot)) {
             $slot->removeItem($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, LootHistory>
-     */
-    public function getLootHistories(): Collection
-    {
-        return $this->lootHistories;
-    }
-
-    public function addLootHistory(LootHistory $lootHistory): self
-    {
-        if (!$this->lootHistories->contains($lootHistory)) {
-            $this->lootHistories[] = $lootHistory;
-            $lootHistory->addItem($this);
-        }
-
-        return $this;
-    }
-
-    public function removeLootHistory(LootHistory $lootHistory): self
-    {
-        if ($this->lootHistories->removeElement($lootHistory)) {
-            $lootHistory->removeItem($this);
         }
 
         return $this;
