@@ -90,14 +90,8 @@
                     aria-labelledby="panelsStayOpen-headingThree">
                     <div class="accordion-body">
                         <ul>
-                        {% for rank in rankSerieux %}
-                            <li>{{rank[1]}} joueurs de grade "Sérieux"</li>
-                        {% endfor %}
-                            {% for rank in rankDemi %}
-                            <li>{{rank[1]}} joueurs de grade "Demi"</li>
-                        {% endfor %}
-                            {% for rank in rankGalopin %}
-                            <li>{{rank[1]}} joueurs de grade "Galopin"</li>
+                        {% for playerRank in ranks %}
+                            <li>{{playerRank[1]}} joueurs de grade "{{playerRank.rank}}"</li>
                         {% endfor %}
                         </ul>
                     </div>

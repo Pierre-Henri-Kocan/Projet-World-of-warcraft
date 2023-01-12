@@ -20,17 +20,15 @@ class PlayerController extends AbstractController
      */
     public function list(PlayerRepository $playerRepository): Response
     {
-        $rankSerieux = $playerRepository->findPlayerByRank('Sérieux');
-        $rankDemi = $playerRepository->findPlayerByRank('Demi');
-        $rankGalopin = $playerRepository->findPlayerByRank('Galopin');
-        // dump($ranks); die;
+        $ranks = $playerRepository->findPlayerByRank();
+    
+        //dd($ranks); die;
 
         return $this->render('player/list.html.twig', [
             'controller_name' => 'PlayerController',
             'players' => $playerRepository->findAll(),
-            'rankSerieux' => $rankSerieux,
-            'rankDemi' => $rankDemi,
-            'rankGalopin' => $rankGalopin,
+            'ranks' => $ranks,
+
         ]);
     }
 
