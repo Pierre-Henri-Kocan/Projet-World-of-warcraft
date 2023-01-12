@@ -57,6 +57,20 @@ class PlayerRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findPlayerByRank(): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT p.rank, COUNT(p)
+            FROM App\Entity\Player p
+            GROUP BY p.rank
+            '
+        );
+
+        return $query->getResult();
+    }
+
 //    /**
 //     * @return Player[] Returns an array of Player objects
 //     */
