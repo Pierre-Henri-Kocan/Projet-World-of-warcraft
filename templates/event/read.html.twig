@@ -28,12 +28,12 @@
             </thead>
             <tbody>
                 {# Pour l'évènement en cours, je veux chaque item récupéré, son type, son raid d'appartenance, le joueur qui l'a récupéré #}
-                {% for item in event.item %}
+                {% for lootHistories in event.lootHistories %}
                 <tr>
-                    <td>{{item.name }}</td>
-                    <td>{{item.type }}</td>
-                    <td>{{item.raid.name }}</td>
-                    {# <td>{{item.player.name}}</td> #}
+                    <td>{{lootHistories.item.name }}</td>
+                    <td>{{lootHistories.item.type }}</td>
+                    <td>{{lootHistories.item.raid.name }}</td>
+                    <td>{{lootHistories.player.name}}</td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -48,10 +48,14 @@
                 </tr>
             </thead>
             <tbody>
-                {% for player in event.player %}
+                {% for participations in event.participations %}
                 <tr>
-                    <td>{{ player.name }}</td>
-                    <td>présent ou is_bench</td>
+                    <td>{{participations.player.name }}</td>
+                    {% if participations.isBench == 1 %}
+                        <td>Présent</td>
+                    {% else %}
+                        <td>Bench</td>
+                    {% endif %}
                 </tr>
                 {% endfor %}
             </tbody>

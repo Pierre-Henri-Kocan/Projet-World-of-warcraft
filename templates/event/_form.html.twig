@@ -2,6 +2,6 @@
     {{ form_widget(form) }}
     <div class="d-flex flex-wrap justify-content-evenly">
         <button class="button-save">{{ button_label|default('Enregistrer') }}</button>
-        <a class="button-back" href="{{ path('app_event_read', {'id': event.id}) }}">Retour</a>
+        <a class="button-back" href="{{ path('app_event_list') }}">Retour</a>
     </div>
 {{ form_end(form) }}
