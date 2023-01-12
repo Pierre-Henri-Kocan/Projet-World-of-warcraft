@@ -62,7 +62,7 @@ class Item
     private $slots;
 
     /**
-     * @ORM\ManyToMany(targetEntity=LootHistory::class, mappedBy="item")
+     * @ORM\OneToMany(targetEntity=LootHistory::class, mappedBy="item")
      */
     private $lootHistories;
 
@@ -204,7 +204,7 @@ class Item
     {
         if (!$this->lootHistories->contains($lootHistory)) {
             $this->lootHistories[] = $lootHistory;
-            $lootHistory->addItem($this);
+            $lootHistory->setItem($this);
         }
 
         return $this;
@@ -213,7 +213,10 @@ class Item
     public function removeLootHistory(LootHistory $lootHistory): self
     {
         if ($this->lootHistories->removeElement($lootHistory)) {
-            $lootHistory->removeItem($this);
+            // set the owning side to null (unless already changed)
+            if ($lootHistory->getItem() === $this) {
+                $lootHistory->setItem(null);
+            }
         }
 
         return $this;
