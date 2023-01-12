@@ -2014,10 +2014,6 @@ class DataFixtures extends Fixture
                         "Naxxramas",
                         "L'oeil de l'éternité",
                     ],
-                    "item" => [
-                        "Ambition infinie",
-                        "Bottes des énergies soignantes",
-                    ],
                 ],
 
                 [
@@ -2026,8 +2022,14 @@ class DataFixtures extends Fixture
                     "raid" => [
                         "L'oeil de l'éternité",
                     ],
-                    "item" => [
-                        "Bottes des énergies soignantes",
+                ],
+
+                [
+                    "date" => "2023-02-15 20:45:00",
+                    "log" => "https://classic.warcraftlogs.com/reports/GtrmZdLaC7Pykh2c/#boss=-2&difficulty=0&wipes=2&view=rankings",
+                    "raid" => [
+                        "Le sanctum Obsidien",
+                        "Naxxramas",
                     ],
                 ],
 
@@ -2046,13 +2048,6 @@ class DataFixtures extends Fixture
                     $eventObj->addRaid($currentEventObj);
                 };
 
-                // $itemObj = $this->getReference($currentEvent["item"]);
-                // $eventObj->addItem($itemObj);
-                foreach ($currentEvent["item"] as $currentItemName) {
-                        $currentEventObj = $itemsObjArray[md5($currentItemName)];
-                        $eventObj->addItem($currentEventObj);
-                };
-
                 $manager->persist($eventObj);
 
                 //* reference to link fixtures files
@@ -2064,22 +2059,33 @@ class DataFixtures extends Fixture
                 [
                     "event" => "2022-11-30 20:45:00",
                     "player" => "Lucamar",
-                    "item" => [
-                        "Ambition infinie",
-                        "Bottes des énergies soignantes",
-                    ],
+                    "item" => "Ambition infinie",
+                ],
 
+                [
+                    "event" => "2022-11-30 20:45:00",
+                    "player" => "Lucamar",
+                    "item" => "Anneau du capteur tellurique",
                 ],
 
                 [
                     "event" => "2022-12-15 20:45:00",
                     "player" => "Youyou",
-                    "item" => [
-                        "Ambition infinie",
-                        "Bottes des énergies soignantes",
-                    ],
-
+                    "item" => "Pas de Malygos",
                 ],
+
+                [
+                    "event" => "2022-12-15 20:45:00",
+                    "player" => "Atanea",
+                    "item" => "Averse de grêle",
+                ],
+
+                [
+                    "event" => "2023-02-15 20:45:00",
+                    "player" => "Kamari",
+                    "item" => "Grand heaume en obsidienne",
+                ],
+
             ];
 
             foreach ($lootHistories as $currentLoot) {
@@ -2091,10 +2097,8 @@ class DataFixtures extends Fixture
                 $playerObj = $this->getReference($currentLoot["player"]);
                 $lootObj->setPlayer($playerObj);
 
-                foreach ($currentLoot["item"] as $currentItemName) {
-                    $currentLootObj = $itemsObjArray[md5($currentItemName)];
-                    $lootObj->addItem($currentLootObj);
-                };
+                $itemObj = $this->getReference($currentLoot["item"]);
+                $lootObj->setItem($itemObj);
 
                 $manager->persist($lootObj);
             }
@@ -2105,28 +2109,48 @@ class DataFixtures extends Fixture
                     "event" => "2022-11-30 20:45:00",
                     "player" => "Lucamar",
                     "isBench" => 1,
-
                 ],
 
                 [
                     "event" => "2022-11-30 20:45:00",
                     "player" => "Youyou",
                     "isBench" => 0,
-
                 ],
 
                 [
                     "event" => "2022-12-15 20:45:00",
                     "player" => "Youyou",
                     "isBench" => 1,
-
                 ],
 
                 [
                     "event" => "2022-12-15 20:45:00",
                     "player" => "Lucamar",
                     "isBench" => 0,
+                ],
 
+                [
+                    "event" => "2022-12-15 20:45:00",
+                    "player" => "Atanea",
+                    "isBench" => 1,
+                ],
+
+                [
+                    "event" => "2023-02-15 20:45:00",
+                    "player" => "Youyou",
+                    "isBench" => 1,
+                ],
+
+                [
+                    "event" => "2023-02-15 20:45:00",
+                    "player" => "Kamari",
+                    "isBench" => 1,
+                ],
+
+                [
+                    "event" => "2023-02-15 20:45:00",
+                    "player" => "Atanea",
+                    "isBench" => 1,
                 ],
             ];
 
